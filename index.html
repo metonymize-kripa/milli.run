@@ -1143,6 +1143,243 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* RESPONSIVE DESIGN & MOBILE FRIENDLINESS */
+  @media (max-width: 1024px) {
+    /* Adjust general spacing */
+    section {
+      padding: 120px 40px 60px;
+    }
+    section.compact {
+      padding: 80px 40px;
+    }
+    .console-wrapper {
+      margin: 0 40px;
+    }
+    
+    /* Grids to 2 columns where appropriate */
+    .hero-metrics {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    
+    .market-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    .market-card {
+      border-left: none;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      padding-left: 0;
+    }
+    .market-card:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .sequoia-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .pilot-phases {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .timeline-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    
+    /* Interactive Console */
+    .console-layout {
+      height: 550px;
+    }
+    .console-sidebar {
+      width: 150px;
+    }
+    .ticket-list {
+      width: 200px;
+    }
+    .console-right {
+      width: 180px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    /* Navigation */
+    nav {
+      padding: 16px 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .nav-links {
+      gap: 16px;
+      width: 100%;
+      justify-content: center;
+      order: 3;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      margin-top: 4px;
+    }
+    .nav-links a {
+      font-size: 12px;
+    }
+    nav .btn-primary {
+      padding: 8px 16px;
+      font-size: 11px;
+    }
+
+    /* General padding */
+    section {
+      padding: 100px 20px 40px;
+    }
+    section.compact {
+      padding: 60px 20px;
+    }
+    .console-wrapper {
+      margin: 0 10px;
+    }
+    .hero-cta-row {
+      flex-direction: column;
+      width: 100%;
+      gap: 12px;
+    }
+    .hero-cta-row a {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* Hero */
+    .hero-sub {
+      font-size: 15px;
+      margin-bottom: 32px;
+    }
+    .hero-metrics {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding-top: 24px;
+    }
+    .metric-item {
+      border-left: none;
+      border-top: 1px solid var(--border);
+      padding-left: 0;
+      padding-top: 16px;
+    }
+    .metric-item:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    /* Market Grid */
+    .market-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .market-card {
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+    .market-card:first-child {
+      border-top: none;
+    }
+
+    /* Interactive Console */
+    .console-layout {
+      height: 500px;
+      flex-direction: column;
+    }
+    .console-sidebar {
+      display: none !important;
+    }
+    .ticket-list {
+      display: none !important;
+    }
+    .console-right {
+      display: none !important;
+    }
+    .console-main {
+      width: 100%;
+      height: 100%;
+    }
+    
+    /* Horizontal scrollable runtime comparisons */
+    .ab-compare {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 12px;
+      padding-bottom: 8px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .ab-card {
+      flex: 0 0 260px;
+      scroll-snap-align: start;
+    }
+    .ab-panel {
+      padding: 12px 16px;
+    }
+    .chat-area {
+      padding: 16px;
+      gap: 16px;
+    }
+    .demo-header {
+      padding: 0 20px;
+    }
+    .tab-switch {
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    .tab-switch-btn {
+      flex: 1 1 auto;
+      text-align: center;
+      padding: 8px 10px;
+    }
+
+    /* Architecture Section */
+    .arch-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .arch-diagram {
+      order: 2;
+    }
+
+    /* Sequoia */
+    .sequoia-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    /* Pilot phases */
+    .pilot-phases {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    /* Timeline */
+    .timeline-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .timeline-col {
+      border-left: 2px solid var(--text);
+      border-top: none;
+      padding-left: 16px;
+      padding-top: 0;
+    }
+    
+    /* Tables responsiveness */
+    .bench-table {
+      font-size: 11px;
+    }
+    .bench-table th, .bench-table td {
+      padding: 10px 8px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -1470,54 +1707,56 @@
     Evaluation results gathered on 500 commerce product-retrieval tasks running against Gemma-4 and local index fixtures.
   </p>
 
-  <table class="bench-table">
-    <thead>
-      <tr>
-        <th>Metric</th>
-        <th>Gorgias Incumbent (Rule/RAG)</th>
-        <th>Sierra-style (Hot-Path Agent)</th>
-        <th>milli.run (Compiled)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="highlight">ASIN Match Rate</td>
-        <td>0% (0/500)</td>
-        <td>91% (455/500)</td>
-        <td class="highlight">89% (445/500)</td>
-      </tr>
-      <tr>
-        <td class="highlight">Option Attribute Match</td>
-        <td>0%</td>
-        <td>93%</td>
-        <td class="highlight">90%</td>
-      </tr>
-      <tr>
-        <td class="highlight">Evidence Grounding Contract</td>
-        <td>0%</td>
-        <td>95%</td>
-        <td class="highlight">100% (Guaranteed)</td>
-      </tr>
-      <tr>
-        <td class="highlight">Average Latency (Seconds)</td>
-        <td>0.050s</td>
-        <td>6.57s</td>
-        <td class="highlight">0.034s</td>
-      </tr>
-      <tr>
-        <td class="highlight">Hot-Path LLM Dependency</td>
-        <td>No</td>
-        <td>Yes (Multi-Step Loop)</td>
-        <td class="highlight">No</td>
-      </tr>
-      <tr>
-        <td class="highlight">Hot-Path Token Cost</td>
-        <td>None</td>
-        <td>High (~$0.12/ticket)</td>
-        <td class="highlight">None ($0.00)</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="bench-table-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table class="bench-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Gorgias Incumbent (Rule/RAG)</th>
+          <th>Sierra-style (Hot-Path Agent)</th>
+          <th>milli.run (Compiled)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="highlight">ASIN Match Rate</td>
+          <td>0% (0/500)</td>
+          <td>91% (455/500)</td>
+          <td class="highlight">89% (445/500)</td>
+        </tr>
+        <tr>
+          <td class="highlight">Option Attribute Match</td>
+          <td>0%</td>
+          <td>93%</td>
+          <td class="highlight">90%</td>
+        </tr>
+        <tr>
+          <td class="highlight">Evidence Grounding Contract</td>
+          <td>0%</td>
+          <td>95%</td>
+          <td class="highlight">100% (Guaranteed)</td>
+        </tr>
+        <tr>
+          <td class="highlight">Average Latency (Seconds)</td>
+          <td>0.050s</td>
+          <td>6.57s</td>
+          <td class="highlight">0.034s</td>
+        </tr>
+        <tr>
+          <td class="highlight">Hot-Path LLM Dependency</td>
+          <td>No</td>
+          <td>Yes (Multi-Step Loop)</td>
+          <td class="highlight">No</td>
+        </tr>
+        <tr>
+          <td class="highlight">Hot-Path Token Cost</td>
+          <td>None</td>
+          <td>High (~$0.12/ticket)</td>
+          <td class="highlight">None ($0.00)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
 <!-- STRATEGY: SEQUOIA PMF -->
