@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Updated diligence-safe version generated from uploaded draft. -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1125,6 +1126,25 @@
     font-family: var(--font-sans);
   }
 
+
+  /* DILIGENCE NOTES */
+  .benchmark-note {
+    max-width: 980px;
+    margin: 8px 0 28px;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--text);
+    background: var(--bg-alt);
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .benchmark-note strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+
   /* Dividers */
   .divider {
     height: 1px;
@@ -1409,53 +1429,57 @@
   <h1>The compiled commerce runtime that runs in milliseconds <em>so your LLM doesn't.</em></h1>
 
   <p class="hero-sub">
-    Incumbents route tickets to templates. Standalone LLM agents spend seconds planning on the hot path. 
-    milli.run compiles offline LLM traces into deterministic, sub-50ms local runtimes.
+    Legacy automation is fast but brittle. Modern ecommerce AI agents are more capable, but often keep model orchestration, retrieval, and tool use on the production path.
+    milli.run compiles proven support workflows into deterministic, evidence-checked runtimes for covered intents.
   </p>
 
   <div class="hero-metrics">
     <div class="metric-item">
       <div class="metric-value"><span id="counter1">0</span><span class="unit">ms</span></div>
-      <div class="metric-label">Average Latency (milli.run)</div>
+      <div class="metric-label">Average latency on covered paths</div>
     </div>
     <div class="metric-item">
       <div class="metric-value"><span id="counter2">0</span><span class="unit">%</span></div>
-      <div class="metric-label">Inference Cost Reduction</div>
+      <div class="metric-label">Hot-path LLM token cost reduction</div>
     </div>
     <div class="metric-item">
       <div class="metric-value"><span id="counter3">0</span><span class="unit">x</span></div>
-      <div class="metric-label">Speedup vs Sierra Agent</div>
+      <div class="metric-label">Speedup vs hot-path agent baseline</div>
     </div>
     <div class="metric-item">
       <div class="metric-value">$<span id="counter4">0</span><span class="unit">B</span></div>
-      <div class="metric-label">Commerce Helpdesk TAM</div>
+      <div class="metric-label">Working commerce support TAM</div>
     </div>
+  </div>
+
+  <div class="benchmark-note" style="margin-top:32px; max-width:1000px;">
+    <strong>Metric scope:</strong> figures are internal benchmark claims for covered workflows and should be externally published only with the harness, dataset version, scorer, raw outputs, and comparator configuration.
   </div>
 </section>
 
 <!-- THE PRIZE -->
 <section class="market-section compact" id="prize">
   <div class="section-label">Market Shift</div>
-  <h2>Customer support is AI's first uncontested enterprise win.</h2>
+  <h2>Customer support is one of AI's clearest enterprise wedge markets.</h2>
   <p class="section-intro">
-    As Benedict Evans writes, the platform shifts are clear. Infrastructure is becoming commodity. The durable value captures the domain-specific runtime layer.
+    The thesis is not that incumbents lack AI. The thesis is that routine, repeatable commerce workflows should not require runtime model planning once the correct decision path has been proven and compiled.
   </p>
 
   <div class="market-grid">
     <div class="market-card">
       <div class="card-num">$700B</div>
-      <div class="card-label">Planned AI capex. Infrastructure is commoditizing; applications capture the proprietary logic.</div>
-      <div class="card-source">Source: Benedict Evans, 2026</div>
+      <div class="card-label">Estimated global AI infrastructure capex. The investment context is large, but this page should cite the exact source and year before external use.</div>
+      <div class="card-source">Working citation: replace with primary source</div>
     </div>
     <div class="market-card">
       <div class="card-num">$8B</div>
-      <div class="card-label">Commerce helpdesk TAM. Total addressable customer service software spend for e-commerce brands.</div>
-      <div class="card-source">Source: Industry Analysis</div>
+      <div class="card-label">Working commerce support software opportunity. Requires bottoms-up sourcing by segment, geography, and buyer size before investor use.</div>
+      <div class="card-source">Working estimate: methodology required</div>
     </div>
     <div class="market-card">
       <div class="card-num">190x</div>
-      <div class="card-label">Average latency reduction achieved by moving routing and product matching out of the hot-path LLM loop.</div>
-      <div class="card-source">Source: Product benchmarks</div>
+      <div class="card-label">Measured speedup versus the tested hot-path agent baseline on covered benchmark tasks; equivalent to roughly 99.5% lower latency.</div>
+      <div class="card-source">Internal benchmark: publish harness before external use</div>
     </div>
   </div>
 
@@ -1466,9 +1490,9 @@
 <section class="demo-section" id="demo">
   <div class="demo-header">
     <div class="section-label">Interactive Console</div>
-    <h2>Compare baseline RAG vs grounded agent vs milli.run</h2>
+    <h2>Compare static macros vs hot-path agents vs milli.run</h2>
     <p class="section-intro">
-      Select a ticket below, then toggle the runtime comparison cards at the bottom to inspect the execution difference in real-time.
+      Select a ticket below, then toggle runtime cards to inspect the architectural tradeoff. The baseline is a static macro/template workflow, not a direct benchmark of the current Gorgias AI Agent product.
     </p>
 
     <div class="tab-switch">
@@ -1502,7 +1526,7 @@
         </div>
         <div style="padding: 16px; border-top: 1px solid var(--border); background: var(--bg-alt);">
           <div style="font-size:9px; color: var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing: 0.08em; font-weight:700; font-family: var(--font-mono);">app telemetry</div>
-          <div style="font-size:11px; font-weight:700; margin-bottom:4px; color: var(--text);" id="sidebar-stat-accuracy">89% ASIN accuracy</div>
+          <div style="font-size:11px; font-weight:700; margin-bottom:4px; color: var(--text);" id="sidebar-stat-accuracy">89% product-ID match</div>
           <div style="font-size:11px; color:var(--text-muted); margin-bottom:2px;" id="sidebar-stat-latency">Avg 0.034s latency</div>
           <div style="font-size:11px; color:var(--text-muted);" id="sidebar-stat-cost">Cost: $0.0001/ticket</div>
         </div>
@@ -1571,24 +1595,24 @@
           <div class="ab-compare">
             <div class="ab-card baseline-card" id="ab-baseline" onclick="switchRuntime('baseline')">
               <div class="ab-card-header">
-                <div class="ab-card-name">Gorgias style</div>
+                <div class="ab-card-name">Static macro</div>
                 <div class="ab-score" id="baseline-score">42%</div>
               </div>
-              <div class="ab-detail" id="baseline-detail">Rules &amp; templates fail on complex queries. No dynamic database logic.</div>
+              <div class="ab-detail" id="baseline-detail">Fast, low-cost template automation, but no live catalog/action layer in this constrained baseline.</div>
             </div>
             <div class="ab-card grounded-card" id="ab-grounded" onclick="switchRuntime('grounded')">
               <div class="ab-card-header">
-                <div class="ab-card-name">Sierra style</div>
+                <div class="ab-card-name">Hot-path agent</div>
                 <div class="ab-score" id="grounded-score">91%</div>
               </div>
-              <div class="ab-detail" id="grounded-detail">SDK tools resolve state, but hot-path LLM planning takes 6.5s of compute.</div>
+              <div class="ab-detail" id="grounded-detail">Tools resolve state, but model planning and tool orchestration stay on the production path.</div>
             </div>
             <div class="ab-card compiled-card active-selection" id="ab-compiled" onclick="switchRuntime('compiled')">
               <div class="ab-card-header">
                 <div class="ab-card-name">milli.run</div>
                 <div class="ab-score" id="compiled-score">89</div>
               </div>
-              <div class="ab-detail" id="compiled-detail">Pre-compiled intent rules execute locally in Elixir. 0.034s latency, zero hot-path LLM cost.</div>
+              <div class="ab-detail" id="compiled-detail">Compiled skills execute locally. 0.034s measured latency and no hot-path LLM token cost on covered paths.</div>
             </div>
           </div>
         </div>
@@ -1620,7 +1644,7 @@
         <div class="right-section">
           <div class="right-section-title">Active Skill</div>
           <div style="font-size:12px; font-weight:600;" id="active-skill-name">return_eligibility_v3</div>
-          <div style="font-size:11px; color: var(--text-muted); margin-top:4px;" id="active-skill-route">Routed by FastText (conf: 0.94). Compiled skill. No LLM hot-path.</div>
+          <div style="font-size:11px; color: var(--text-muted); margin-top:4px;" id="active-skill-route">Routed by FastText (conf: 0.94). Compiled skill. No LLM on covered hot path.</div>
         </div>
         <div class="right-section">
           <div class="right-section-title">Trace Logs</div>
@@ -1704,23 +1728,27 @@
   <div class="section-label">Benchmarks</div>
   <h2>Quantitative performance metrics.</h2>
   <p class="section-intro">
-    Evaluation results gathered on 500 commerce product-retrieval tasks running against Gemma-4 and local index fixtures.
+    Evaluation results gathered on 500 commerce product-retrieval and support-resolution tasks running against local catalog/order fixtures. These results should be treated as an internal benchmark until the dataset, scorer, fixture version, and raw outputs are published.
   </p>
+
+  <div class="benchmark-note">
+    <strong>Scope note:</strong> the first column is a constrained static rules/macros baseline. It is not a claim about the current Gorgias AI Agent product unless that product is tested directly under the same harness with the same catalog, order, policy, and action access.
+  </div>
 
   <div class="bench-table-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;">
     <table class="bench-table">
       <thead>
         <tr>
           <th>Metric</th>
-          <th>Gorgias Incumbent (Rule/RAG)</th>
-          <th>Sierra-style (Hot-Path Agent)</th>
-          <th>milli.run (Compiled)</th>
+          <th>Static rules/macros baseline</th>
+          <th>Hot-path LLM agent baseline</th>
+          <th>milli.run compiled covered-path runtime</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="highlight">ASIN Match Rate</td>
-          <td>0% (0/500)</td>
+          <td class="highlight">Product / Variant Match Rate</td>
+          <td>0% (0/500, static macro constraint)</td>
           <td>91% (455/500)</td>
           <td class="highlight">89% (445/500)</td>
         </tr>
@@ -1732,9 +1760,9 @@
         </tr>
         <tr>
           <td class="highlight">Evidence Grounding Contract</td>
-          <td>0%</td>
+          <td>0% under constrained macro baseline</td>
           <td>95%</td>
-          <td class="highlight">100% (Guaranteed)</td>
+          <td class="highlight">100% verifier pass on covered tasks</td>
         </tr>
         <tr>
           <td class="highlight">Average Latency (Seconds)</td>
@@ -1751,11 +1779,15 @@
         <tr>
           <td class="highlight">Hot-Path Token Cost</td>
           <td>None</td>
-          <td>High (~$0.12/ticket)</td>
-          <td class="highlight">None ($0.00)</td>
+          <td>High in tested configuration (~$0.12/ticket)</td>
+          <td class="highlight">No hot-path LLM token cost; serving cost tracked separately</td>
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="benchmark-note">
+    <strong>Measurement checklist before publication:</strong> report p50/p95/p99 latency, hardware, warm/cold start behavior, concurrency, whether latency includes network/API calls, the exact cost basis, and whether the comparator has the same data and action access.
   </div>
 </section>
 
@@ -1772,28 +1804,28 @@
       <div class="sequoia-q">Why is this big?</div>
       <div class="sequoia-a">$8B Commerce TAM</div>
       <div class="sequoia-detail">
-        Gorgias built a helpdesk software layer. Sierra proves autonomous agents work. milli.run provides Sierra-level capabilities but runs on deterministic SaaS infrastructure rather than expensive LLM compute.
+        Existing helpdesks prove the workflow system of record. Hot-path agents prove autonomous resolution is possible. milli.run targets the middle path: agent-level coverage for repeated workflows, served through deterministic infrastructure where coverage is proven.
       </div>
     </div>
     <div class="sequoia-card">
       <div class="sequoia-q">Why now?</div>
       <div class="sequoia-a">LLM Commoditization</div>
       <div class="sequoia-detail">
-        Inference is standard infrastructure. As Benedict Evans notes, model capability has no network effects. The value is captured at the database routing and application runtime layer.
+        Inference is becoming increasingly standardized infrastructure. The differentiated value is captured in domain-specific workflows, evidence contracts, integration depth, and runtime reliability.
       </div>
     </div>
     <div class="sequoia-card">
       <div class="sequoia-q">Why will it last?</div>
       <div class="sequoia-a">Proprietary Test Moats</div>
       <div class="sequoia-detail">
-        Every fallback trace compiles into a regression test case. The software library grows with usage, ensuring the system becomes more reliable over time, unlike fragile prompt-based agents.
+        Every fallback trace can become a regression test case. The software library grows with usage when review, compilation, and deployment gates are enforced.
       </div>
     </div>
     <div class="sequoia-card">
       <div class="sequoia-q">Why us?</div>
       <div class="sequoia-a">Benchmark-First Science</div>
       <div class="sequoia-detail">
-        We reject vibes and subjective demo scripts. We prove performance through public, reproducible results scored against ShoppingBench catalog constraints.
+        We reject subjective demo scripts. The goal is to prove performance through reproducible fixtures, published scorer logic, raw outputs, and versioned benchmark runs.
       </div>
     </div>
   </div>
@@ -1814,7 +1846,7 @@
       <div class="phase-number">Phase 1</div>
       <div class="phase-title">Ingest &amp; Train</div>
       <div class="phase-desc">
-        We sync your historical ticket templates and catalog database, establishing baseline accuracy and training custom intent classifiers offline.
+        We sync historical tickets, macros, policies, product catalog data, and order-state examples, establishing baseline coverage and training custom intent classifiers offline.
       </div>
     </div>
     <div class="pilot-phase-card">
@@ -1837,7 +1869,7 @@
     <div class="timeline-col">
       <div class="timeline-w">W1–W2</div>
       <div class="timeline-title">Catalog Sync</div>
-      <div class="timeline-desc">Sync product catalog database and ingest active templates. Deploy shadow monitoring to baseline customer intents.</div>
+      <div class="timeline-desc">Sync product catalog, order-state fixtures, policies, and active macros. Deploy shadow monitoring to baseline customer intents.</div>
     </div>
     <div class="timeline-col">
       <div class="timeline-w">W3–W4</div>
@@ -1852,12 +1884,12 @@
     <div class="timeline-col">
       <div class="timeline-w">W7–W8</div>
       <div class="timeline-title">Shadow A/B Run</div>
-      <div class="timeline-desc">Run milli.run in shadow mode. Verify ASIN accuracy targets (&gt;95%) and latencies against live agent sessions.</div>
+      <div class="timeline-desc">Run milli.run in shadow mode. Verify product/variant match targets, evidence pass rates, escalation behavior, and latency against live agent sessions.</div>
     </div>
     <div class="timeline-col">
       <div class="timeline-w">W9–W10</div>
       <div class="timeline-title">Controlled Launch</div>
-      <div class="timeline-desc">Route 5% of routine incoming tickets to milli.run. Enable automated verifier audits and escalations to Gorgias.</div>
+      <div class="timeline-desc">Route 5% of routine incoming tickets to milli.run. Enable automated verifier audits and escalation to the existing helpdesk queue.</div>
     </div>
     <div class="timeline-col">
       <div class="timeline-w">W11–W12</div>
@@ -1871,7 +1903,7 @@
 <section class="cta-section" id="contact">
   <h2>Autonomic support compiled to code. Not prompts.</h2>
   <p class="section-intro">
-    By using LLMs offline as compilers and fallbacks, we deliver sub-50ms latency, deterministic accuracy, and zero runtime LLM costs.
+    By using LLMs offline for compilation, evaluation, and fallback, milli.run targets sub-50ms execution, evidence-checked outputs, and no hot-path LLM token cost on covered workflows.
   </p>
   <div class="hero-cta-row" style="justify-content:center;">
     <a href="#demo" class="btn-primary">Open Simulator</a>
@@ -1890,7 +1922,7 @@
 
 <footer>
   <div>milli.run · Confidential Pitch · 2026</div>
-  <div>ShoppingBench Evaluated</div>
+  <div>Internal benchmark · publish harness before external use</div>
 </footer>
 
 <script>
@@ -1909,14 +1941,14 @@ const tickets = [
         latency: "0.050s",
         cost: "$0.000",
         message: "Hi Sarah! Our standard return policy is 30 days. You can create a return label in your account portal by entering your order number. If you need assistance, let me know.",
-        detail: "Standard Shopify automated template. Cannot verify if she is inside the window or order status.",
+        detail: "Static macro response. Fast and inexpensive, but no live order/policy verification in this constrained baseline.",
         evidence: [],
         trace: [
           "1. Match intent keyword: 'return'",
           "2. Select template: standard_return_portal",
           "3. Output static response text"
         ],
-        skill: "Gorgias-style Rule Template"
+        skill: "Static macro/template baseline"
       },
       grounded: {
         score: "91",
@@ -1933,14 +1965,14 @@ const tickets = [
           "5. LLM computes date math (Dec 3 + 30 days = Jan 2)",
           "6. LLM generates final response (verified against evidence)"
         ],
-        skill: "Sierra-style LLM Agent Loop"
+        skill: "Hot-path LLM agent loop"
       },
       compiled: {
         score: "89",
         latency: "0.034s",
         cost: "$0.0001",
         message: "Hi Sarah! I verified your order #3841 was delivered on December 3, 2025. Per our standard 30-day return policy, your return window is open until January 2, 2026. You are eligible for a return. Shall I generate a label?",
-        detail: "FastText routed query to return_eligibility skill. Checked order and policy tables. Executed deterministic Elixir code. Verified evidence: order#3841, policy#return-4.",
+        detail: "FastText routed query to return_eligibility skill. Checked order and policy tables. Executed deterministic Elixir code. Verified evidence: order#3841, policy#return-4. No hot-path LLM token cost on this covered path.",
         evidence: ["order#3841", "policy#return-4"],
         trace: [
           "1. FastText classifier: return_eligibility (conf: 0.94)",
@@ -1969,14 +2001,14 @@ const tickets = [
         latency: "0.050s",
         cost: "$0.000",
         message: "Hi Marcus! If you are checking on your shipment, standard orders take 3-5 business days to ship. You will receive an automated tracking link in your email once your order leaves our warehouse.",
-        detail: "Automated template for shipping status. Cannot query carrier scan logs or check order fulfillment status.",
+        detail: "Static macro response. Cannot query carrier scan logs or fulfillment state in this constrained baseline.",
         evidence: [],
         trace: [
           "1. Match intent keyword: 'where is my order'",
           "2. Select template: standard_shipping_info",
           "3. Output static response text"
         ],
-        skill: "Gorgias-style Rule Template"
+        skill: "Static macro/template baseline"
       },
       grounded: {
         score: "90",
@@ -1993,14 +2025,14 @@ const tickets = [
           "5. LLM checks shipment status: scan_log",
           "6. LLM generates response with tracking info"
         ],
-        skill: "Sierra-style LLM Agent Loop"
+        skill: "Hot-path LLM agent loop"
       },
       compiled: {
         score: "89",
         latency: "0.038s",
         cost: "$0.0001",
         message: "Hi Marcus! Order #4872 (Trail Runner X) was shipped on May 29, 2026, via FedEx (tracking: 7489234567). Current status: In transit, last scanned at Portland hub on May 31. Expected delivery: June 4-5. The delay is due to weather.",
-        detail: "FastText routed query to wismo skill. Joined order, shipment, and carrier scan logs. Returned data through template. Zero LLM calls.",
+        detail: "FastText routed query to wismo skill. Joined order, shipment, and carrier scan logs. Returned data through template. No hot-path LLM calls on this covered path.",
         evidence: ["order#4872", "shipment#sh-7489", "scan_log#Portland"],
         trace: [
           "1. FastText classifier: wismo (conf: 0.98)",
@@ -2028,14 +2060,14 @@ const tickets = [
         latency: "0.050s",
         cost: "$0.000",
         message: "Hi Priya! You can browse our active catalog collections for wide fit shoes. Please visit our footwear collections page online to filter by size and price range.",
-        detail: "Rules cannot dynamically search catalog attributes or filter by complex multi-constraint inputs.",
+        detail: "Static macro response. Cannot resolve multi-constraint catalog search in this constrained baseline.",
         evidence: [],
         trace: [
           "1. Match intent keyword: 'recommend'",
           "2. Select template: catalog_collections_browse",
           "3. Output static response text"
         ],
-        skill: "Gorgias-style Rule Template"
+        skill: "Static macro/template baseline"
       },
       grounded: {
         score: "91",
@@ -2052,14 +2084,14 @@ const tickets = [
           "5. LLM checks inventory status for filtered products",
           "6. LLM drafts recommendations card"
         ],
-        skill: "Sierra-style LLM Agent Loop"
+        skill: "Hot-path LLM agent loop"
       },
       compiled: {
         score: "89",
         latency: "0.042s",
         cost: "$0.0001",
         message: "Hi Priya! Based on our catalog search, here are our top-rated trail running shoes under $120 matching your wide fit:\n\n1. TrailMax Pro Wide (B09RPRRNVP) — $109.00 (In stock)\n2. GravelKing V2 (B07S7HDC88) — $115.00 (In stock)\n3. FlexRun XT (B07XPR3R7N) — $98.00 (In stock)\n\nTrailMax Pro Wide is our top recommendation for wide-fit trail runners. Would you like me to add it to your cart?",
-        detail: "FastText routed to search_products skill. spaCy extracted slots: price_max=120, width=wide, surface=trail. Structured ranker executed catalog search. Zero LLM calls.",
+        detail: "FastText routed to search_products skill. spaCy extracted slots: price_max=120, width=wide, surface=trail. Structured ranker executed catalog search. No hot-path LLM calls on this covered path.",
         evidence: ["product#tj-901", "product#gk-404", "product#fr-202"],
         trace: [
           "1. FastText classifier: search_catalog (conf: 0.95)",
@@ -2162,8 +2194,8 @@ function switchRuntime(runtime) {
     agentBubble.innerHTML = rData.message.replace(/\n/g, '<br>');
   }
   if (agentSender) {
-    if (runtime === 'baseline') agentSender.textContent = 'Gorgias (Rule/RAG)';
-    if (runtime === 'grounded') agentSender.textContent = 'Sierra LLM Agent';
+    if (runtime === 'baseline') agentSender.textContent = 'Static macro baseline';
+    if (runtime === 'grounded') agentSender.textContent = 'Hot-path LLM agent';
     if (runtime === 'compiled') agentSender.textContent = 'milli.run Runtime';
   }
 
@@ -2171,7 +2203,7 @@ function switchRuntime(runtime) {
   const evidencePanel = document.getElementById('evidence-panel');
   evidencePanel.innerHTML = '';
   if (rData.evidence.length === 0) {
-    evidencePanel.innerHTML = '<span style="color:var(--text-muted); font-size:11px;">No evidence (hallucinated)</span>';
+    evidencePanel.innerHTML = '<span style="color:var(--text-muted); font-size:11px;">No structured evidence in this constrained baseline</span>';
   } else {
     rData.evidence.forEach(ev => {
       const pill = document.createElement('span');
@@ -2197,7 +2229,7 @@ function switchRuntime(runtime) {
   });
 
   // Telemetry updates
-  document.getElementById('sidebar-stat-accuracy').textContent = runtime === 'baseline' ? '0% ASIN accuracy' : (runtime === 'grounded' ? '91% ASIN accuracy' : '89% ASIN accuracy');
+  document.getElementById('sidebar-stat-accuracy').textContent = runtime === 'baseline' ? '0% product-ID match' : (runtime === 'grounded' ? '91% product-ID match' : '89% product-ID match');
   document.getElementById('sidebar-stat-latency').textContent = `Avg ${rData.latency} latency`;
   document.getElementById('sidebar-stat-cost').textContent = `Cost: ${rData.cost}/ticket`;
 }
