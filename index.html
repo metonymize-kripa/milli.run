@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>milli.run — The Compiled Commerce Runtime</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FDFDFD;
+    --bg-alt: #F5F5F3;
+    --border: #E4E4E3;
+    --border-strong: #7E7E76;
+    --text: #1C1C1A;
+    --text-muted: #7E7E76;
+    --font-serif: 'Inter', -apple-system, sans-serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    font-family: var(--font-mono);
+    text-transform: lowercase;
+  }
+
+  .nav-logo .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--text);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.1s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* BUTTONS */
+  .btn-primary {
+    padding: 10px 20px;
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: opacity 0.1s;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+
+  .btn-secondary {
+    padding: 10px 20px;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.1s;
+  }
+
+  .btn-secondary:hover {
+    background: var(--bg-alt);
+    border-color: var(--text-muted);
+  }
+
+  /* SECTIONS */
+  section {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 160px 80px 80px;
+    position: relative;
+  }
+
+  section.compact {
+    min-height: auto;
+    padding: 100px 80px;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: var(--font-sans);
+    font-size: clamp(38px, 5.5vw, 64px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--text);
+    max-width: 950px;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 em {
+    font-family: var(--font-sans);
+    font-style: normal;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .hero-sub {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 650px;
+    line-height: 1.6;
+    margin-bottom: 48px;
+  }
+
+  .hero-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    border-top: 1px solid var(--border);
+    padding-top: 40px;
+    max-width: 1000px;
+  }
+
+  .metric-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-left: 1px solid var(--border);
+    padding-left: 20px;
+  }
+
+  .metric-item:first-child {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .metric-value {
+    font-family: var(--font-serif);
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  .metric-value .unit {
+    font-size: 20px;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-left: 2px;
+  }
+
+  .metric-label {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+
+  .section-intro {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 650px;
+    margin-bottom: 48px;
+    line-height: 1.65;
+  }
+
+  /* MARKET / PRIZE SECTION */
+  .market-section {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .market-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .market-card {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--border);
+    padding-left: 24px;
+  }
+
+  .market-card:first-child {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .market-card .card-num {
+    font-family: var(--font-serif);
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+
+  .market-card .card-label {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .market-card .card-source {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 16px;
+    font-family: var(--font-mono);
+  }
+
+  /* BAR CHART */
+  .bar-chart {
+    margin-top: 48px;
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    max-width: 800px;
+  }
+
+  .bar-chart-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    font-family: var(--font-mono);
+  }
+
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    font-size: 12px;
+  }
+
+  .bar-label {
+    width: 200px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 8px;
+    background: var(--bg-alt);
+    position: relative;
+  }
+
+  .bar-fill {
+    height: 100%;
+    background: var(--text);
+    width: 0%;
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+  }
+
+  .bar-val {
+    position: absolute;
+    left: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  /* DEMO SECTION */
+  .demo-section {
+    background: var(--bg);
+    padding: 100px 0 80px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .demo-header {
+    padding: 0 80px;
+    margin-bottom: 40px;
+  }
+
+  .tab-switch {
+    display: flex;
+    gap: 4px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    padding: 4px;
+    width: fit-content;
+    margin-bottom: 24px;
+  }
+
+  .tab-switch-btn {
+    padding: 8px 16px;
+    border-radius: 0;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    transition: all 0.1s;
+  }
+
+  .tab-switch-btn.active {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  /* Simulator Wrapper */
+  .console-wrapper {
+    margin: 0 80px;
+    border-radius: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .console-topbar {
+    background: var(--bg-alt);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .window-btn {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    border: 1px solid var(--border-strong);
+    background: transparent;
+  }
+
+  .console-topbar-title {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .console-layout {
+    display: flex;
+    height: 600px;
+    background: var(--bg);
+  }
+
+  /* Sidebar */
+  .console-sidebar {
+    width: 180px;
+    background: var(--bg-alt);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+
+  .sidebar-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-logo {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .sidebar-logo span {
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+
+  .sidebar-nav {
+    padding: 12px 0;
+    flex: 1;
+  }
+
+  .sidebar-section-title {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 16px 16px 8px;
+    font-family: var(--font-mono);
+  }
+
+  .console-sidebar .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-left: 2px solid transparent;
+  }
+
+  .console-sidebar .nav-item:hover {
+    color: var(--text);
+  }
+
+  .console-sidebar .nav-item.active {
+    background: transparent;
+    color: var(--text);
+    border-left: 2px solid var(--text);
+    font-weight: 600;
+  }
+
+  /* Ticket List */
+  .ticket-list {
+    width: 230px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    flex-shrink: 0;
+  }
+
+  .ticket-list-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .ticket-item {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    background: var(--bg);
+    transition: background 0.1s;
+  }
+
+  .ticket-item:hover {
+    background: var(--bg-alt);
+  }
+
+  .ticket-item.selected {
+    background: var(--bg-alt);
+    border-left: 3px solid var(--text);
+  }
+
+  .ticket-customer {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text);
+  }
+
+  .ticket-preview {
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+  }
+
+  .ticket-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .intent-tag {
+    font-size: 9px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 0;
+    background: var(--bg-alt);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  .ticket-time {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* Main Pane */
+  .console-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  .main-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .main-customer-info {
+    font-size: 12px;
+  }
+
+  .customer-name {
+    font-weight: 700;
+    color: var(--text);
+    font-size: 13px;
+  }
+
+  .customer-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .main-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .icon-btn {
+    padding: 6px 12px;
+    border-radius: 0;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .icon-btn:hover {
+    background: var(--bg-alt);
+  }
+
+  .icon-btn.resolve {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+  }
+
+  .icon-btn.resolve:hover {
+    opacity: 0.9;
+  }
+
+  /* Transcript Chat Area */
+  .chat-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: var(--bg);
+  }
+
+  .chat-msg {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-sender {
+    font-size: 10px;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .chat-msg.agent .chat-sender {
+    text-align: left;
+  }
+
+  .chat-bubble {
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.5;
+    border-radius: 0;
+  }
+
+  .chat-msg.customer .chat-bubble {
+    background: var(--bg-alt);
+    color: var(--text);
+    border-left: 2px solid var(--border-strong);
+  }
+
+  .chat-msg.agent .chat-bubble {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--text);
+  }
+
+  /* AB Compare Panel */
+  .ab-panel {
+    border-top: 1px solid var(--border);
+    padding: 16px 20px;
+    background: var(--bg);
+  }
+
+  .ab-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    font-family: var(--font-mono);
+  }
+
+  .ab-compare {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .ab-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.1s;
+  }
+
+  .ab-card:hover {
+    border-color: var(--text-muted);
+  }
+
+  .ab-card.active-selection {
+    border-color: var(--text);
+    border-width: 1.5px;
+    background: var(--bg-alt);
+  }
+
+  .ab-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+
+  .ab-card-name {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .ab-score {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .ab-detail {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* Right Panel */
+  .console-right {
+    width: 220px;
+    border-left: 1px solid var(--border);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow-y: auto;
+  }
+
+  .right-section {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .right-section-title {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 11px;
+  }
+
+  .info-label { color: var(--text-muted); }
+  .info-val { color: var(--text); font-weight: 500; }
+
+  .evidence-pill {
+    display: inline-block;
+    padding: 2px 6px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    font-size: 10px;
+    color: var(--text);
+    font-family: var(--font-mono);
+    margin: 2px 2px 2px 0;
+  }
+
+  /* ARCHITECTURE SECTION */
+  .arch-section {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .arch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .arch-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .arch-layer {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border-color 0.15s ease;
+  }
+
+  .arch-layer:hover {
+    border-color: var(--text-muted);
+  }
+
+  .arch-layer-name {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .arch-layer-desc {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: right;
+  }
+
+  .arch-connector {
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  .arch-claims {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .claim-item {
+    padding: 24px;
+    background: var(--bg);
+    border-radius: 0;
+    border: 1px solid var(--border);
+  }
+
+  .claim-item .claim-title {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .claim-item .claim-body {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* BENCHMARK TABLE */
+  .bench-section {
+    background: var(--bg);
+  }
+
+  .bench-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+    font-size: 13px;
+  }
+
+  .bench-table thead {
+    border-top: 2px solid var(--text);
+    border-bottom: 1px solid var(--text);
+  }
+
+  .bench-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .bench-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  .bench-table tbody tr:last-child td {
+    border-bottom: 2px solid var(--text);
+  }
+
+  .bench-table td.highlight {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .bench-table td:nth-child(4),
+  .bench-table th:nth-child(4) {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .bench-table td:nth-child(4).highlight {
+    font-weight: 700;
+  }
+
+  /* SEQUOIA PMF */
+  .prize-section {
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sequoia-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin: 40px 0;
+  }
+
+  .sequoia-card {
+    border: none;
+    border-top: 1px solid var(--text);
+    padding-top: 20px;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .sequoia-q {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .sequoia-a {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .sequoia-detail {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* PILOT SECTION & PHASES */
+  .pilot-section {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pilot-phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin: 40px 0 64px;
+  }
+
+  .pilot-phase-card {
+    border-top: 1px solid var(--text);
+    padding-top: 20px;
+  }
+
+  .pilot-phase-card .phase-number {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .pilot-phase-card .phase-title {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .pilot-phase-card .phase-desc {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* Timeline */
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .timeline-col {
+    border-top: 1px solid var(--text);
+    padding-top: 20px;
+  }
+
+  .timeline-w {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .timeline-title {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .timeline-desc {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--bg);
+    text-align: center;
+    padding: 100px 80px;
+  }
+
+  .cta-section h2 {
+    max-width: 600px;
+    margin: 0 auto 20px;
+  }
+
+  .cta-section .section-intro {
+    margin: 0 auto 40px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 80px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--bg-alt);
+    font-family: var(--font-sans);
+  }
+
+  /* Dividers */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 80px;
+  }
+
+  /* ANIMATED REVEALS (CLEAN TRANSFORM) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="dot"></div>
+    milli.run
+  </div>
+  <ul class="nav-links">
+    <li><a href="#hero">Concept</a></li>
+    <li><a href="#prize">Market</a></li>
+    <li><a href="#demo">Console</a></li>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#benchmark">Metrics</a></li>
+    <li><a href="#sequoia">Strategy</a></li>
+    <li><a href="#pilot">Pilot</a></li>
+  </ul>
+  <a href="#demo" class="btn-primary">Simulator →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-eyebrow">milli.run</div>
+
+  <h1>The compiled commerce runtime that runs in milliseconds <em>so your LLM doesn't.</em></h1>
+
+  <p class="hero-sub">
+    Incumbents route tickets to templates. Standalone LLM agents spend seconds planning on the hot path. 
+    milli.run compiles offline LLM traces into deterministic, sub-50ms local runtimes.
+  </p>
+
+  <div class="hero-metrics">
+    <div class="metric-item">
+      <div class="metric-value"><span id="counter1">0</span><span class="unit">ms</span></div>
+      <div class="metric-label">Average Latency (milli.run)</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-value"><span id="counter2">0</span><span class="unit">%</span></div>
+      <div class="metric-label">Inference Cost Reduction</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-value"><span id="counter3">0</span><span class="unit">x</span></div>
+      <div class="metric-label">Speedup vs Sierra Agent</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-value">$<span id="counter4">0</span><span class="unit">B</span></div>
+      <div class="metric-label">Commerce Helpdesk TAM</div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PRIZE -->
+<section class="market-section compact" id="prize">
+  <div class="section-label">Market Shift</div>
+  <h2>Customer support is AI's first uncontested enterprise win.</h2>
+  <p class="section-intro">
+    As Benedict Evans writes, the platform shifts are clear. Infrastructure is becoming commodity. The durable value captures the domain-specific runtime layer.
+  </p>
+
+  <div class="market-grid">
+    <div class="market-card">
+      <div class="card-num">$700B</div>
+      <div class="card-label">Planned AI capex. Infrastructure is commoditizing; applications capture the proprietary logic.</div>
+      <div class="card-source">Source: Benedict Evans, 2026</div>
+    </div>
+    <div class="market-card">
+      <div class="card-num">$8B</div>
+      <div class="card-label">Commerce helpdesk TAM. Total addressable customer service software spend for e-commerce brands.</div>
+      <div class="card-source">Source: Industry Analysis</div>
+    </div>
+    <div class="market-card">
+      <div class="card-num">190x</div>
+      <div class="card-label">Average latency reduction achieved by moving routing and product matching out of the hot-path LLM loop.</div>
+      <div class="card-source">Source: Product benchmarks</div>
+    </div>
+  </div>
+
+
+</section>
+
+<!-- DEMO -->
+<section class="demo-section" id="demo">
+  <div class="demo-header">
+    <div class="section-label">Interactive Console</div>
+    <h2>Compare baseline RAG vs grounded agent vs milli.run</h2>
+    <p class="section-intro">
+      Select a ticket below, then toggle the runtime comparison cards at the bottom to inspect the execution difference in real-time.
+    </p>
+
+    <div class="tab-switch">
+      <button class="tab-switch-btn active" onclick="switchTicket(0)" id="ticket-btn-0">Return Eligibility</button>
+      <button class="tab-switch-btn" onclick="switchTicket(1)" id="ticket-btn-1">WISMO Tracking</button>
+      <button class="tab-switch-btn" onclick="switchTicket(2)" id="ticket-btn-2">Product Recommendation</button>
+    </div>
+  </div>
+
+  <div class="console-wrapper">
+    <div class="console-topbar">
+      <div class="window-btn"></div>
+      <div class="window-btn"></div>
+      <div class="window-btn"></div>
+      <div class="console-topbar-title">Shopify Admin — milli.run app</div>
+    </div>
+
+    <div class="console-layout">
+      <!-- Sidebar -->
+      <div class="console-sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-logo">Shopify<span> Admin</span></div>
+        </div>
+        <div class="sidebar-nav">
+          <div class="nav-item">Home</div>
+          <div class="nav-item">Orders</div>
+          <div class="nav-item">Products</div>
+          <div class="nav-item">Customers</div>
+          <div class="sidebar-section-title">Apps</div>
+          <div class="nav-item active">milli.run</div>
+        </div>
+        <div style="padding: 16px; border-top: 1px solid var(--border); background: var(--bg-alt);">
+          <div style="font-size:9px; color: var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing: 0.08em; font-weight:700; font-family: var(--font-mono);">app telemetry</div>
+          <div style="font-size:11px; font-weight:700; margin-bottom:4px; color: var(--text);" id="sidebar-stat-accuracy">89% ASIN accuracy</div>
+          <div style="font-size:11px; color:var(--text-muted); margin-bottom:2px;" id="sidebar-stat-latency">Avg 0.034s latency</div>
+          <div style="font-size:11px; color:var(--text-muted);" id="sidebar-stat-cost">Cost: $0.0001/ticket</div>
+        </div>
+      </div>
+
+      <!-- Ticket List -->
+      <div class="ticket-list">
+        <div class="ticket-list-header">
+          Tickets
+          <span style="font-size:11px; color:var(--text-muted); font-weight:400;">3 open</span>
+        </div>
+        <div class="ticket-item selected" onclick="switchTicket(0)" id="ticket-0">
+          <div class="ticket-customer">
+            Sarah Chen
+            <span class="ticket-time">2m ago</span>
+          </div>
+          <div class="ticket-preview">Can I return my Merino jacket?</div>
+          <div class="ticket-meta">
+            <span class="intent-tag return">Return</span>
+          </div>
+        </div>
+
+        <div class="ticket-item" onclick="switchTicket(1)" id="ticket-1">
+          <div class="ticket-customer">
+            Marcus Webb
+            <span class="ticket-time">15m ago</span>
+          </div>
+          <div class="ticket-preview">Where is my order #4872?</div>
+          <div class="ticket-meta">
+            <span class="intent-tag wismo">WISMO</span>
+          </div>
+        </div>
+
+        <div class="ticket-item" onclick="switchTicket(2)" id="ticket-2">
+          <div class="ticket-customer">
+            Priya Nair
+            <span class="ticket-time">1h ago</span>
+          </div>
+          <div class="ticket-preview">Running shoes under $120 wide fit</div>
+          <div class="ticket-meta">
+            <span class="intent-tag recommend">Recommend</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main chat -->
+      <div class="console-main">
+        <div class="main-header">
+          <div class="main-customer-info">
+            <div class="customer-name" id="customer-name">Sarah Chen</div>
+            <div class="customer-sub" id="customer-sub">Order #3841 · Merino Jacket · $189</div>
+          </div>
+          <div class="main-actions">
+            <button class="icon-btn">Handoff</button>
+            <button class="icon-btn resolve">Resolve</button>
+          </div>
+        </div>
+
+        <div class="chat-area" id="chat-area">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- AB compare panel -->
+        <div class="ab-panel">
+          <div class="ab-label">Compare Runtimes</div>
+          <div class="ab-compare">
+            <div class="ab-card baseline-card" id="ab-baseline" onclick="switchRuntime('baseline')">
+              <div class="ab-card-header">
+                <div class="ab-card-name">Gorgias style</div>
+                <div class="ab-score" id="baseline-score">42%</div>
+              </div>
+              <div class="ab-detail" id="baseline-detail">Rules &amp; templates fail on complex queries. No dynamic database logic.</div>
+            </div>
+            <div class="ab-card grounded-card" id="ab-grounded" onclick="switchRuntime('grounded')">
+              <div class="ab-card-header">
+                <div class="ab-card-name">Sierra style</div>
+                <div class="ab-score" id="grounded-score">91%</div>
+              </div>
+              <div class="ab-detail" id="grounded-detail">SDK tools resolve state, but hot-path LLM planning takes 6.5s of compute.</div>
+            </div>
+            <div class="ab-card compiled-card active-selection" id="ab-compiled" onclick="switchRuntime('compiled')">
+              <div class="ab-card-header">
+                <div class="ab-card-name">milli.run</div>
+                <div class="ab-score" id="compiled-score">89</div>
+              </div>
+              <div class="ab-detail" id="compiled-detail">Pre-compiled intent rules execute locally in Elixir. 0.034s latency, zero hot-path LLM cost.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right panel -->
+      <div class="console-right">
+        <div class="right-section">
+          <div class="right-section-title">Session State</div>
+          <div class="info-row">
+            <span class="info-label">Customer Tier</span>
+            <span class="info-val" id="cust-tier">Silver</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Lifetime Value</span>
+            <span class="info-val" id="cust-ltv">$642</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Order Date</span>
+            <span class="info-val" id="ord-date">Dec 3, 2025</span>
+          </div>
+        </div>
+        <div class="right-section">
+          <div class="right-section-title">Evidence Used</div>
+          <div id="evidence-panel">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        <div class="right-section">
+          <div class="right-section-title">Active Skill</div>
+          <div style="font-size:12px; font-weight:600;" id="active-skill-name">return_eligibility_v3</div>
+          <div style="font-size:11px; color: var(--text-muted); margin-top:4px;" id="active-skill-route">Routed by FastText (conf: 0.94). Compiled skill. No LLM hot-path.</div>
+        </div>
+        <div class="right-section">
+          <div class="right-section-title">Trace Logs</div>
+          <div id="trace-panel" style="background: var(--bg-alt); border: 1px solid var(--border); padding: 8px; max-height: 120px; overflow-y: auto; font-family: var(--mono); font-size: 11px;">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="arch-section" id="architecture">
+  <div class="section-label">Architecture</div>
+  <h2>The compiler paradigm shift.</h2>
+  <p class="section-intro">
+    Standard agent architectures put the LLM on the production hot path. We separate routing from compilation.
+  </p>
+
+  <div class="arch-grid">
+    <div>
+      <div class="arch-diagram">
+        <div class="arch-layer">
+          <div class="arch-layer-name">Shopify Admin App Console</div>
+          <div class="arch-layer-desc">Merchant ticket view and telemetry</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer">
+          <div class="arch-layer-name">Evidence Verifier</div>
+          <div class="arch-layer-desc">Factual assertions must map to database rows</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer">
+          <div class="arch-layer-name">FastText Router &amp; spaCy Extractor</div>
+          <div class="arch-layer-desc">Intent classification and slot extraction under 10ms</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer">
+          <div class="arch-layer-name">GroundedRepoSDK</div>
+          <div class="arch-layer-desc">Typed interface to database primitives</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer">
+          <div class="arch-layer-name">DuckDB + Graph Traversal</div>
+          <div class="arch-layer-desc">Local truth substrate and relational storage</div>
+        </div>
+        <div class="arch-connector">↓</div>
+        <div class="arch-layer">
+          <div class="arch-layer-name">Offline LLM Compiler</div>
+          <div class="arch-layer-desc">Analyses fallback traces to propose new skills and test cases</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arch-claims">
+      <div class="claim-item">
+        <div class="claim-title">1. LLM as Compiler, Not Executor</div>
+        <div class="claim-body">
+          We use local gemma4:12b models offline in batch to compile trace clusters into Elixir skills and generate synthetic test coverage. The LLM never touches hot-path production traffic for routine covered intents.
+        </div>
+      </div>
+      <div class="claim-item">
+        <div class="claim-title">2. Provenance and Trust Contracts</div>
+        <div class="claim-body">
+          The verifier stops responses that contain claims not matching specific database records. Every price, stock status, or shipment date is validated against catalog constraints.
+        </div>
+      </div>
+      <div class="claim-item">
+        <div class="claim-title">3. Trace Moat Loop</div>
+        <div class="claim-body">
+          Every session fallback is converted into a regression test. The system expands its coverage automatically as the offline compiler processes failure logs, creating a durable software asset library.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENCHMARK -->
+<section class="bench-section" id="benchmark">
+  <div class="section-label">Benchmarks</div>
+  <h2>Quantitative performance metrics.</h2>
+  <p class="section-intro">
+    Evaluation results gathered on 500 commerce product-retrieval tasks running against Gemma-4 and local index fixtures.
+  </p>
+
+  <table class="bench-table">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Gorgias Incumbent (Rule/RAG)</th>
+        <th>Sierra-style (Hot-Path Agent)</th>
+        <th>milli.run (Compiled)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="highlight">ASIN Match Rate</td>
+        <td>0% (0/500)</td>
+        <td>91% (455/500)</td>
+        <td class="highlight">89% (445/500)</td>
+      </tr>
+      <tr>
+        <td class="highlight">Option Attribute Match</td>
+        <td>0%</td>
+        <td>93%</td>
+        <td class="highlight">90%</td>
+      </tr>
+      <tr>
+        <td class="highlight">Evidence Grounding Contract</td>
+        <td>0%</td>
+        <td>95%</td>
+        <td class="highlight">100% (Guaranteed)</td>
+      </tr>
+      <tr>
+        <td class="highlight">Average Latency (Seconds)</td>
+        <td>0.050s</td>
+        <td>6.57s</td>
+        <td class="highlight">0.034s</td>
+      </tr>
+      <tr>
+        <td class="highlight">Hot-Path LLM Dependency</td>
+        <td>No</td>
+        <td>Yes (Multi-Step Loop)</td>
+        <td class="highlight">No</td>
+      </tr>
+      <tr>
+        <td class="highlight">Hot-Path Token Cost</td>
+        <td>None</td>
+        <td>High (~$0.12/ticket)</td>
+        <td class="highlight">None ($0.00)</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- STRATEGY: SEQUOIA PMF -->
+<section class="prize-section compact" id="sequoia">
+  <div class="section-label">Strategy</div>
+  <h2>Addressing the PMF framework.</h2>
+  <p class="section-intro">
+    Evaluating the business metrics through Sequoia Capital's PMF questions.
+  </p>
+
+  <div class="sequoia-grid">
+    <div class="sequoia-card">
+      <div class="sequoia-q">Why is this big?</div>
+      <div class="sequoia-a">$8B Commerce TAM</div>
+      <div class="sequoia-detail">
+        Gorgias built a helpdesk software layer. Sierra proves autonomous agents work. milli.run provides Sierra-level capabilities but runs on deterministic SaaS infrastructure rather than expensive LLM compute.
+      </div>
+    </div>
+    <div class="sequoia-card">
+      <div class="sequoia-q">Why now?</div>
+      <div class="sequoia-a">LLM Commoditization</div>
+      <div class="sequoia-detail">
+        Inference is standard infrastructure. As Benedict Evans notes, model capability has no network effects. The value is captured at the database routing and application runtime layer.
+      </div>
+    </div>
+    <div class="sequoia-card">
+      <div class="sequoia-q">Why will it last?</div>
+      <div class="sequoia-a">Proprietary Test Moats</div>
+      <div class="sequoia-detail">
+        Every fallback trace compiles into a regression test case. The software library grows with usage, ensuring the system becomes more reliable over time, unlike fragile prompt-based agents.
+      </div>
+    </div>
+    <div class="sequoia-card">
+      <div class="sequoia-q">Why us?</div>
+      <div class="sequoia-a">Benchmark-First Science</div>
+      <div class="sequoia-detail">
+        We reject vibes and subjective demo scripts. We prove performance through public, reproducible results scored against ShoppingBench catalog constraints.
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+<!-- PILOT INSTALLATION -->
+<section class="pilot-section compact" id="pilot">
+  <div class="section-label">Implementation</div>
+  <h2>Pilot Installation Process</h2>
+  <p class="section-intro">
+    A low-risk, phase-by-phase onboarding roadmap to transition customer service operations to a compiled, deterministic runtime while maintaining safety gates and agent fallbacks.
+  </p>
+
+  <div class="pilot-phases">
+    <div class="pilot-phase-card">
+      <div class="phase-number">Phase 1</div>
+      <div class="phase-title">Ingest &amp; Train</div>
+      <div class="phase-desc">
+        We sync your historical ticket templates and catalog database, establishing baseline accuracy and training custom intent classifiers offline.
+      </div>
+    </div>
+    <div class="pilot-phase-card">
+      <div class="phase-number">Phase 2</div>
+      <div class="phase-title">Compile &amp; Verify</div>
+      <div class="phase-desc">
+        Core workflows are compiled into Elixir skills and integrated with your live APIs, running in shadow mode to audit accuracy against real agents.
+      </div>
+    </div>
+    <div class="pilot-phase-card">
+      <div class="phase-number">Phase 3</div>
+      <div class="phase-title">Route &amp; Scale</div>
+      <div class="phase-desc">
+        Routine tickets are routed gradually with automated verifier checks. Low-confidence interactions route to standard helpdesk queues.
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-grid">
+    <div class="timeline-col">
+      <div class="timeline-w">W1–W2</div>
+      <div class="timeline-title">Catalog Sync</div>
+      <div class="timeline-desc">Sync product catalog database and ingest active templates. Deploy shadow monitoring to baseline customer intents.</div>
+    </div>
+    <div class="timeline-col">
+      <div class="timeline-w">W3–W4</div>
+      <div class="timeline-title">Extraction Training</div>
+      <div class="timeline-desc">Train FastText intent classifiers and spaCy extractors on historical tickets; establish confidence thresholds.</div>
+    </div>
+    <div class="timeline-col">
+      <div class="timeline-w">W5–W6</div>
+      <div class="timeline-title">Skill Compiling</div>
+      <div class="timeline-desc">Compile core skills (WISMO tracking, return windows) into Elixir; connect live carrier and Shopify APIs.</div>
+    </div>
+    <div class="timeline-col">
+      <div class="timeline-w">W7–W8</div>
+      <div class="timeline-title">Shadow A/B Run</div>
+      <div class="timeline-desc">Run milli.run in shadow mode. Verify ASIN accuracy targets (&gt;95%) and latencies against live agent sessions.</div>
+    </div>
+    <div class="timeline-col">
+      <div class="timeline-w">W9–W10</div>
+      <div class="timeline-title">Controlled Launch</div>
+      <div class="timeline-desc">Route 5% of routine incoming tickets to milli.run. Enable automated verifier audits and escalations to Gorgias.</div>
+    </div>
+    <div class="timeline-col">
+      <div class="timeline-w">W11–W12</div>
+      <div class="timeline-title">Production Scale</div>
+      <div class="timeline-desc">Scale to 50% traffic. Stream shadow fallbacks to compiler to automatically expand intent skill library.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Autonomic support compiled to code. Not prompts.</h2>
+  <p class="section-intro">
+    By using LLMs offline as compilers and fallbacks, we deliver sub-50ms latency, deterministic accuracy, and zero runtime LLM costs.
+  </p>
+  <div class="hero-cta-row" style="justify-content:center;">
+    <a href="#demo" class="btn-primary">Open Simulator</a>
+    <a href="#architecture" class="btn-secondary">Spec Sheet</a>
+  </div>
+
+  <div style="margin-top:64px; max-width:680px; text-align:center; margin-left:auto; margin-right:auto;">
+    <div style="font-size:18px; font-style:italic; line-height:1.5; color:var(--text-muted);">
+      "The LLM is most valuable as a compiler, simulator, evaluator, and fallback — not as a production executor."
+    </div>
+    <div style="font-size:11px; font-weight:700; margin-top:16px; letter-spacing:0.1em; text-transform:uppercase; color: var(--text);">
+      — milli.run Architecture Thesis
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>milli.run · Confidential Pitch · 2026</div>
+  <div>ShoppingBench Evaluated</div>
+</footer>
+
+<script>
+// ---- Ticket and Runtime Data ----
+const tickets = [
+  {
+    customer: "Sarah Chen",
+    initials: "SC",
+    sub: "Order #3841 · Merino Jacket · $189",
+    tier: "Silver",
+    ltv: "$642",
+    orderDate: "Dec 3, 2025",
+    runtimes: {
+      baseline: {
+        score: "42",
+        latency: "0.050s",
+        cost: "$0.000",
+        message: "Hi Sarah! Our standard return policy is 30 days. You can create a return label in your account portal by entering your order number. If you need assistance, let me know.",
+        detail: "Standard Shopify automated template. Cannot verify if she is inside the window or order status.",
+        evidence: [],
+        trace: [
+          "1. Match intent keyword: 'return'",
+          "2. Select template: standard_return_portal",
+          "3. Output static response text"
+        ],
+        skill: "Gorgias-style Rule Template"
+      },
+      grounded: {
+        score: "91",
+        latency: "6.57s",
+        cost: "$0.124",
+        message: "Hi Sarah! I've checked your order #3841 — the Merino Jacket was delivered December 3rd. Our return policy gives you 30 days from delivery, which means your return window is open until January 2nd. You are within the window. Shall I send a label?",
+        detail: "GroundedRepoSDK resolved order #3841. Checked delivery date (Dec 3) and returns policy. Correct result, but required 6.57s of multi-step LLM tool-calling and planning.",
+        evidence: ["order#3841", "policy#return-4", "product#mjkt-82"],
+        trace: [
+          "1. LLM plans search: search_orders('Sarah Chen')",
+          "2. GroundedRepoSDK returns order#3841 (delivered Dec 3)",
+          "3. LLM plans search: search_docs('return window duration')",
+          "4. SDK returns return policy (30-day window)",
+          "5. LLM computes date math (Dec 3 + 30 days = Jan 2)",
+          "6. LLM generates final response (verified against evidence)"
+        ],
+        skill: "Sierra-style LLM Agent Loop"
+      },
+      compiled: {
+        score: "89",
+        latency: "0.034s",
+        cost: "$0.0001",
+        message: "Hi Sarah! I verified your order #3841 was delivered on December 3, 2025. Per our standard 30-day return policy, your return window is open until January 2, 2026. You are eligible for a return. Shall I generate a label?",
+        detail: "FastText routed query to return_eligibility skill. Checked order and policy tables. Executed deterministic Elixir code. Verified evidence: order#3841, policy#return-4.",
+        evidence: ["order#3841", "policy#return-4"],
+        trace: [
+          "1. FastText classifier: return_eligibility (conf: 0.94)",
+          "2. spaCy NER: extracts order_id=#3841",
+          "3. Load session state (Elixir state machine)",
+          "4. Execute compiled skill: check_return_window(order_id)",
+          "5. DB query: select delivery_date from orders where id=3841",
+          "6. Evaluator: current_date <= delivery_date + 30 days (Pass)",
+          "7. Response compiler: fill template return_eligible_template",
+          "8. Evidence verifier: matches all outputs to database rows"
+        ],
+        skill: "return_eligibility_v3 (milli.run Compiled)"
+      }
+    }
+  },
+  {
+    customer: "Marcus Webb",
+    initials: "MW",
+    sub: "Order #4872 · Trail Runners · $142",
+    tier: "Gold",
+    ltv: "$1,120",
+    orderDate: "May 25, 2026",
+    runtimes: {
+      baseline: {
+        score: "50",
+        latency: "0.050s",
+        cost: "$0.000",
+        message: "Hi Marcus! If you are checking on your shipment, standard orders take 3-5 business days to ship. You will receive an automated tracking link in your email once your order leaves our warehouse.",
+        detail: "Automated template for shipping status. Cannot query carrier scan logs or check order fulfillment status.",
+        evidence: [],
+        trace: [
+          "1. Match intent keyword: 'where is my order'",
+          "2. Select template: standard_shipping_info",
+          "3. Output static response text"
+        ],
+        skill: "Gorgias-style Rule Template"
+      },
+      grounded: {
+        score: "90",
+        latency: "6.81s",
+        cost: "$0.119",
+        message: "Hey Marcus! I've looked up order #4872 — your Trail Runner X shoes shipped from our Seattle center on May 29th via FedEx (tracking: 7489234567). Current status: In transit, last scanned Portland hub May 31. Estimated delivery: June 4–5. Delays are weather-related.",
+        detail: "Resolved order and shipment tables. Checked FedEx API mock. LLM retrieved all tracking details, but cost 6.8s of LLM planning at runtime.",
+        evidence: ["order#4872", "shipment#sh-7489", "carrier#fedex-3"],
+        trace: [
+          "1. LLM plans search: search_orders('Marcus Webb')",
+          "2. GroundedRepoSDK returns order#4872 (shipped May 29)",
+          "3. LLM plans search: traverse_graph(order#4872, 'has_shipment')",
+          "4. SDK returns shipment details + FedEx tracker",
+          "5. LLM checks shipment status: scan_log",
+          "6. LLM generates response with tracking info"
+        ],
+        skill: "Sierra-style LLM Agent Loop"
+      },
+      compiled: {
+        score: "89",
+        latency: "0.038s",
+        cost: "$0.0001",
+        message: "Hi Marcus! Order #4872 (Trail Runner X) was shipped on May 29, 2026, via FedEx (tracking: 7489234567). Current status: In transit, last scanned at Portland hub on May 31. Expected delivery: June 4-5. The delay is due to weather.",
+        detail: "FastText routed query to wismo skill. Joined order, shipment, and carrier scan logs. Returned data through template. Zero LLM calls.",
+        evidence: ["order#4872", "shipment#sh-7489", "scan_log#Portland"],
+        trace: [
+          "1. FastText classifier: wismo (conf: 0.98)",
+          "2. spaCy NER: extracts order_id=#4872",
+          "3. Execute compiled skill: track_order(order_id)",
+          "4. SQL join: select orders, shipments, tracking from DB",
+          "5. Fetch scan logs from carrier table",
+          "6. Response compiler: fill wismo_transit_template",
+          "7. Evidence verifier: validates all order status claims"
+         ],
+        skill: "wismo_tracking_v2 (milli.run Compiled)"
+      }
+    }
+  },
+  {
+    customer: "Priya Nair",
+    initials: "PN",
+    sub: "Product Query · Running · Budget $120",
+    tier: "Silver",
+    ltv: "$412",
+    orderDate: "None (Browsing)",
+    runtimes: {
+      baseline: {
+        score: "45",
+        latency: "0.050s",
+        cost: "$0.000",
+        message: "Hi Priya! You can browse our active catalog collections for wide fit shoes. Please visit our footwear collections page online to filter by size and price range.",
+        detail: "Rules cannot dynamically search catalog attributes or filter by complex multi-constraint inputs.",
+        evidence: [],
+        trace: [
+          "1. Match intent keyword: 'recommend'",
+          "2. Select template: catalog_collections_browse",
+          "3. Output static response text"
+        ],
+        skill: "Gorgias-style Rule Template"
+      },
+      grounded: {
+        score: "91",
+        latency: "7.12s",
+        cost: "$0.142",
+        message: "Hi Priya! Based on your wide-fit requirement and trail use, here are three options under $120:\n1. TrailMax Pro Wide ($109) — 4.6★, wide fit\n2. GravelKing V2 ($115) — mid-width, trail\n3. FlexRun XT ($98) — narrower but stretchable mesh\n\nThe TrailMax Pro Wide is best. Want me to reserve a pair?",
+        detail: "LLM called search_products and filter_products. Retrieved 5 candidates and selected 3. Correct prices and inventory, but took 7.12s of reasoning.",
+        evidence: ["product#tj-901", "product#gk-404", "product#fr-202"],
+        trace: [
+          "1. LLM plans search: search_products('trail running shoes wide')",
+          "2. SDK returns 8 candidates",
+          "3. LLM filters candidates by price <= 120",
+          "4. LLM ranks candidates by rating + description",
+          "5. LLM checks inventory status for filtered products",
+          "6. LLM drafts recommendations card"
+        ],
+        skill: "Sierra-style LLM Agent Loop"
+      },
+      compiled: {
+        score: "89",
+        latency: "0.042s",
+        cost: "$0.0001",
+        message: "Hi Priya! Based on our catalog search, here are our top-rated trail running shoes under $120 matching your wide fit:\n\n1. TrailMax Pro Wide (B09RPRRNVP) — $109.00 (In stock)\n2. GravelKing V2 (B07S7HDC88) — $115.00 (In stock)\n3. FlexRun XT (B07XPR3R7N) — $98.00 (In stock)\n\nTrailMax Pro Wide is our top recommendation for wide-fit trail runners. Would you like me to add it to your cart?",
+        detail: "FastText routed to search_products skill. spaCy extracted slots: price_max=120, width=wide, surface=trail. Structured ranker executed catalog search. Zero LLM calls.",
+        evidence: ["product#tj-901", "product#gk-404", "product#fr-202"],
+        trace: [
+          "1. FastText classifier: search_catalog (conf: 0.95)",
+          "2. spaCy NER: price_max=120, width=wide, type=running",
+          "3. Execute compiled skill: catalog_search(slots)",
+          "4. DB search: select * from products where price <= 120 and width='wide'",
+          "5. Rank candidates by matching attributes and inventory",
+          "6. Response compiler: fill product_list_template",
+          "7. Evidence verifier: price and inventory matches DB"
+        ],
+        skill: "catalog_search_v4 (milli.run Compiled)"
+      }
+    }
+  }
+];
+
+let activeTicket = 0;
+let activeRuntime = 'compiled';
+
+function switchTicket(idx) {
+  activeTicket = idx;
+  
+  // Highlight active ticket in list
+  document.querySelectorAll('.ticket-item').forEach((el, i) => {
+    el.classList.toggle('selected', i === idx);
+  });
+  
+  // Highlight active ticket button
+  document.querySelectorAll('.tab-switch-btn').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
+
+  const t = tickets[idx];
+
+  // Update customer info
+  document.getElementById('customer-name').textContent = t.customer;
+  document.getElementById('customer-sub').textContent = t.sub;
+  
+  // Update Right Panel Context
+  document.getElementById('cust-tier').textContent = t.tier;
+  document.getElementById('cust-ltv').textContent = t.ltv;
+  document.getElementById('ord-date').textContent = t.orderDate;
+
+  // Clear and rewrite chat bubbles
+  const chatArea = document.getElementById('chat-area');
+  chatArea.innerHTML = '';
+  
+  // Customer message
+  const cMsg = document.createElement('div');
+  cMsg.className = 'chat-msg customer';
+  let firstMsg = "";
+  if (idx === 0) firstMsg = "Hi, I bought a Merino Wool Jacket in November but I haven't had a chance to wear it. Can I still return it?";
+  if (idx === 1) firstMsg = "Hey, where is my order? I placed it 6 days ago and haven't gotten any shipping updates.";
+  if (idx === 2) firstMsg = "I'm looking for running shoes under $120. I have a wide foot and I run mostly on trails. Any recommendations?";
+  
+  cMsg.innerHTML = `
+    <div class="chat-sender">${t.customer}</div>
+    <div class="chat-bubble">${firstMsg}</div>
+  `;
+  chatArea.appendChild(cMsg);
+
+  // Agent message
+  const aMsg = document.createElement('div');
+  aMsg.className = 'chat-msg agent';
+  aMsg.innerHTML = `
+    <div class="chat-sender">Agent</div>
+    <div class="chat-bubble">Loading...</div>
+  `;
+  chatArea.appendChild(aMsg);
+
+  // Update scores and detail text
+  document.getElementById('baseline-score').textContent = t.runtimes.baseline.score + "%";
+  document.getElementById('baseline-detail').textContent = t.runtimes.baseline.detail;
+  
+  document.getElementById('grounded-score').textContent = t.runtimes.grounded.score + "%";
+  document.getElementById('grounded-detail').textContent = t.runtimes.grounded.detail;
+  
+  document.getElementById('compiled-score').textContent = t.runtimes.compiled.score + "%";
+  document.getElementById('compiled-detail').textContent = t.runtimes.compiled.detail;
+
+  switchRuntime(activeRuntime);
+}
+
+function switchRuntime(runtime) {
+  activeRuntime = runtime;
+
+  // Toggle selection highlight
+  document.querySelectorAll('.ab-card').forEach(el => {
+    el.classList.remove('active-selection');
+  });
+  document.getElementById(`ab-${runtime}`).classList.add('active-selection');
+
+  const t = tickets[activeTicket];
+  const rData = t.runtimes[runtime];
+
+  // Update agent message content
+  const agentBubble = document.querySelector('.chat-msg.agent .chat-bubble');
+  const agentSender = document.querySelector('.chat-msg.agent .chat-sender');
+  if (agentBubble) {
+    agentBubble.innerHTML = rData.message.replace(/\n/g, '<br>');
+  }
+  if (agentSender) {
+    if (runtime === 'baseline') agentSender.textContent = 'Gorgias (Rule/RAG)';
+    if (runtime === 'grounded') agentSender.textContent = 'Sierra LLM Agent';
+    if (runtime === 'compiled') agentSender.textContent = 'milli.run Runtime';
+  }
+
+  // Update evidence drawer
+  const evidencePanel = document.getElementById('evidence-panel');
+  evidencePanel.innerHTML = '';
+  if (rData.evidence.length === 0) {
+    evidencePanel.innerHTML = '<span style="color:var(--text-muted); font-size:11px;">No evidence (hallucinated)</span>';
+  } else {
+    rData.evidence.forEach(ev => {
+      const pill = document.createElement('span');
+      pill.className = 'evidence-pill';
+      pill.textContent = ev;
+      evidencePanel.appendChild(pill);
+    });
+  }
+
+  // Update active skill metadata
+  document.getElementById('active-skill-name').textContent = rData.skill;
+  document.getElementById('active-skill-route').textContent = rData.detail;
+
+  // Update trace logs
+  const tracePanel = document.getElementById('trace-panel');
+  tracePanel.innerHTML = '';
+  rData.trace.forEach(step => {
+    const logLine = document.createElement('div');
+    logLine.style.marginBottom = '4px';
+    logLine.style.lineHeight = '1.3';
+    logLine.textContent = step;
+    tracePanel.appendChild(logLine);
+  });
+
+  // Telemetry updates
+  document.getElementById('sidebar-stat-accuracy').textContent = runtime === 'baseline' ? '0% ASIN accuracy' : (runtime === 'grounded' ? '91% ASIN accuracy' : '89% ASIN accuracy');
+  document.getElementById('sidebar-stat-latency').textContent = `Avg ${rData.latency} latency`;
+  document.getElementById('sidebar-stat-cost').textContent = `Cost: ${rData.cost}/ticket`;
+}
+
+// Initial load
+switchTicket(0);
+
+// ---- Counters ----
+function animateCounter(el, target, duration) {
+  let start = 0;
+  const step = target / (duration / 16);
+  const timer = setInterval(() => {
+    start = Math.min(start + step, target);
+    el.textContent = Math.round(start);
+    if (start >= target) clearInterval(timer);
+  }, 16);
+}
+
+// ---- Scroll Reveals ----
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.05 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Counter observer
+const heroObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(document.getElementById('counter1'), 34, 1200);
+      animateCounter(document.getElementById('counter2'), 99, 1200);
+      animateCounter(document.getElementById('counter3'), 190, 1200);
+      animateCounter(document.getElementById('counter4'), 8, 1200);
+      heroObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+const heroMetrics = document.querySelector('.hero-metrics');
+if (heroMetrics) heroObserver.observe(heroMetrics);
+
+
+</script>
+</body>
+</html>
