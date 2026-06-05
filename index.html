@@ -229,13 +229,20 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .llm-cost{border:1px solid var(--border);padding:10px;background:var(--bg)}
 .llm-cost b{display:block;font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
 .llm-cost span{font:700 13px var(--mono);color:var(--text)}
+
+.latency-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.latency-card{border:1px solid var(--border);background:var(--bg);padding:10px}
+.latency-card b{display:block;font:700 9px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.latency-card span{display:block;font:700 12px var(--mono);color:var(--text);line-height:1.35}
+.latency-note{border:1px solid var(--border);background:var(--alt);padding:10px 12px;font:700 10px var(--mono);letter-spacing:.03em;text-transform:uppercase;color:var(--muted)}
+.latency-note strong{color:var(--text)}
 .session-controls{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 32px;border-top:1px solid var(--border);background:var(--bg)}
 .session-stepper{font:700 11px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
 .session-control-buttons{display:flex;gap:10px}
 .session-control-buttons .btn{padding:9px 14px}
 @media(max-width:1024px){
   .session-grid{grid-template-columns:1fr}
-  .state-row,.llm-cost-grid{grid-template-columns:1fr 1fr}
+  .state-row,.llm-cost-grid,.latency-grid{grid-template-columns:1fr 1fr}
 }
 
 @media(max-width:1024px){
@@ -273,6 +280,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .state-row,.slot-grid,.llm-cost-grid,.flow-strip{grid-template-columns:1fr}
   .candidate-row{grid-template-columns:52px 88px minmax(0,1fr)}
   .session-controls{display:grid}
+  .latency-grid{grid-template-columns:1fr}
   .session-control-buttons{display:grid;grid-template-columns:1fr 1fr}
 
 }
@@ -482,9 +490,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     <div class="session-toggle-wrap">
       <div class="session-mode-toggle" id="sessionModeToggle" data-mode="milli" role="tablist" aria-label="Session mode">
         <button class="mode-option" type="button" data-mode="llm" role="tab" aria-selected="false">SOTA LLM-in-loop</button>
-        <button class="mode-option active" type="button" data-mode="milli" role="tab" aria-selected="true">milli</button>
+        <button class="mode-option active" type="button" data-mode="milli" role="tab" aria-selected="true">milli.run</button>
       </div>
-      <div class="session-status" id="sessionStatus">Mode: <strong>milli</strong></div>
+      <div class="session-status" id="sessionStatus">Mode: <strong>milli.run</strong></div>
     </div>
     <div class="session-body">
       <div class="session-grid">
@@ -493,7 +501,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
           <div class="turn-list" id="sessionTurns"></div>
         </div>
         <div class="runtime-panel">
-          <div class="panel-head"><span id="runtimePanelLabel">milli output</span><strong id="runtimePanelState">actions · choices · commit</strong></div>
+          <div class="panel-head"><span id="runtimePanelLabel">milli.run output</span><strong id="runtimePanelState">actions · choices · commit</strong></div>
           <div class="runtime-stage" id="sessionStage"></div>
         </div>
       </div>
@@ -527,7 +535,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 const sessionData = {
   milli: [
     {
-      meta: 'FULL PATH · ~1ms',
+      meta: 'FULL PATH · 1.2ms',
       user: 'I need something for yoga, high waist, tummy control',
       intent: 'ambiguous · 0.43',
       slots: ['attributes=high waist', 'attributes=tummy control'],
@@ -538,13 +546,14 @@ const sessionData = {
         ['0.400','B085S5P7WB','Women High Waist Tummy Control Fitness Yoga Pants',''],
         ['0.400','B09NSC5VDG','CofeeMO Womens Lingerie Sleep Lounge Nursing','']
       ],
+      latency: {input:'9 input tok', state:'0 prior tok', product:'28 product-title tok', output:'0 generated tok', note:'router + spaCy slots + rank'},
       gap: '0.000',
       action: 'ASK_FIELD(product_type)',
       choices: ['fashion'],
       selected: ''
     },
     {
-      meta: 'FAST PATH · 0.3ms',
+      meta: 'FAST PATH · 0.24ms',
       user: 'leggings',
       intent: 'product intent · injected',
       slots: ['product_type=leggings', 'attributes=high waist', 'attributes=tummy control'],
@@ -555,13 +564,14 @@ const sessionData = {
         ['0.400','B09QCP4579','LWLW High Waist Yoga Shorts','correct'],
         ['0.400','B09QCVCYVY','Burband Womens High Waist Bike Shorts','']
       ],
+      latency: {input:'1 input tok', state:'3 slot tok', product:'25 product-title tok', output:'0 generated tok', note:'inject slot + rerank'},
       gap: '0.333',
       action: 'ASK_FIELD(color)',
       choices: ['black','blue','dark blue','dark gray','gray','green','wine'],
       selected: 'leggings'
     },
     {
-      meta: 'FAST PATH · 0.3ms',
+      meta: 'FAST PATH · 0.31ms',
       user: 'wine',
       intent: 'product intent · injected',
       slots: ['product_type=leggings', 'color=wine', 'attributes=high waist', 'attributes=tummy control'],
@@ -572,13 +582,14 @@ const sessionData = {
         ['0.400','B07MGB73NJ','Viracy Women\'s Short Sleeve V-Neck Casual Flowy Tunic',''],
         ['0.400','B09MSZ4VS8','Goldweather Women Winter Leggings','']
       ],
+      latency: {input:'1 input tok', state:'4 slot tok', product:'24 product-title tok', output:'0 generated tok', note:'color constraint + rerank'},
       gap: '0.250',
       action: 'ASK_FIELD(size)',
       choices: ['3x-large','4x-large','large','medium','small','x-large'],
       selected: 'wine'
     },
     {
-      meta: 'FAST PATH · 0.2ms',
+      meta: 'FAST PATH · 0.38ms',
       user: '3x-large',
       intent: 'commit allowed · max turns',
       slots: ['product_type=leggings', 'color=wine', 'size=3x-large', 'attributes=high waist', 'attributes=tummy control'],
@@ -589,6 +600,7 @@ const sessionData = {
         ['0.600','B09MSZ4VS8','Goldweather Women Winter Leggings',''],
         ['0.500','B09QCVCYVY','Burband Womens High Waist Bike Shorts','']
       ],
+      latency: {input:'1 input tok', state:'5 slot tok', product:'23 product-title tok', output:'0 generated tok', note:'size constraint + commit gate'},
       gap: '0.125',
       action: 'COMMIT_PRODUCT(B09QCP4579) · $13.99',
       choices: ['add_to_cart','send_product_card','log_trace'],
@@ -597,31 +609,35 @@ const sessionData = {
   ],
   llm: [
     {
-      meta: 'MODEL CALL · 4,101ms',
+      meta: 'MODEL CALL · 3,640ms',
       user: 'I need something for yoga, high waist, tummy control',
       response: 'I can help with that. Are you looking for leggings, shorts, pants, or something else for yoga?',
-      stats: ['LLM tokens on hot path','free-text answer','ambiguous product family'],
+      latency: {input:'9 input tok', state:'72 prompt tok', product:'138 product-description tok', output:'19 generated tok', note:'prompt + catalog context + decode'},
+      stats: ['text answer generated','ambiguous product family','no typed merchant action'],
       risk: 'Conversational clarification; no typed merchant action yet.'
     },
     {
-      meta: 'MODEL CALL · 4,101ms',
+      meta: 'MODEL CALL · 3,980ms',
       user: 'leggings',
       response: 'Got it — leggings. Do you have a preferred color? I see options like black, blue, gray, green, and wine.',
-      stats: ['LLM tokens on hot path','catalog options translated to prose','state stored in prompt'],
+      latency: {input:'1 input tok', state:'126 prompt tok', product:'174 product-description tok', output:'24 generated tok', note:'larger prompt state + options prose'},
+      stats: ['catalog options translated to prose','state stored in prompt','tool schema still pending'],
       risk: 'State and constraints remain language-shaped rather than execution-shaped.'
     },
     {
-      meta: 'MODEL CALL · 4,101ms',
+      meta: 'MODEL CALL · 3,720ms',
       user: 'wine',
       response: 'Wine works. What size should I search for? Available sizes appear to include small through 4x-large.',
-      stats: ['LLM tokens on hot path','variant disambiguation in language','tool choice still pending'],
+      latency: {input:'1 input tok', state:'161 prompt tok', product:'146 product-description tok', output:'19 generated tok', note:'variant context + decode'},
+      stats: ['variant disambiguation in language','product context re-read','tool choice still pending'],
       risk: 'The model still has to convert the conversation back into a tool/action schema.'
     },
     {
-      meta: 'MODEL CALL · 4,101ms',
+      meta: 'MODEL CALL · 4,890ms',
       user: '3x-large',
       response: 'The closest match is LWLW High Waist Yoga Shorts in wine, 3x-large, priced at $13.99. Would you like me to add it to cart?',
-      stats: ['LLM tokens on hot path','natural-language confirmation','action after generation'],
+      latency: {input:'2 input tok', state:'205 prompt tok', product:'222 product-description tok', output:'34 generated tok', note:'longest context + confirmation decode'},
+      stats: ['natural-language confirmation','action after generation','largest product context'],
       risk: 'The final action is downstream of text generation rather than the primary interface.'
     }
   ]
@@ -640,6 +656,20 @@ let sessionTurn = 0;
 
 function escapeHtml(value){
   return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+}
+
+
+function renderLatencyGrid(latency){
+  if(!latency) return '';
+  return `
+    <div class="latency-grid">
+      <div class="latency-card"><b>Input</b><span>${escapeHtml(latency.input)}</span></div>
+      <div class="latency-card"><b>State</b><span>${escapeHtml(latency.state)}</span></div>
+      <div class="latency-card"><b>Catalog text</b><span>${escapeHtml(latency.product)}</span></div>
+      <div class="latency-card"><b>Output</b><span>${escapeHtml(latency.output)}</span></div>
+    </div>
+    <div class="latency-note">Latency driver: <strong>${escapeHtml(latency.note)}</strong></div>
+  `;
 }
 
 function renderTurns(){
@@ -675,6 +705,7 @@ function renderMilliTurn(item){
       <div class="state-card"><b>Intent</b><span>${escapeHtml(item.intent)}</span></div>
       <div class="state-card"><b>Gap</b><span>${escapeHtml(item.gap)}</span></div>
     </div>
+    ${renderLatencyGrid(item.latency)}
     <div class="slot-grid">
       <div class="slot-box"><b>Slots</b><div class="slot-tags">${item.slots.map(slot => `<span class="slot-tag">${escapeHtml(slot)}</span>`).join('')}</div></div>
       <div class="slot-box"><b>Missing</b><div class="slot-tags">${missing.map(slot => `<span class="slot-tag missing">${escapeHtml(slot)}</span>`).join('')}</div></div>
@@ -694,6 +725,7 @@ function renderLlmTurn(item){
         <div class="state-card"><b>Interface</b><span>natural language out</span></div>
         <div class="state-card"><b>Control</b><span>post-generation action</span></div>
       </div>
+      ${renderLatencyGrid(item.latency)}
       <div class="llm-bubble"><strong>Assistant text</strong>${escapeHtml(item.response)}</div>
       <div class="llm-cost-grid">${item.stats.map(stat => `<div class="llm-cost"><b>Property</b><span>${escapeHtml(stat)}</span></div>`).join('')}</div>
       <div class="note" style="margin-top:0"><strong>Runtime difference:</strong> ${escapeHtml(item.risk)}</div>
@@ -708,8 +740,8 @@ function renderSession(){
     button.classList.toggle('active', active);
     button.setAttribute('aria-selected', active ? 'true' : 'false');
   });
-  statusEl.innerHTML = `Mode: <strong>${sessionMode === 'milli' ? 'milli' : 'SOTA LLM-in-loop'}</strong>`;
-  labelEl.textContent = sessionMode === 'milli' ? 'milli output' : 'LLM output';
+  statusEl.innerHTML = `Mode: <strong>${sessionMode === 'milli' ? 'milli.run' : 'SOTA LLM-in-loop'}</strong>`;
+  labelEl.textContent = sessionMode === 'milli' ? 'milli.run output' : 'LLM output';
   stateEl.textContent = sessionMode === 'milli' ? 'actions · choices · commit' : 'text · tokens · prompt state';
   renderTurns();
   const item = sessionData[sessionMode][sessionTurn];
