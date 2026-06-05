@@ -1,42 +1,388 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>milli.run — Merchant Runtime for Agentic Commerce</title>
 <meta name="description" content="milli.run is the merchant runtime for agentic commerce: LLMs learn offline, deterministic software executes online.">
 <link rel="canonical" href="https://milli.run/">
+
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#B6FF00">
+
 <meta property="og:type" content="website">
 <meta property="og:title" content="milli.run — Merchant Runtime for Agentic Commerce">
-<meta property="og:description" content="The execution layer that turns agentic commerce from runtime reasoning into verified merchant action.">
-<meta property="og:image" content="https://milli.run/og-image.png">
+<meta property="og:description" content="LLMs learn offline. Deterministic merchant software executes online.">
 <meta property="og:url" content="https://milli.run/">
+<meta property="og:image" content="https://milli.run/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="milli.run — Merchant Runtime for Agentic Commerce">
 <meta name="twitter:description" content="LLMs learn offline. Deterministic merchant software executes online.">
-<meta name="twitter:image" content="https://milli.run/og-image.png">
+<meta name="twitter:image" content="https://milli.run/twitter-image.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
-:root{--bg:#FDFDFD;--alt:#F5F5F3;--border:#E4E4E3;--strong:#7E7E76;--text:#1C1C1A;--muted:#7E7E76;--sans:'Inter',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}a{color:inherit}nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 60px;display:flex;align-items:center;justify-content:space-between;background:var(--bg);border-bottom:1px solid var(--border)}.logo{display:flex;align-items:center;gap:8px;font:800 16px var(--mono);text-decoration:none;text-transform:lowercase}.dot{width:8px;height:8px;border-radius:50%;background:var(--text)}.links{display:flex;gap:28px;list-style:none}.links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500}.links a:hover{color:var(--text)}.btn{display:inline-flex;align-items:center;padding:10px 20px;background:var(--text);color:var(--bg);font-size:13px;font-weight:600;text-decoration:none}.btn.secondary{background:transparent;color:var(--text);border:1px solid var(--border)}section{padding:108px 80px;border-bottom:1px solid var(--border)}.hero{min-height:88vh;padding-top:170px}.alt{background:var(--alt)}.eyebrow,.label{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}h1{font-size:clamp(42px,6vw,72px);font-weight:600;letter-spacing:-.025em;line-height:1.08;max-width:1080px;margin-bottom:28px}h1 em{font-style:normal;color:var(--muted)}h2{font-size:clamp(30px,3.6vw,44px);font-weight:600;letter-spacing:-.015em;line-height:1.18;max-width:940px;margin-bottom:24px}h3{font-size:18px;font-weight:600;margin-bottom:10px}.sub,.intro{font-size:18px;color:var(--muted);max-width:780px;line-height:1.65;margin-bottom:42px}.intro{font-size:16px}.cta{display:flex;gap:16px;align-items:center;margin-bottom:54px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;border-top:1px solid var(--border);padding-top:40px;max-width:1120px}.metric{border-left:1px solid var(--border);padding-left:20px}.metric:first-child{border-left:none;padding-left:0}.num{font-size:42px;font-weight:600;letter-spacing:-.02em;line-height:1}.unit{font-size:20px;color:var(--muted);font-weight:400;margin-left:2px}.caption{font-size:12px;color:var(--muted);line-height:1.45;margin-top:8px}.two{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}.card,.tech{background:var(--bg);border:1px solid var(--border);padding:26px}.card p,.tech p{font-size:13px;color:var(--muted);line-height:1.65}.card-label{font:600 10px var(--mono);color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}.runtime{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:24px}.mode{background:var(--bg);border-top:2px solid var(--text);padding:28px}.mode .name{font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}.mode h3{font-size:24px}.mode p{color:var(--muted);font-size:14px}.flow{display:grid;gap:2px;margin-top:28px}.step{background:var(--bg);border:1px solid var(--border);padding:14px 18px;display:flex;justify-content:space-between;gap:18px}.step strong{font:600 11px var(--mono);text-transform:uppercase}.step span{font-size:12px;color:var(--muted);text-align:right}.techgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}.mono{margin-top:18px;padding:14px 16px;border:1px solid var(--border);background:var(--alt);font:11px/1.7 var(--mono);color:var(--muted);overflow-x:auto}.guarantees{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:28px}.g{border-top:1px solid var(--text);padding-top:14px}.g strong{display:block;font-size:13px;margin-bottom:8px}.g span{display:block;color:var(--muted);font-size:12px;line-height:1.5}.tablewrap{width:100%;overflow-x:auto;margin-top:28px}table{width:100%;min-width:760px;border-collapse:collapse;font-size:13px}thead{border-top:2px solid var(--text);border-bottom:1px solid var(--text)}th{padding:12px 16px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}td{padding:16px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top}tbody tr:last-child td{border-bottom:2px solid var(--text)}.hi{font-weight:700;color:var(--text)}.note{max-width:980px;margin-top:24px;padding:16px 18px;border:1px solid var(--border);border-left:3px solid var(--text);background:var(--alt);color:var(--muted);font-size:12px;line-height:1.6}.alt .note{background:var(--bg)}.list{list-style:none;display:grid;gap:12px}.list li{border-top:1px solid var(--border);padding-top:14px;color:var(--muted);font-size:14px;line-height:1.6}.list strong{color:var(--text)}.center{text-align:center}.center h2{margin-left:auto;margin-right:auto}.center .intro{margin-left:auto;margin-right:auto}.center .cta{justify-content:center;margin-bottom:0}footer{padding:32px 80px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:12px;color:var(--muted);background:var(--alt)}.reveal{opacity:0;transform:translateY(12px);transition:.5s}.reveal.visible{opacity:1;transform:translateY(0)}@media(max-width:1024px){section{padding:90px 40px}.metrics{grid-template-columns:repeat(2,1fr)}.two,.runtime,.techgrid{grid-template-columns:1fr;gap:36px}.three{grid-template-columns:1fr}.guarantees{grid-template-columns:repeat(2,1fr)}}@media(max-width:768px){nav{padding:16px 20px;flex-wrap:wrap;gap:12px}.links{gap:14px;width:100%;justify-content:center;order:3;border-top:1px solid var(--border);padding-top:12px}.links a{font-size:12px}.btn{padding:8px 14px;font-size:11px}section{padding:72px 20px}.hero{min-height:auto;padding-top:140px}.sub,.intro{font-size:15px}.cta{flex-direction:column;align-items:stretch}.cta a{justify-content:center}.metrics,.guarantees{grid-template-columns:1fr}.metric{border-left:none;border-top:1px solid var(--border);padding:16px 0 0}.metric:first-child{border-top:none;padding-top:0}.step{flex-direction:column}.step span{text-align:left}footer{padding:28px 20px;flex-direction:column;gap:8px}}
+:root{
+  --bg:#FDFDFD;
+  --alt:#F5F5F3;
+  --border:#E4E4E3;
+  --border-strong:#7E7E76;
+  --text:#1C1C1A;
+  --muted:#7E7E76;
+  --lime:#B6FF00;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}.sub a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+code{font-family:var(--mono);font-size:.92em;color:var(--text)}
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:20;
+  padding:24px 60px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg);border-bottom:1px solid var(--border)
+}
+.logo{display:flex;align-items:center;gap:8px;font:800 16px var(--mono);text-decoration:none;text-transform:lowercase}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--text)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:14px;font-weight:500;text-decoration:none;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:10px 20px;background:var(--text);color:var(--bg);
+  text-decoration:none;font-size:13px;font-weight:700;border:1px solid var(--text)
+}
+.btn.secondary{background:transparent;color:var(--text);border-color:var(--border)}
+section{padding:112px 80px;border-bottom:1px solid var(--border)}
+section.alt{background:var(--alt)}
+.hero{min-height:88vh;padding-top:172px}
+.label{
+  font:700 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:18px
+}
+h1{
+  font-size:clamp(42px,6vw,74px);font-weight:600;letter-spacing:-.026em;
+  line-height:1.07;max-width:1120px;margin-bottom:28px
+}
+h1 em{font-style:normal;color:var(--muted)}
+h2{
+  font-size:clamp(30px,3.7vw,46px);font-weight:600;letter-spacing:-.018em;
+  line-height:1.16;max-width:980px;margin-bottom:24px
+}
+h3{font-size:18px;font-weight:650;letter-spacing:-.01em;margin-bottom:10px}
+p{color:var(--muted);font-size:14px;line-height:1.65}
+.sub,.intro{font-size:18px;color:var(--muted);max-width:820px;line-height:1.65;margin-bottom:42px}
+.intro{font-size:16px}
+.cta-row{display:flex;gap:16px;align-items:center;margin-bottom:54px}
+.metric-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:40px;
+  border-top:1px solid var(--border);padding-top:40px;max-width:1120px
+}
+.metric{border-left:1px solid var(--border);padding-left:20px}
+.metric:first-child{border-left:none;padding-left:0}
+.metric-value{font-size:42px;font-weight:650;letter-spacing:-.02em;line-height:1}
+.metric-value .unit{font-size:20px;color:var(--muted);font-weight:400;margin-left:2px}
+.metric-label{font-size:12px;color:var(--muted);line-height:1.45;margin-top:8px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:28px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:28px}
+.card{
+  background:var(--bg);border:1px solid var(--border);padding:26px
+}
+.alt .card{background:var(--bg)}
+.card-label{
+  font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:12px
+}
+.card strong{color:var(--text)}
+.runtime-flow{display:grid;gap:2px;margin-top:28px}
+.flow-step{
+  display:flex;justify-content:space-between;gap:24px;
+  background:var(--bg);border:1px solid var(--border);padding:14px 18px
+}
+.flow-step strong{font:700 11px var(--mono);letter-spacing:.02em;text-transform:uppercase;color:var(--text)}
+.flow-step span{font-size:12px;color:var(--muted);text-align:right}
+.guarantees{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:28px
+}
+.guarantee{border-top:1px solid var(--text);padding-top:14px}
+.guarantee strong{display:block;font-size:13px;margin-bottom:8px}
+.guarantee span{display:block;font-size:12px;color:var(--muted);line-height:1.5}
+.table-wrap{width:100%;overflow-x:auto;margin-top:28px}
+table{width:100%;min-width:760px;border-collapse:collapse;font-size:13px;background:transparent}
+thead{border-top:2px solid var(--text);border-bottom:1px solid var(--text)}
+th{
+  padding:12px 16px;text-align:left;
+  font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)
+}
+td{padding:16px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top}
+tbody tr:last-child td{border-bottom:2px solid var(--text)}
+.hi{color:var(--text);font-weight:750}
+.note{
+  max-width:1060px;margin-top:24px;padding:16px 18px;
+  border:1px solid var(--border);border-left:3px solid var(--text);
+  background:var(--alt);color:var(--muted);font-size:12px;line-height:1.65
+}
+.alt .note{background:var(--bg)}
+.note strong{color:var(--text)}
+.proof-points{
+  display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:28px
+}
+.phase-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:28px
+}
+.team-note{
+  margin-top:28px;max-width:980px;
+  color:var(--muted);font-size:14px;line-height:1.7
+}
+.team-note strong{color:var(--text)}
+.final-cta{
+  margin-top:44px;padding-top:32px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:32px
+}
+.final-cta h3{font-size:24px;margin:0}
+footer{
+  padding:32px 80px;background:var(--alt);
+  display:flex;justify-content:space-between;gap:20px;
+  font-size:12px;color:var(--muted)
+}
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:1024px){
+  section{padding:92px 40px}
+  .metric-grid{grid-template-columns:repeat(2,1fr)}
+  .grid-2,.grid-3,.proof-points,.phase-grid{grid-template-columns:1fr}
+  .guarantees{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:760px){
+  nav{padding:16px 20px;flex-wrap:wrap;gap:12px}
+  .nav-links{order:3;width:100%;justify-content:center;gap:16px;border-top:1px solid var(--border);padding-top:12px}
+  .nav-links a{font-size:12px}
+  section{padding:74px 20px}
+  .hero{min-height:auto;padding-top:142px}
+  .sub,.intro{font-size:15px}
+  .cta-row{flex-direction:column;align-items:stretch}
+  .metric-grid,.guarantees{grid-template-columns:1fr}
+  .metric{border-left:none;border-top:1px solid var(--border);padding:16px 0 0}
+  .metric:first-child{border-top:none;padding-top:0}
+  .flow-step{display:block}
+  .flow-step span{display:block;text-align:left;margin-top:8px}
+  .final-cta{display:block}
+  .final-cta .btn{margin-top:20px;width:100%}
+  footer{padding:28px 20px;display:block}
+}
 </style>
 </head>
+
 <body>
-<nav><a class="logo" href="#hero"><span class="dot"></span>milli.run</a><ul class="links"><li><a href="#runtime">Runtime</a></li><li><a href="#architecture">Architecture</a></li><li><a href="#proof">Proof</a></li><li><a href="#why-us">Why us</a></li><li><a href="#deploy">Deploy</a></li></ul><a href="#contact" class="btn">Talk to us →</a></nav>
-<section class="hero" id="hero"><div class="eyebrow">Merchant runtime for agentic commerce</div><h1>Agentic commerce needs a merchant runtime. <em>Not another shopping chatbot.</em></h1><p class="sub">McKinsey estimates agentic commerce could orchestrate up to $1T in U.S. B2C retail revenue by 2030. milli.run is the execution layer merchants need to make that possible: LLMs learn offline, deterministic software executes online.</p><div class="cta"><a href="#runtime" class="btn">See the runtime</a><a href="#proof" class="btn secondary">View benchmark</a></div><div class="metrics"><div class="metric"><div class="num">$1<span class="unit">T</span></div><div class="caption">Estimated U.S. B2C retail revenue potentially orchestrated by agentic commerce by 2030</div></div><div class="metric"><div class="num">$3–5<span class="unit">T</span></div><div class="caption">Estimated global agentic commerce opportunity in McKinsey's 2030 projection</div></div><div class="metric"><div class="num">92<span class="unit">%</span></div><div class="caption">ASIN exact match on 500 seed-grouped WebShop tasks in the v3 benchmark</div></div><div class="metric"><div class="num">3<span class="unit">ms</span></div><div class="caption">Reported compiled slot extraction latency with zero hot-path LLM token cost</div></div></div></section>
-<section class="alt" id="runtime"><div class="label">The missing layer</div><h2>The trillion-dollar prize only materializes if merchants can execute agent intent safely.</h2><p class="intro">Consumer agents can express intent. Merchants still own the systems that make commerce real: catalog, price, inventory, promotions, loyalty, shipping, returns, refunds, risk rules, and brand policy.</p><div class="two"><div class="card reveal"><div class="card-label">Why chatbots failed</div><h3>Conversation is not execution.</h3><p>The first wave put probabilistic reasoning on the live customer path. That made commerce slower, more expensive, less predictable, and harder to certify. A customer may tolerate ambiguity during discovery. A merchant cannot tolerate ambiguity when an agent changes an order, approves a return, applies a discount, or commits to a delivery promise.</p></div><div class="card reveal"><div class="card-label">What changes now</div><h3>Agents need a controlled merchant endpoint.</h3><p>Agentic commerce turns shopping from search into delegation. That shifts the burden from answering questions to executing verified commercial intent. The merchant runtime becomes the trusted boundary between open-ended agents and operational systems of record.</p></div></div><div class="runtime"><div class="mode reveal"><div class="name">System 2 · Offline</div><h3>Learn, reason, compile.</h3><p>LLMs and agents discover workflows, analyze failures, simulate edge cases, generate tests, and compile merchant-specific skills outside the production hot path.</p></div><div class="mode reveal"><div class="name">System 1 · Online</div><h3>Verify, route, execute.</h3><p>Live interactions run through deterministic software: typed interfaces, evidence contracts, policy gates, regression tests, telemetry, rollback, and latency budgets.</p></div></div></section>
-<section id="product"><div class="label">What milli.run does</div><h2>Turn commercial intent into verified merchant action.</h2><p class="intro">milli.run compiles repeated commerce workflows into fast, observable execution paths. LLMs remain valuable for fallback and offline learning. Covered production paths run like software.</p><div class="three"><div class="card reveal"><div class="card-label">01</div><h3>Route covered work</h3><p>Classify customer or agent requests, apply confidence thresholds, and separate covered workflows from exploratory cases that require LLM fallback or human review.</p></div><div class="card reveal"><div class="card-label">02</div><h3>Ground every claim</h3><p>Bind prices, variants, order states, return windows, stock status, and delivery promises to merchant records before response or action.</p></div><div class="card reveal"><div class="card-label">03</div><h3>Compile repeatability</h3><p>Turn resolved workflows into versioned skills with regression fixtures, rollout gates, latency budgets, telemetry, and rollback paths.</p></div></div><div class="flow reveal"><div class="step"><strong>Agent or customer intent</strong><span>Natural-language request, support ticket, or agent action proposal</span></div><div class="step"><strong>Intent router</strong><span>Determines coverage, workflow, confidence, and escalation path</span></div><div class="step"><strong>Evidence verifier</strong><span>Checks assertions against catalog, order, policy, and customer state</span></div><div class="step"><strong>Typed merchant tools</strong><span>Executes approved actions through controlled interfaces</span></div><div class="step"><strong>Offline compiler loop</strong><span>Turns fallbacks and failures into tests, skills, and rollout candidates</span></div></div></section>
-<section class="alt" id="architecture"><div class="label">Technical architecture</div><h2>A merchant runtime needs compiler discipline, not prompt discipline.</h2><p class="intro">milli.run keeps System 2 reasoning out of covered production paths. LLMs inspect failures and propose new skills offline. Online execution uses small, testable components with explicit contracts.</p><div class="techgrid"><div class="tech reveal"><div class="card-label">Coverage gate</div><h3>Intent router before execution.</h3><p>Fast classifiers route only covered workflows into deterministic execution. Low-confidence or novel intents go to fallback, preserving safety without blocking the learning loop.</p><div class="mono">intent → confidence threshold → covered skill | fallback | human queue</div></div><div class="tech reveal"><div class="card-label">Extraction layer</div><h3>Structured slots, repaired against the catalog.</h3><p>spaCy extraction is paired with deterministic repair logic: exact catalog-token preservation, longest-match attribute scans, size and price parsing, and merchant-specific lexicons.</p><div class="mono">spaCy NER → repair_slots() → color/size/price/attribute constraints</div></div><div class="tech reveal"><div class="card-label">Evidence layer</div><h3>Claims must resolve to records.</h3><p>Responses and actions are checked against catalog, order, policy, customer, and fulfillment state. The runtime is designed to prevent unsupported claims from reaching the customer or agent.</p><div class="mono">claim → typed repo call → record match → policy gate → response/action</div></div><div class="tech reveal"><div class="card-label">Compiler loop</div><h3>Fallbacks become tests before skills.</h3><p>Offline agents analyze failures, synthesize edge cases, generate regression fixtures, and propose workflow skills. Deployment happens only after shadow evaluation and versioned rollout gates.</p><div class="mono">fallback trace → LLM analysis → test fixture → skill candidate → shadow A/B → rollout</div></div></div><div class="guarantees reveal"><div class="g"><strong>Latency budget</strong><span>Covered extraction measured in milliseconds, not seconds.</span></div><div class="g"><strong>Cost budget</strong><span>Zero hot-path LLM token cost for compiled workflows.</span></div><div class="g"><strong>Evidence contract</strong><span>Every factual claim must map to merchant data or policy.</span></div><div class="g"><strong>Regression gate</strong><span>New skills ship with historical and synthetic fixtures.</span></div><div class="g"><strong>Rollback path</strong><span>Skills are versioned, observed, and reversible.</span></div></div></section>
-<section id="proof"><div class="label">Proof point</div><h2>Compiled execution preserves accuracy while removing model latency from covered workflows.</h2><p class="intro">On 500 seed-grouped WebShop test tasks, the compiled spaCy + repair path tied the oracle ceiling at 92% ASIN match while keeping LLMs off the hot path.</p><div class="tablewrap"><table><thead><tr><th>System</th><th>Execution model</th><th>Hot-path LLM?</th><th>ASIN match</th><th>Avg latency</th></tr></thead><tbody><tr><td class="hi">spacy+repair compiled</td><td>Trained spaCy NER plus deterministic repair rules, then shared product ranker</td><td>No</td><td class="hi">92%</td><td class="hi">3ms reported extraction</td></tr><tr><td>llm extractor</td><td>Ollama gemma4:12b extracts slots, then same product ranker</td><td>Yes</td><td>90%</td><td>4,101ms</td></tr><tr><td>vector RAG sample</td><td>nomic-embed-text retrieves top candidates; gemma4:12b selects</td><td>Yes</td><td>~95%*</td><td>15,821ms*</td></tr></tbody></table></div><div class="note"><strong>Benchmark scope:</strong> product-match and extractor metrics are from <code>eval/compare_extractors.py</code> on 500 WebShop test tasks with seed-grouped splitting. Every system feeds the same <code>search_products()</code> ranker; the measured variable is how slots are extracted before ranking. The compiled path tied the golden-oracle ceiling at 92% ASIN exact match, meaning the remaining misses were ranker/catalog-ceiling misses rather than extractor misses on oracle-solvable tasks. Vector RAG was measured on a 20-task sample because the full 500-task run would take roughly two hours at approximately 16 seconds per query.</div><div class="tablewrap"><table><thead><tr><th>Comparison</th><th>Raw latency inputs</th><th>Specific speedup</th></tr></thead><tbody><tr><td class="hi">compiled vs LLM extractor</td><td>4,101ms vs 3ms reported compiled extraction</td><td class="hi">1,367x faster</td></tr><tr><td class="hi">compiled vs vector RAG sample</td><td>15,821ms vs 3ms reported compiled extraction</td><td class="hi">5,274x faster</td></tr></tbody></table></div></section>
-<section id="why-us"><div class="label">Why we are building this</div><h2>The team has seen commercial intent break from every side of the stack.</h2><p class="intro">The founding group — K.R., W.Z., D.H., A.D., and D.S. — brings operating history across a recently exited startup, enterprise customer service AI, global consumer brands, demand generation, and developer platforms.</p><div class="two"><div class="card reveal"><div class="card-label">Pattern observed</div><h3>Intent is valuable, but rarely executable.</h3><p>Brands often infer intent through indirect media and data systems. Support tools talk around the systems that actually hold catalog, order, policy, and fulfillment truth. Agents can express what should happen, but merchants still need a runtime that decides what may happen.</p></div><div class="card reveal"><div class="card-label">Operating lesson</div><h3>Reasoning needs controls.</h3><p>Commerce scales when probabilistic intelligence is wrapped in deterministic execution, evidence contracts, policy checks, observability, and rollback. milli.run exists to make that control layer available to merchants before agents become the dominant commerce interface.</p></div></div></section>
-<section class="alt" id="deploy"><div class="label">Deployment path</div><h2>Start with support workflows. Expand into agentic commerce execution.</h2><p class="intro">Support is the natural wedge because it already contains repeated commercial intent: where is my order, can I return this, which variant fits, can I exchange it, is this eligible, what can you recommend.</p><div class="three"><div class="card reveal"><div class="card-label">Phase 1</div><h3>Ingest</h3><p>Sync tickets, macros, policies, product catalog, order states, returns, and fulfillment data. Establish baseline coverage and evidence requirements.</p></div><div class="card reveal"><div class="card-label">Phase 2</div><h3>Compile</h3><p>Train routers and extractors, compile covered workflows, generate regression tests, and run in shadow mode against real support sessions.</p></div><div class="card reveal"><div class="card-label">Phase 3</div><h3>Route</h3><p>Route covered traffic through deterministic execution paths. Escalate low-confidence interactions and feed fallbacks back into the compiler loop.</p></div></div></section>
-<section class="center" id="contact"><div class="label">Architecture thesis</div><h2>LLMs learn offline. Deterministic merchant software executes online.</h2><p class="intro">milli.run turns agentic commerce from runtime reasoning into compiled execution: fast enough for customer support, reliable enough for merchant operations, and controlled enough for brands and retailers to trust.</p><div class="cta"><a href="#contact" class="btn">Talk to us</a><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-agentic-commerce-opportunity-how-ai-agents-are-ushering-in-a-new-era-for-consumers-and-merchants" class="btn secondary" target="_blank" rel="noopener">McKinsey market estimate</a></div></section>
-<footer><div>milli.run · Merchant runtime for agentic commerce</div><div>Compiled execution · verified commercial intent</div></footer>
-<script>const observer=new IntersectionObserver(e=>{e.forEach(t=>{if(t.isIntersecting){t.target.classList.add('visible');observer.unobserve(t.target)}})},{threshold:.08});document.querySelectorAll('.reveal').forEach(e=>observer.observe(e));</script>
+<nav>
+  <a class="logo" href="#hero"><span class="logo-dot"></span>milli.run</a>
+  <ul class="nav-links">
+    <li><a href="#hero">Thesis</a></li>
+    <li><a href="#runtime">Runtime</a></li>
+    <li><a href="#proof">Proof</a></li>
+    <li><a href="#deploy">Deployment</a></li>
+  </ul>
+  <a class="btn" href="#deploy">Talk to us →</a>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="label">Merchant runtime for agentic commerce</div>
+  <h1>Agentic commerce needs a merchant runtime. <em>Not another shopping chatbot.</em></h1>
+  <p class="sub"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-agentic-commerce-opportunity-how-ai-agents-are-ushering-in-a-new-era-for-consumers-and-merchants" target="_blank" rel="noopener">McKinsey estimates agentic commerce could orchestrate up to $1T in U.S. B2C retail revenue by 2030</a>. That prize only materializes if merchants can safely execute agent intent against catalog, order, policy, fulfillment, and support systems.</p>
+  <div class="cta-row">
+    <a class="btn" href="#runtime">See the runtime</a>
+    <a class="btn secondary" href="#proof">View benchmark</a>
+  </div>
+  <div class="metric-grid">
+    <div class="metric">
+      <div class="metric-value">$1<span class="unit">T</span></div>
+      <div class="metric-label">U.S. B2C retail revenue potentially orchestrated by agentic commerce by 2030</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">92<span class="unit">%</span></div>
+      <div class="metric-label">ASIN exact match on 500 seed-grouped WebShop test tasks</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">3<span class="unit">ms</span></div>
+      <div class="metric-label">Compiled slot extraction latency with zero hot-path LLM calls</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">1,295<span class="unit">×</span></div>
+      <div class="metric-label">Faster than LLM slot extraction in Findings v3</div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="runtime">
+  <div class="label">Runtime</div>
+  <h2>LLMs learn offline. Deterministic software executes online.</h2>
+  <p class="intro">Agents can express commercial intent; merchants must decide what may actually happen. milli.run separates open-ended reasoning from production execution so covered workflows run with software-grade latency, evidence, policy, and rollback controls.</p>
+
+  <div class="grid-2">
+    <div class="card reveal">
+      <div class="card-label">System 2 · Offline</div>
+      <h3>Learn, reason, compile.</h3>
+      <p>LLMs and agents analyze failure traces, simulate edge cases, generate regression fixtures, discover reusable workflows, and propose merchant-specific skills. This layer is powerful and probabilistic, but not on the covered production path.</p>
+    </div>
+    <div class="card reveal">
+      <div class="card-label">System 1 · Online</div>
+      <h3>Verify, route, execute.</h3>
+      <p>Live interactions run through deterministic components: intent routing, structured extraction, catalog repair, evidence verification, typed merchant tools, telemetry, confidence gates, and rollback.</p>
+    </div>
+  </div>
+
+  <div class="runtime-flow reveal">
+    <div class="flow-step"><strong>Intent</strong><span>Raw user text, support ticket, or agent action proposal</span></div>
+    <div class="flow-step"><strong>Router</strong><span>FastText/SVM classifier; confidence threshold defaults to 0.70</span></div>
+    <div class="flow-step"><strong>Extractor</strong><span>spaCy NER extracts candidate slots in ~3ms</span></div>
+    <div class="flow-step"><strong>Repair</strong><span><code>repair_slots()</code> applies exact catalog terms, size rules, price parsing, and attribute phrase repair</span></div>
+    <div class="flow-step"><strong>Verifier</strong><span>Claims resolve to catalog, order, policy, customer, or fulfillment records</span></div>
+    <div class="flow-step"><strong>Typed tools</strong><span><code>search_products()</code> and other merchant actions execute through controlled interfaces</span></div>
+    <div class="flow-step"><strong>Fallback</strong><span>Confidence below threshold routes to LLM or human review; fallback traces feed the compiler loop</span></div>
+  </div>
+
+  <div class="guarantees reveal">
+    <div class="guarantee"><strong>Latency</strong><span>~35ms total covered-path product-intent resolution.</span></div>
+    <div class="guarantee"><strong>Cost</strong><span>Zero hot-path LLM token cost for compiled workflows.</span></div>
+    <div class="guarantee"><strong>Evidence</strong><span>Every factual claim must map to merchant data or policy.</span></div>
+    <div class="guarantee"><strong>Regression</strong><span>New skills ship with historical and synthetic fixtures.</span></div>
+    <div class="guarantee"><strong>Fallback</strong><span>Novel or low-confidence work remains reviewable.</span></div>
+    <div class="guarantee"><strong>Rollback</strong><span>Skills are versioned, observed, and reversible.</span></div>
+  </div>
+
+  <div class="note"><strong>Runtime claim:</strong> the merchant runtime is the safety boundary between open-ended agents and operational systems of record. It is not a chatbot layer; it is the execution layer that constrains what agents may say and do.</div>
+</section>
+
+<section id="proof">
+  <div class="label">Proof · Findings v3 · 2026-06-04</div>
+  <h2>Compiled execution matches oracle accuracy at 3ms.</h2>
+  <p class="intro">On 500 WebShop test tasks using seed-grouped splitting, the compiled pipeline matches oracle accuracy at 3ms per query — 1,295× faster than an LLM extractor and approximately 5,000× faster than production-grade vector RAG — with no LLM cost on the hot path.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>System</th>
+          <th>Execution model</th>
+          <th>ASIN match</th>
+          <th>Latency</th>
+          <th>Hot-path LLM</th>
+          <th>Cost at 1M queries/day</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>golden oracle</td>
+          <td>Pre-labeled ground-truth slots; upper bound for the shared ranker</td>
+          <td class="hi">92%</td>
+          <td>0ms</td>
+          <td>No</td>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <td class="hi">spacy+repair</td>
+          <td>Trained spaCy NER plus deterministic repair, then shared <code>search_products()</code> ranker</td>
+          <td class="hi">92%</td>
+          <td class="hi">3ms</td>
+          <td class="hi">No</td>
+          <td class="hi">~$0/day</td>
+        </tr>
+        <tr>
+          <td>llm extractor</td>
+          <td>Ollama <code>gemma4:12b</code> extracts slots from instruction text, then feeds the same ranker</td>
+          <td>90%</td>
+          <td>4,101ms</td>
+          <td>Yes</td>
+          <td>~$2,000/day</td>
+        </tr>
+        <tr>
+          <td>vector RAG*</td>
+          <td><code>nomic-embed-text</code> retrieves top-12 product cards; <code>gemma4:12b</code> selects the candidate</td>
+          <td>~95%*</td>
+          <td>~15,800ms*</td>
+          <td>Yes</td>
+          <td>~$8,000/day</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="proof-points">
+    <div class="card reveal">
+      <div class="card-label">Accuracy</div>
+      <h3>The compiled path ties the oracle ceiling.</h3>
+      <p>The 92% ceiling reflects 42 tasks where no extractor can find the correct ASIN because the products are ambiguous or missing from the catalog's top results. The compiled path misses none that the oracle hits. The LLM extractor loses extra tasks to catalog-token normalization, such as extracting <code>navy blue</code> instead of <code>12-navy</code>.</p>
+    </div>
+    <div class="card reveal">
+      <div class="card-label">Economics</div>
+      <h3>RAG can approach accuracy, but not execution economics.</h3>
+      <p>Dense retrieval plus LLM selection is a fair production baseline. It can match product-family relevance, but pays embedding and full LLM generation cost on every query. The remaining failure mode is variant disambiguation when many color/size ASINs share the same product family.</p>
+    </div>
+  </div>
+
+  <div class="note"><strong>Methodology:</strong> benchmark script <code>eval/compare_extractors.py</code>; 500 tasks from the WebShop test split; seed-grouped train/test split prevents paraphrase leakage. Every system feeds the same <code>search_products()</code> ranker; only slot extraction changes. *Vector RAG was measured on a 20-task sample because the full 500-task run was excluded due to approximately two-hour runtime at roughly 16 seconds per query.</div>
+</section>
+
+<section class="alt" id="deploy">
+  <div class="label">Deployment</div>
+  <h2>Start in support. Expand into agentic commerce execution.</h2>
+  <p class="intro">Support is the wedge because it already contains repeated commercial intent: where is my order, can I return this, which variant fits, can I exchange it, is this eligible, what can you recommend. These workflows can be compiled, verified, routed, and expanded.</p>
+
+  <div class="phase-grid">
+    <div class="card reveal">
+      <div class="card-label">Phase 1</div>
+      <h3>Ingest</h3>
+      <p>Sync tickets, macros, policies, product catalog, order states, returns, and fulfillment data. Establish baseline coverage and evidence requirements.</p>
+    </div>
+    <div class="card reveal">
+      <div class="card-label">Phase 2</div>
+      <h3>Compile</h3>
+      <p>Train routers and extractors, compile covered workflows, generate regression fixtures, and run in shadow mode against real support sessions.</p>
+    </div>
+    <div class="card reveal">
+      <div class="card-label">Phase 3</div>
+      <h3>Route</h3>
+      <p>Route covered traffic through deterministic execution paths. Escalate low-confidence interactions and feed fallback traces back into the compiler loop.</p>
+    </div>
+  </div>
+
+  <p class="team-note"><strong>Why this is the right wedge:</strong> support workflows expose repeated commercial intent before full agentic checkout does. The founding group — K.R., W.Z., D.H., A.D., and D.S. — has seen the same failure pattern across a recently exited startup, enterprise customer service AI, global consumer brands, demand generation, and developer platforms: reasoning only becomes useful in commerce when it is wrapped in deterministic execution, evidence, policy, observability, and rollback.</p>
+
+  <div class="final-cta">
+    <div>
+      <div class="label" style="margin-bottom:10px;">Architecture thesis</div>
+      <h3>Turn agentic commerce into verified merchant action.</h3>
+    </div>
+    <a class="btn" href="mailto:founders@milli.run?subject=milli.run%20merchant%20runtime">Talk to us</a>
+  </div>
+</section>
+
+<footer>
+  <div>milli.run · Merchant runtime for agentic commerce</div>
+  <div>Compiled execution · verified commercial intent</div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
