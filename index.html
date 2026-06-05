@@ -199,7 +199,8 @@ footer{
 <section class="hero" id="hero">
   <div class="label">Merchant runtime for agentic commerce</div>
   <h1>Agentic commerce needs a merchant runtime. <em>Not another shopping chatbot.</em></h1>
-  <p class="sub"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-agentic-commerce-opportunity-how-ai-agents-are-ushering-in-a-new-era-for-consumers-and-merchants" target="_blank" rel="noopener">McKinsey estimates agentic commerce could orchestrate up to $1T in U.S. B2C retail revenue by 2030</a>. That prize only materializes if merchants can safely execute agent intent against catalog, order, policy, fulfillment, and support systems.</p>
+  <p class="sub"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-agentic-commerce-opportunity-how-ai-agents-are-ushering-in-a-new-era-for-consumers-and-merchants" target="_blank" rel="noopener">McKinsey estimates agentic commerce could orchestrate up to $1T in U.S. B2C retail revenue by 2030</a>. 
+    That prize only materializes if merchants can safely execute agent intent against catalog, order, policy, fulfillment, and support systems.</p>
   <div class="cta-row">
     <a class="btn" href="#runtime">See the runtime</a>
     <a class="btn secondary" href="#proof">View benchmark</a>
@@ -227,47 +228,42 @@ footer{
 <section class="alt" id="runtime">
   <div class="label">Runtime</div>
   <h2>LLMs learn offline. Deterministic software executes online.</h2>
-  <p class="intro">Agents can express commercial intent; merchants must decide what may actually happen. milli.run separates open-ended reasoning from production execution so covered workflows run with software-grade latency, evidence, policy, and rollback controls.</p>
+  <p class="intro">Agents can express commercial intent; merchants must decide what may actually happen. 
+    milli.run compiles reasoning and execution possibilities into a special purpose VM, 
+    so covered workflows run with software-grade latency, evidence, policy, and rollback controls.</p>
 
   <div class="grid-2">
     <div class="card reveal">
       <div class="card-label">System 2 · Offline</div>
       <h3>Learn, reason, compile.</h3>
-      <p>LLMs and agents analyze failure traces, simulate edge cases, generate regression fixtures, discover reusable workflows, and propose merchant-specific skills. This layer is powerful and probabilistic, but not on the covered production path.</p>
+      <p>LLMs and agents analyze failure traces, simulate edge cases, generate regression fixtures, discover reusable workflows, 
+        and propose merchant-specific skills. This layer is powerful and probabilistic, but not on the covered production path.</p>
     </div>
     <div class="card reveal">
       <div class="card-label">System 1 · Online</div>
       <h3>Verify, route, execute.</h3>
-      <p>Live interactions run through deterministic components: intent routing, structured extraction, catalog repair, evidence verification, typed merchant tools, telemetry, confidence gates, and rollback.</p>
+      <p>Live interactions run through deterministic components: intent routing, structured extraction, 
+        catalog repair, evidence verification, typed merchant tools, telemetry, confidence gates, and rollback.</p>
     </div>
   </div>
 
-  <div class="runtime-flow reveal">
-    <div class="flow-step"><strong>Intent</strong><span>Raw user text, support ticket, or agent action proposal</span></div>
-    <div class="flow-step"><strong>Router</strong><span>FastText/SVM classifier; confidence threshold defaults to 0.70</span></div>
-    <div class="flow-step"><strong>Extractor</strong><span>spaCy NER extracts candidate slots in ~3ms</span></div>
-    <div class="flow-step"><strong>Repair</strong><span><code>repair_slots()</code> applies exact catalog terms, size rules, price parsing, and attribute phrase repair</span></div>
-    <div class="flow-step"><strong>Verifier</strong><span>Claims resolve to catalog, order, policy, customer, or fulfillment records</span></div>
-    <div class="flow-step"><strong>Typed tools</strong><span><code>search_products()</code> and other merchant actions execute through controlled interfaces</span></div>
-    <div class="flow-step"><strong>Fallback</strong><span>Confidence below threshold routes to LLM or human review; fallback traces feed the compiler loop</span></div>
-  </div>
-
   <div class="guarantees reveal">
-    <div class="guarantee"><strong>Latency</strong><span>~35ms total covered-path product-intent resolution.</span></div>
+    <div class="guarantee"><strong>Latency</strong><span><10ms total covered-path product-intent resolution.</span></div>
     <div class="guarantee"><strong>Cost</strong><span>Zero hot-path LLM token cost for compiled workflows.</span></div>
-    <div class="guarantee"><strong>Evidence</strong><span>Every factual claim must map to merchant data or policy.</span></div>
     <div class="guarantee"><strong>Regression</strong><span>New skills ship with historical and synthetic fixtures.</span></div>
-    <div class="guarantee"><strong>Fallback</strong><span>Novel or low-confidence work remains reviewable.</span></div>
-    <div class="guarantee"><strong>Rollback</strong><span>Skills are versioned, observed, and reversible.</span></div>
+    <div class="guarantee"><strong>Fallback</strong><span>Novel or low-confidence paths logged for automated self-improvement.</span></div>
   </div>
 
-  <div class="note"><strong>Runtime claim:</strong> the merchant runtime is the safety boundary between open-ended agents and operational systems of record. It is not a chatbot layer; it is the execution layer that constrains what agents may say and do.</div>
+  <div class="note"><strong>Runtime claim:</strong> the merchant runtime is the safety boundary between open-ended agents and operational systems of record. 
+    It is not a chatbot layer; it is the execution layer that constrains what agents can do.</div>
 </section>
 
 <section id="proof">
   <div class="label">Proof · Findings v3 · 2026-06-04</div>
   <h2>Compiled execution matches oracle accuracy at 3ms.</h2>
-  <p class="intro">On 500 WebShop test tasks using seed-grouped splitting, the compiled pipeline matches oracle accuracy at 3ms per query — 1,295× faster than an LLM extractor and approximately 5,000× faster than production-grade vector RAG — with no LLM cost on the hot path.</p>
+  <p class="intro">On 500 WebShop test tasks using seed-grouped splitting, 
+    the compiled pipeline matches oracle accuracy at 3ms per query — 1,295× faster than an LLM extractor 
+    and approximately 5,000× faster than production-grade vector RAG — with no LLM cost on the hot path.</p>
 
   <div class="table-wrap">
     <table>
@@ -357,14 +353,17 @@ footer{
     </div>
   </div>
 
-  <p class="team-note"><strong>Why this is the right wedge:</strong> support workflows expose repeated commercial intent before full agentic checkout does. The founding group — K.R., W.Z., D.H., A.D., and D.S. — has seen the same failure pattern across a recently exited startup, enterprise customer service AI, global consumer brands, demand generation, and developer platforms: reasoning only becomes useful in commerce when it is wrapped in deterministic execution, evidence, policy, observability, and rollback.</p>
+  <p class="team-note"><strong>Why this is the right wedge:</strong> Support workflows surface repeated buying intent before brands are ready to trust fully agentic checkout. 
+    The founding team has seen this failure mode in production across AI retail infrastructure, IBM enterprise customer-service AI, demand generation at a top-five CPG company, 
+    and outsourced ecommerce support for a major merchant. 
+    The lesson is consistent: analytics only produce ROI when they translate into deterministic execution, auditable evidence, enforceable policy, observability, and rollback.</p>
 
   <div class="final-cta">
     <div>
       <div class="label" style="margin-bottom:10px;">Architecture thesis</div>
       <h3>Turn agentic commerce into verified merchant action.</h3>
     </div>
-    <a class="btn" href="mailto:founders@milli.run?subject=milli.run%20merchant%20runtime">Talk to us</a>
+    <a class="btn" href="mailto:kripa@metolabs.com?subject=milli.run%20merchant%20runtime">Talk to us</a>
   </div>
 </section>
 
