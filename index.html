@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>milli.run — Compiled Commerce Runtime</title>
-<meta name="description" content="Compiled ecommerce support workflows with 92% ASIN match on 500 WebShop tasks, 3ms extraction latency, and zero hot-path LLM cost.">
+<title>milli.run — Merchant Runtime for Agentic Commerce</title>
+<meta name="description" content="milli.run is the merchant runtime for agentic commerce: LLMs learn offline, deterministic software executes online.">
 <link rel="canonical" href="https://milli.run/">
 
 <!-- Favicon / App Icons -->
@@ -16,8 +16,8 @@
 
 <!-- Open Graph / Link Preview -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="milli.run — Compiled Commerce Runtime">
-<meta property="og:description" content="92% ASIN match on 500 WebShop tasks. 3ms extraction latency. 1,367× faster than LLM extraction and 5,274× faster than vector RAG.">
+<meta property="og:title" content="milli.run — Merchant Runtime for Agentic Commerce">
+<meta property="og:description" content="The execution layer that turns agentic commerce from runtime reasoning into verified merchant action.">
 <meta property="og:image" content="https://milli.run/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -26,14 +26,15 @@
 
 <!-- Twitter / X Preview -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="milli.run — Compiled Commerce Runtime">
-<meta name="twitter:description" content="92% ASIN match. 3ms extraction latency. Zero hot-path LLM cost.">
+<meta name="twitter:title" content="milli.run — Merchant Runtime for Agentic Commerce">
+<meta name="twitter:description" content="LLMs learn offline. Deterministic merchant software executes online.">
 <meta name="twitter:image" content="https://milli.run/og-image.png">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
   :root {
     --bg: #FDFDFD;
@@ -49,6 +50,8 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html { scroll-behavior: smooth; }
+
   body {
     background: var(--bg);
     color: var(--text);
@@ -56,6 +59,8 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
+
+  a { color: inherit; }
 
   /* NAV */
   nav {
@@ -80,6 +85,7 @@
     color: var(--text);
     font-family: var(--font-mono);
     text-transform: lowercase;
+    text-decoration: none;
   }
 
   .nav-logo .dot {
@@ -120,9 +126,7 @@
     transition: opacity 0.1s;
   }
 
-  .btn-primary:hover {
-    opacity: 0.9;
-  }
+  .btn-primary:hover { opacity: 0.9; }
 
   .btn-secondary {
     padding: 10px 20px;
@@ -144,43 +148,42 @@
 
   /* SECTIONS */
   section {
-    min-height: 90vh;
+    min-height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 160px 80px 80px;
+    padding: 110px 80px;
     position: relative;
-  }
-
-  section.compact {
-    min-height: auto;
-    padding: 100px 80px;
-  }
-
-  /* HERO */
-  .hero {
-    background: var(--bg);
     border-bottom: 1px solid var(--border);
   }
 
-  .hero-eyebrow {
+  .hero {
+    min-height: 88vh;
+    padding-top: 170px;
+    background: var(--bg);
+  }
+
+  .section-alt { background: var(--bg-alt); }
+
+  .hero-eyebrow,
+  .section-label {
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-muted);
-    margin-bottom: 24px;
+    margin-bottom: 18px;
   }
 
   .hero h1 {
     font-family: var(--font-sans);
-    font-size: clamp(38px, 5.5vw, 64px);
+    font-size: clamp(42px, 6vw, 72px);
     font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
     color: var(--text);
-    max-width: 950px;
+    max-width: 1060px;
     margin-bottom: 28px;
   }
 
@@ -191,22 +194,53 @@
     font-weight: 600;
   }
 
-  .hero-sub {
+  h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(30px, 3.6vw, 44px);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.18;
+    color: var(--text);
+    max-width: 900px;
+    margin-bottom: 24px;
+  }
+
+  h3 {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .hero-sub,
+  .section-intro {
     font-family: var(--font-sans);
     font-size: 18px;
     color: var(--text-muted);
-    max-width: 650px;
-    line-height: 1.6;
-    margin-bottom: 48px;
+    max-width: 760px;
+    line-height: 1.65;
+    margin-bottom: 42px;
   }
 
-  .hero-metrics {
+  .section-intro { font-size: 16px; }
+
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 54px;
+  }
+
+  /* METRICS */
+  .metric-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 40px;
     border-top: 1px solid var(--border);
     padding-top: 40px;
-    max-width: 1000px;
+    max-width: 1120px;
   }
 
   .metric-item {
@@ -224,7 +258,7 @@
 
   .metric-value {
     font-family: var(--font-serif);
-    font-size: 40px;
+    font-size: 42px;
     font-weight: 600;
     letter-spacing: -0.02em;
     line-height: 1;
@@ -243,717 +277,142 @@
     font-size: 12px;
     color: var(--text-muted);
     font-weight: 500;
-    line-height: 1.4;
+    line-height: 1.45;
   }
 
-  .hero-cta-row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  /* SECTION HEADERS */
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 16px;
-  }
-
-  h2 {
-    font-family: var(--font-serif);
-    font-size: clamp(28px, 3.5vw, 40px);
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    line-height: 1.25;
-    color: var(--text);
-    margin-bottom: 24px;
-  }
-
-  .section-intro {
-    font-family: var(--font-sans);
-    font-size: 16px;
-    color: var(--text-muted);
-    max-width: 650px;
-    margin-bottom: 48px;
-    line-height: 1.65;
-  }
-
-  /* MARKET / PRIZE SECTION */
-  .market-section {
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .market-grid {
+  /* GRIDS */
+  .two-col {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 48px;
-    margin-bottom: 48px;
-  }
-
-  .market-card {
-    display: flex;
-    flex-direction: column;
-    border-left: 1px solid var(--border);
-    padding-left: 24px;
-  }
-
-  .market-card:first-child {
-    border-left: none;
-    padding-left: 0;
-  }
-
-  .market-card .card-num {
-    font-family: var(--font-serif);
-    font-size: 44px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    margin-bottom: 12px;
-    line-height: 1;
-  }
-
-  .market-card .card-label {
-    font-family: var(--font-sans);
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  .market-card .card-source {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 16px;
-    font-family: var(--font-mono);
-  }
-
-  /* BAR CHART */
-  .bar-chart {
-    margin-top: 48px;
-    border-top: 1px solid var(--border);
-    padding-top: 32px;
-    max-width: 800px;
-  }
-
-  .bar-chart-title {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-    margin-bottom: 24px;
-    font-family: var(--font-mono);
-  }
-
-  .bar-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-    font-size: 12px;
-  }
-
-  .bar-label {
-    width: 200px;
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  .bar-track {
-    flex: 1;
-    height: 8px;
-    background: var(--bg-alt);
-    position: relative;
-  }
-
-  .bar-fill {
-    height: 100%;
-    background: var(--text);
-    width: 0%;
-    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    position: relative;
-  }
-
-  .bar-val {
-    position: absolute;
-    left: calc(100% + 8px);
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 11px;
-    font-family: var(--font-mono);
-    font-weight: 500;
-    color: var(--text);
-    white-space: nowrap;
-  }
-
-  /* DEMO SECTION */
-  .demo-section {
-    background: var(--bg);
-    padding: 100px 0 80px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .demo-header {
-    padding: 0 80px;
-    margin-bottom: 40px;
-  }
-
-  .tab-switch {
-    display: flex;
-    gap: 4px;
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: 0;
-    padding: 4px;
-    width: fit-content;
-    margin-bottom: 24px;
-  }
-
-  .tab-switch-btn {
-    padding: 8px 16px;
-    border-radius: 0;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    color: var(--text-muted);
-    transition: all 0.1s;
-  }
-
-  .tab-switch-btn.active {
-    background: var(--bg);
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
-
-  /* Simulator Wrapper */
-  .console-wrapper {
-    margin: 0 80px;
-    border-radius: 0;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    background: var(--bg);
-  }
-
-  .console-topbar {
-    background: var(--bg-alt);
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .window-btn {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    border: 1px solid var(--border-strong);
-    background: transparent;
-  }
-
-  .console-topbar-title {
-    flex: 1;
-    text-align: center;
-    font-size: 11px;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .console-layout {
-    display: flex;
-    height: 600px;
-    background: var(--bg);
-  }
-
-  /* Sidebar */
-  .console-sidebar {
-    width: 180px;
-    background: var(--bg-alt);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-  }
-
-  .sidebar-header {
-    padding: 16px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .sidebar-logo {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--text);
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-  }
-
-  .sidebar-logo span {
-    font-weight: 400;
-    color: var(--text-muted);
-  }
-
-  .sidebar-nav {
-    padding: 12px 0;
-    flex: 1;
-  }
-
-  .sidebar-section-title {
-    font-size: 9px;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 16px 16px 8px;
-    font-family: var(--font-mono);
-  }
-
-  .console-sidebar .nav-item {
-    display: flex;
-    align-items: center;
-    padding: 8px 16px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-muted);
-    cursor: pointer;
-    border-left: 2px solid transparent;
-  }
-
-  .console-sidebar .nav-item:hover {
-    color: var(--text);
-  }
-
-  .console-sidebar .nav-item.active {
-    background: transparent;
-    color: var(--text);
-    border-left: 2px solid var(--text);
-    font-weight: 600;
-  }
-
-  /* Ticket List */
-  .ticket-list {
-    width: 230px;
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    background: var(--bg);
-    flex-shrink: 0;
-  }
-
-  .ticket-list-header {
-    padding: 16px;
-    border-bottom: 1px solid var(--border);
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .ticket-item {
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--border);
-    cursor: pointer;
-    background: var(--bg);
-    transition: background 0.1s;
-  }
-
-  .ticket-item:hover {
-    background: var(--bg-alt);
-  }
-
-  .ticket-item.selected {
-    background: var(--bg-alt);
-    border-left: 3px solid var(--text);
-  }
-
-  .ticket-customer {
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: var(--text);
-  }
-
-  .ticket-preview {
-    font-size: 11px;
-    color: var(--text-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.4;
-  }
-
-  .ticket-meta {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 8px;
-  }
-
-  .intent-tag {
-    font-size: 9px;
-    font-family: var(--font-mono);
-    font-weight: 600;
-    padding: 2px 6px;
-    border-radius: 0;
-    background: var(--bg-alt);
-    color: var(--text-muted);
-    border: 1px solid var(--border);
-  }
-
-  .ticket-time {
-    font-size: 10px;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  /* Main Pane */
-  .console-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background: var(--bg);
-  }
-
-  .main-header {
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .main-customer-info {
-    font-size: 12px;
-  }
-
-  .customer-name {
-    font-weight: 700;
-    color: var(--text);
-    font-size: 13px;
-  }
-
-  .customer-sub {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 2px;
-  }
-
-  .main-actions {
-    display: flex;
-    gap: 8px;
-  }
-
-  .icon-btn {
-    padding: 6px 12px;
-    border-radius: 0;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    border: 1px solid var(--border);
-    background: var(--bg);
-    color: var(--text);
-  }
-
-  .icon-btn:hover {
-    background: var(--bg-alt);
-  }
-
-  .icon-btn.resolve {
-    background: var(--text);
-    color: var(--bg);
-    border-color: var(--text);
-  }
-
-  .icon-btn.resolve:hover {
-    opacity: 0.9;
-  }
-
-  /* Transcript Chat Area */
-  .chat-area {
-    flex: 1;
-    overflow-y: auto;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background: var(--bg);
-  }
-
-  .chat-msg {
-    max-width: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .chat-sender {
-    font-size: 10px;
-    font-family: var(--font-mono);
-    color: var(--text-muted);
-    margin-bottom: 6px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .chat-msg.agent .chat-sender {
-    text-align: left;
-  }
-
-  .chat-bubble {
-    padding: 12px 16px;
-    font-size: 13px;
-    line-height: 1.5;
-    border-radius: 0;
-  }
-
-  .chat-msg.customer .chat-bubble {
-    background: var(--bg-alt);
-    color: var(--text);
-    border-left: 2px solid var(--border-strong);
-  }
-
-  .chat-msg.agent .chat-bubble {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-left: 2px solid var(--text);
-  }
-
-  /* AB Compare Panel */
-  .ab-panel {
-    border-top: 1px solid var(--border);
-    padding: 16px 20px;
-    background: var(--bg);
-  }
-
-  .ab-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-    font-family: var(--font-mono);
-  }
-
-  .ab-compare {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-
-  .ab-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 0;
-    padding: 12px;
-    cursor: pointer;
-    transition: all 0.1s;
-  }
-
-  .ab-card:hover {
-    border-color: var(--text-muted);
-  }
-
-  .ab-card.active-selection {
-    border-color: var(--text);
-    border-width: 1.5px;
-    background: var(--bg-alt);
-  }
-
-  .ab-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 6px;
-  }
-
-  .ab-card-name {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-  }
-
-  .ab-score {
-    font-family: var(--font-serif);
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--text);
-  }
-
-  .ab-detail {
-    font-size: 11px;
-    color: var(--text-muted);
-    line-height: 1.4;
-  }
-
-  /* Right Panel */
-  .console-right {
-    width: 220px;
-    border-left: 1px solid var(--border);
-    background: var(--bg);
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    overflow-y: auto;
-  }
-
-  .right-section {
-    padding: 16px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .right-section-title {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 12px;
-  }
-
-  .info-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    font-size: 11px;
-  }
-
-  .info-label { color: var(--text-muted); }
-  .info-val { color: var(--text); font-weight: 500; }
-
-  .evidence-pill {
-    display: inline-block;
-    padding: 2px 6px;
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: 0;
-    font-size: 10px;
-    color: var(--text);
-    font-family: var(--font-mono);
-    margin: 2px 2px 2px 0;
-  }
-
-  /* ARCHITECTURE SECTION */
-  .arch-section {
-    background: var(--bg-alt);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .arch-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 48px;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
     align-items: start;
   }
 
-  .arch-diagram {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 14px;
   }
 
-  .arch-layer {
+  .card {
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 0;
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: border-color 0.15s ease;
+    padding: 26px;
   }
 
-  .arch-layer:hover {
-    border-color: var(--text-muted);
+  .section-alt .card { background: var(--bg); }
+
+  .card-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
   }
 
-  .arch-layer-name {
+  .card p {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .plain-list {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+  }
+
+  .plain-list li {
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .plain-list strong { color: var(--text); }
+
+  /* ARCHITECTURE */
+  .runtime-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 24px;
+  }
+
+  .runtime-card {
+    border-top: 2px solid var(--text);
+    background: var(--bg);
+    padding: 28px;
+  }
+
+  .runtime-card .mode {
     font-family: var(--font-mono);
     font-size: 11px;
-    font-weight: 600;
-    color: var(--text);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .runtime-card h3 {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+
+  .runtime-card p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 22px;
+  }
+
+  .flow-step {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .flow-step strong {
+    font-family: var(--font-mono);
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.02em;
   }
 
-  .arch-layer-desc {
-    font-family: var(--font-sans);
+  .flow-step span {
     font-size: 12px;
     color: var(--text-muted);
     text-align: right;
   }
 
-  .arch-connector {
-    height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    font-size: 11px;
-  }
-
-  .arch-claims {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .claim-item {
-    padding: 24px;
-    background: var(--bg);
-    border-radius: 0;
-    border: 1px solid var(--border);
-  }
-
-  .claim-item .claim-title {
-    font-family: var(--font-serif);
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 8px;
-    color: var(--text);
-  }
-
-  .claim-item .claim-body {
-    font-family: var(--font-sans);
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
   /* BENCHMARK TABLE */
-  .bench-section {
-    background: var(--bg);
+  .bench-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 28px;
   }
 
   .bench-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 32px;
     font-size: 13px;
+    min-width: 760px;
   }
 
   .bench-table thead {
@@ -973,9 +432,10 @@
   }
 
   .bench-table td {
-    padding: 14px 16px;
+    padding: 16px;
     border-bottom: 1px solid var(--border);
     color: var(--text-muted);
+    vertical-align: top;
   }
 
   .bench-table tbody tr:last-child td {
@@ -983,165 +443,50 @@
   }
 
   .bench-table td.highlight {
-    font-weight: 600;
-    color: var(--text);
-  }
-
-  .bench-table td:nth-child(4),
-  .bench-table th:nth-child(4) {
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  .bench-table td:nth-child(4).highlight {
     font-weight: 700;
+    color: var(--text);
   }
 
-  /* SEQUOIA PMF */
-  .prize-section {
+  .note {
+    max-width: 980px;
+    margin-top: 24px;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--text);
     background: var(--bg-alt);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .sequoia-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    margin: 40px 0;
-  }
-
-  .sequoia-card {
-    border: none;
-    border-top: 1px solid var(--text);
-    padding-top: 20px;
-    background: transparent;
-    border-radius: 0;
-  }
-
-  .sequoia-q {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
     color: var(--text-muted);
-    margin-bottom: 12px;
-  }
-
-  .sequoia-a {
-    font-family: var(--font-serif);
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 8px;
-    line-height: 1.3;
-  }
-
-  .sequoia-detail {
-    font-family: var(--font-sans);
     font-size: 12px;
-    color: var(--text-muted);
     line-height: 1.6;
   }
 
-  /* PILOT SECTION & PHASES */
-  .pilot-section {
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-  }
+  .section-alt .note { background: var(--bg); }
 
-  .pilot-phases {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    margin: 40px 0 64px;
-  }
-
-  .pilot-phase-card {
-    border-top: 1px solid var(--text);
-    padding-top: 20px;
-  }
-
-  .pilot-phase-card .phase-number {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-    letter-spacing: 0.05em;
-  }
-
-  .pilot-phase-card .phase-title {
-    font-family: var(--font-serif);
-    font-size: 18px;
-    font-weight: 500;
+  .note strong {
     color: var(--text);
-    margin-bottom: 12px;
-  }
-
-  .pilot-phase-card .phase-desc {
-    font-family: var(--font-sans);
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  /* Timeline */
-  .timeline-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 16px;
-    margin-top: 32px;
-  }
-
-  .timeline-col {
-    border-top: 1px solid var(--text);
-    padding-top: 20px;
-  }
-
-  .timeline-w {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    font-weight: 500;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 8px;
-  }
-
-  .timeline-title {
-    font-family: var(--font-serif);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-
-  .timeline-desc {
-    font-family: var(--font-sans);
-    font-size: 12px;
-    color: var(--text-muted);
-    line-height: 1.5;
+    font-weight: 700;
   }
 
   /* CTA */
   .cta-section {
     background: var(--bg);
     text-align: center;
-    padding: 100px 80px;
+    padding: 110px 80px;
   }
 
   .cta-section h2 {
-    max-width: 600px;
+    max-width: 760px;
     margin: 0 auto 20px;
   }
 
   .cta-section .section-intro {
-    margin: 0 auto 40px;
+    margin: 0 auto 38px;
   }
 
-  /* FOOTER */
+  .cta-section .hero-cta-row {
+    justify-content: center;
+    margin-bottom: 0;
+  }
+
   footer {
     padding: 32px 80px;
     border-top: 1px solid var(--border);
@@ -1154,33 +499,6 @@
     font-family: var(--font-sans);
   }
 
-
-  /* DILIGENCE NOTES */
-  .benchmark-note {
-    max-width: 980px;
-    margin: 8px 0 28px;
-    padding: 16px 18px;
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--text);
-    background: var(--bg-alt);
-    color: var(--text-muted);
-    font-size: 12px;
-    line-height: 1.6;
-  }
-
-  .benchmark-note strong {
-    color: var(--text);
-    font-weight: 700;
-  }
-
-  /* Dividers */
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 0 80px;
-  }
-
-  /* ANIMATED REVEALS (CLEAN TRANSFORM) */
   .reveal {
     opacity: 0;
     transform: translateY(12px);
@@ -1192,77 +510,21 @@
     transform: translateY(0);
   }
 
-  /* RESPONSIVE DESIGN & MOBILE FRIENDLINESS */
   @media (max-width: 1024px) {
-    /* Adjust general spacing */
-    section {
-      padding: 120px 40px 60px;
-    }
-    section.compact {
-      padding: 80px 40px;
-    }
-    .console-wrapper {
-      margin: 0 40px;
-    }
-    
-    /* Grids to 2 columns where appropriate */
-    .hero-metrics {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-    }
-    
-    .market-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-    }
-    .market-card {
-      border-left: none;
-      border-top: 1px solid var(--border);
-      padding-top: 20px;
-      padding-left: 0;
-    }
-    .market-card:first-child {
-      border-top: none;
-      padding-top: 0;
-    }
-
-    .sequoia-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-
-    .pilot-phases {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-
-    .timeline-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    
-    /* Interactive Console */
-    .console-layout {
-      height: 550px;
-    }
-    .console-sidebar {
-      width: 150px;
-    }
-    .ticket-list {
-      width: 200px;
-    }
-    .console-right {
-      width: 180px;
-    }
+    section { padding: 90px 40px; }
+    .hero { padding-top: 150px; }
+    .metric-grid { grid-template-columns: repeat(2, 1fr); }
+    .two-col, .runtime-grid { grid-template-columns: 1fr; gap: 36px; }
+    .three-col { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 768px) {
-    /* Navigation */
     nav {
       padding: 16px 20px;
       flex-wrap: wrap;
       gap: 12px;
     }
+
     .nav-links {
       gap: 16px;
       width: 100%;
@@ -1272,1111 +534,324 @@
       padding-top: 12px;
       margin-top: 4px;
     }
-    .nav-links a {
-      font-size: 12px;
-    }
-    nav .btn-primary {
-      padding: 8px 16px;
-      font-size: 11px;
-    }
 
-    /* General padding */
-    section {
-      padding: 100px 20px 40px;
-    }
-    section.compact {
-      padding: 60px 20px;
-    }
-    .console-wrapper {
-      margin: 0 10px;
-    }
+    .nav-links a { font-size: 12px; }
+    nav .btn-primary { padding: 8px 16px; font-size: 11px; }
+
+    section { padding: 72px 20px; }
+    .hero { min-height: auto; padding-top: 140px; }
+
+    .hero-sub, .section-intro { font-size: 15px; }
+
     .hero-cta-row {
       flex-direction: column;
       width: 100%;
       gap: 12px;
     }
+
     .hero-cta-row a {
       width: 100%;
       justify-content: center;
+      text-align: center;
     }
 
-    /* Hero */
-    .hero-sub {
-      font-size: 15px;
-      margin-bottom: 32px;
-    }
-    .hero-metrics {
+    .metric-grid {
       grid-template-columns: 1fr;
       gap: 24px;
       padding-top: 24px;
     }
+
     .metric-item {
       border-left: none;
       border-top: 1px solid var(--border);
       padding-left: 0;
       padding-top: 16px;
     }
+
     .metric-item:first-child {
       border-top: none;
       padding-top: 0;
     }
 
-    /* Market Grid */
-    .market-grid {
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-    .market-card {
-      border-top: 1px solid var(--border);
-      padding-top: 16px;
-    }
-    .market-card:first-child {
-      border-top: none;
-    }
-
-    /* Interactive Console */
-    .console-layout {
-      height: 500px;
+    .flow-step {
       flex-direction: column;
-    }
-    .console-sidebar {
-      display: none !important;
-    }
-    .ticket-list {
-      display: none !important;
-    }
-    .console-right {
-      display: none !important;
-    }
-    .console-main {
-      width: 100%;
-      height: 100%;
-    }
-    
-    /* Horizontal scrollable runtime comparisons */
-    .ab-compare {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      gap: 12px;
-      padding-bottom: 8px;
-      -webkit-overflow-scrolling: touch;
-    }
-    .ab-card {
-      flex: 0 0 260px;
-      scroll-snap-align: start;
-    }
-    .ab-panel {
-      padding: 12px 16px;
-    }
-    .chat-area {
-      padding: 16px;
-      gap: 16px;
-    }
-    .demo-header {
-      padding: 0 20px;
-    }
-    .tab-switch {
-      flex-wrap: wrap;
-      width: 100%;
-    }
-    .tab-switch-btn {
-      flex: 1 1 auto;
-      text-align: center;
-      padding: 8px 10px;
+      gap: 8px;
     }
 
-    /* Architecture Section */
-    .arch-grid {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    .arch-diagram {
-      order: 2;
-    }
+    .flow-step span { text-align: left; }
 
-    /* Sequoia */
-    .sequoia-grid {
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-
-    /* Pilot phases */
-    .pilot-phases {
-      grid-template-columns: 1fr;
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-
-    /* Timeline */
-    .timeline-grid {
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    .timeline-col {
-      border-left: 2px solid var(--text);
-      border-top: none;
-      padding-left: 16px;
-      padding-top: 0;
-    }
-    
-    /* Tables responsiveness */
-    .bench-table {
-      font-size: 11px;
-    }
-    .bench-table th, .bench-table td {
-      padding: 10px 8px;
+    footer {
+      padding: 28px 20px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
     }
   }
 </style>
 </head>
-<body>
 
-<!-- NAV -->
+<body>
 <nav>
-  <div class="nav-logo">
+  <a class="nav-logo" href="#hero">
     <div class="dot"></div>
     milli.run
-  </div>
+  </a>
   <ul class="nav-links">
-    <li><a href="#hero">Concept</a></li>
-    <li><a href="#prize">Market</a></li>
-    <li><a href="#demo">Console</a></li>
-    <li><a href="#architecture">Architecture</a></li>
-    <li><a href="#benchmark">Metrics</a></li>
-    <li><a href="#sequoia">Strategy</a></li>
-    <li><a href="#pilot">Pilot</a></li>
+    <li><a href="#runtime">Runtime</a></li>
+    <li><a href="#proof">Proof</a></li>
+    <li><a href="#why-us">Why us</a></li>
+    <li><a href="#deploy">Deploy</a></li>
   </ul>
-  <a href="#demo" class="btn-primary">Simulator →</a>
+  <a href="#contact" class="btn-primary">Talk to us →</a>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-eyebrow">milli.run · WebShop benchmark v3 · 2026-06-04</div>
+  <div class="hero-eyebrow">Merchant runtime for agentic commerce</div>
 
-  <h1>The compiled commerce runtime that resolves catalog intent in milliseconds <em>without an LLM on the hot path.</em></h1>
+  <h1>Agentic commerce needs a merchant runtime. <em>Not another shopping chatbot.</em></h1>
 
   <p class="hero-sub">
-    On 500 seed-grouped WebShop test tasks, the compiled <strong>spaCy + repair</strong> pipeline ties the oracle ranker ceiling at 92% ASIN match, while extracting slots in 3ms reported time and preserving zero hot-path LLM token cost for covered intents.
+    McKinsey estimates agentic commerce could orchestrate up to $1T in U.S. B2C retail revenue by 2030. milli.run is the execution layer merchants need to make that possible: LLMs learn offline, deterministic software executes online.
   </p>
 
-  <div class="hero-metrics">
+  <div class="hero-cta-row">
+    <a href="#runtime" class="btn-primary">See the runtime</a>
+    <a href="#proof" class="btn-secondary">View benchmark</a>
+  </div>
+
+  <div class="metric-grid">
     <div class="metric-item">
-      <div class="metric-value">3<span class="unit">ms</span></div>
-      <div class="metric-label">Reported compiled slot extraction latency; ratios use table values</div>
+      <div class="metric-value">$1<span class="unit">T</span></div>
+      <div class="metric-label">Estimated U.S. B2C retail revenue potentially orchestrated by agentic commerce by 2030</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-value">$3–5<span class="unit">T</span></div>
+      <div class="metric-label">Estimated global agentic commerce opportunity in McKinsey's 2030 projection</div>
     </div>
     <div class="metric-item">
       <div class="metric-value">92<span class="unit">%</span></div>
-      <div class="metric-label">ASIN exact match; ties golden oracle ceiling on n=500</div>
+      <div class="metric-label">ASIN exact match on 500 seed-grouped WebShop tasks in the v3 benchmark</div>
     </div>
     <div class="metric-item">
-      <div class="metric-value">1,367<span class="unit">x</span></div>
-      <div class="metric-label">Faster than Ollama gemma4:12b LLM slot extraction</div>
+      <div class="metric-value">3<span class="unit">ms</span></div>
+      <div class="metric-label">Reported compiled slot extraction latency with zero hot-path LLM token cost</div>
     </div>
-    <div class="metric-item">
-      <div class="metric-value">5,274<span class="unit">x</span></div>
-      <div class="metric-label">Faster than vector RAG sample using 15,821ms/query</div>
-    </div>
-  </div>
-
-  <div class="benchmark-note" style="margin-top:32px; max-width:1000px;">
-    <strong>Metric scope:</strong> product-match and extractor metrics are from <code>eval/compare_extractors.py</code> on 500 WebShop test tasks with seed-grouped splitting. Vector RAG was measured on a 20-task sample because the 500-task run would take roughly two hours at ~16 seconds/query.
   </div>
 </section>
 
-<!-- THE PRIZE -->
-<section class="market-section compact" id="prize">
-  <div class="section-label">Market Shift</div>
-  <h2>Customer support is one of AI's clearest enterprise wedge markets.</h2>
+<section class="section-alt" id="runtime">
+  <div class="section-label">The missing layer</div>
+  <h2>The trillion-dollar prize only materializes if merchants can execute agent intent safely.</h2>
   <p class="section-intro">
-    The thesis is not that incumbents lack AI. The thesis is that routine, repeatable commerce workflows should not require runtime model planning once the correct decision path has been proven and compiled.
+    Consumer agents can express intent. Merchants still own the systems that make commerce real: catalog, price, inventory, promotions, loyalty, shipping, returns, refunds, fraud rules, and brand policy. The runtime must verify and constrain every action before it touches those systems.
   </p>
 
-  <div class="market-grid">
-    <div class="market-card">
-      <div class="card-num">$700B</div>
-      <div class="card-label">Estimated global AI infrastructure capex. The investment context is large, but this page should cite the exact source and year before external use.</div>
-      <div class="card-source">Working citation: replace with primary source</div>
+  <div class="two-col">
+    <div class="card reveal">
+      <div class="card-label">Why chatbots failed</div>
+      <h3>Conversation is not execution.</h3>
+      <p>
+        The first wave of shopping bots put probabilistic reasoning on the live customer path. That made commerce slower, more expensive, less predictable, and harder to certify. A customer may tolerate ambiguity during discovery. A merchant cannot tolerate ambiguity when an agent changes an order, approves a return, applies a discount, or commits to a delivery promise.
+      </p>
     </div>
-    <div class="market-card">
-      <div class="card-num">$8B</div>
-      <div class="card-label">Working commerce support software opportunity. Requires bottoms-up sourcing by segment, geography, and buyer size before investor use.</div>
-      <div class="card-source">Working estimate: methodology required</div>
-    </div>
-    <div class="market-card">
-      <div class="card-num">1,367x</div>
-      <div class="card-label">Computed directly from visible latency data: 4,101ms / 3ms = 1,367x. Vector RAG sample: 15,821ms / 3ms = 5,274x.</div>
-      <div class="card-source">eval/compare_extractors.py · 2026-06-04</div>
-    </div>
-  </div>
 
-
-</section>
-
-<!-- DEMO -->
-<section class="demo-section" id="demo">
-  <div class="demo-header">
-    <div class="section-label">Interactive Console</div>
-    <h2>Compare vector RAG vs LLM extraction vs compiled slot extraction</h2>
-    <p class="section-intro">
-      Select a workflow below, then toggle runtime cards to inspect the v3 benchmark tradeoff. Every system feeds the same <code>search_products()</code> ranker; the variable is how slots are extracted before ranking.
-    </p>
-
-    <div class="tab-switch">
-      <button class="tab-switch-btn active" onclick="switchTicket(0)" id="ticket-btn-0">Apparel Variant</button>
-      <button class="tab-switch-btn" onclick="switchTicket(1)" id="ticket-btn-1">Footwear Fit</button>
-      <button class="tab-switch-btn" onclick="switchTicket(2)" id="ticket-btn-2">Home Attribute</button>
+    <div class="card reveal">
+      <div class="card-label">What changes now</div>
+      <h3>Agents need a controlled merchant endpoint.</h3>
+      <p>
+        Agentic commerce turns shopping from search into delegation. That shifts the burden from answering questions to executing verified commercial intent. The merchant runtime becomes the trusted boundary between open-ended agents and operational systems of record.
+      </p>
     </div>
   </div>
 
-  <div class="console-wrapper">
-    <div class="console-topbar">
-      <div class="window-btn"></div>
-      <div class="window-btn"></div>
-      <div class="window-btn"></div>
-      <div class="console-topbar-title">Shopify Admin — milli.run app</div>
+  <div class="runtime-grid">
+    <div class="runtime-card reveal">
+      <div class="mode">System 2 · Offline</div>
+      <h3>Learn, reason, compile.</h3>
+      <p>
+        LLMs and agents discover workflows, analyze failures, simulate edge cases, generate tests, and compile merchant-specific skills outside the production hot path.
+      </p>
     </div>
 
-    <div class="console-layout">
-      <!-- Sidebar -->
-      <div class="console-sidebar">
-        <div class="sidebar-header">
-          <div class="sidebar-logo">Shopify<span> Admin</span></div>
-        </div>
-        <div class="sidebar-nav">
-          <div class="nav-item">Home</div>
-          <div class="nav-item">Orders</div>
-          <div class="nav-item">Products</div>
-          <div class="nav-item">Customers</div>
-          <div class="sidebar-section-title">Apps</div>
-          <div class="nav-item active">milli.run</div>
-        </div>
-        <div style="padding: 16px; border-top: 1px solid var(--border); background: var(--bg-alt);">
-          <div style="font-size:9px; color: var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing: 0.08em; font-weight:700; font-family: var(--font-mono);">app telemetry</div>
-          <div style="font-size:11px; font-weight:700; margin-bottom:4px; color: var(--text);" id="sidebar-stat-accuracy">92% ASIN match</div>
-          <div style="font-size:11px; color:var(--text-muted); margin-bottom:2px;" id="sidebar-stat-latency">Avg 3ms extraction</div>
-          <div style="font-size:11px; color:var(--text-muted);" id="sidebar-stat-cost">LLM cost: $0/query</div>
-        </div>
-      </div>
-
-      <!-- Ticket List -->
-      <div class="ticket-list">
-        <div class="ticket-list-header">
-          Tickets
-          <span style="font-size:11px; color:var(--text-muted); font-weight:400;">3 open</span>
-        </div>
-        <div class="ticket-item selected" onclick="switchTicket(0)" id="ticket-0">
-          <div class="ticket-customer">
-            Task A
-            <span class="ticket-time">test</span>
-          </div>
-          <div class="ticket-preview">12-navy jacket under $150</div>
-          <div class="ticket-meta">
-            <span class="intent-tag return">Apparel</span>
-          </div>
-        </div>
-
-        <div class="ticket-item" onclick="switchTicket(1)" id="ticket-1">
-          <div class="ticket-customer">
-            Task B
-            <span class="ticket-time">test</span>
-          </div>
-          <div class="ticket-preview">wide trail shoes under $120</div>
-          <div class="ticket-meta">
-            <span class="intent-tag wismo">Footwear</span>
-          </div>
-        </div>
-
-        <div class="ticket-item" onclick="switchTicket(2)" id="ticket-2">
-          <div class="ticket-customer">
-            Task C
-            <span class="ticket-time">test</span>
-          </div>
-          <div class="ticket-preview">machine-washable home item</div>
-          <div class="ticket-meta">
-            <span class="intent-tag recommend">Home</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Main chat -->
-      <div class="console-main">
-        <div class="main-header">
-          <div class="main-customer-info">
-            <div class="customer-name" id="customer-name">Task A</div>
-            <div class="customer-sub" id="customer-sub">WebShop apparel variant · exact color code</div>
-          </div>
-          <div class="main-actions">
-            <button class="icon-btn">Handoff</button>
-            <button class="icon-btn resolve">Resolve</button>
-          </div>
-        </div>
-
-        <div class="chat-area" id="chat-area">
-          <!-- Populated by JS -->
-        </div>
-
-        <!-- AB compare panel -->
-        <div class="ab-panel">
-          <div class="ab-label">Compare Runtimes</div>
-          <div class="ab-compare">
-            <div class="ab-card baseline-card" id="ab-baseline" onclick="switchRuntime('baseline')">
-              <div class="ab-card-header">
-                <div class="ab-card-name">Vector RAG</div>
-                <div class="ab-score" id="baseline-score">~95%*</div>
-              </div>
-              <div class="ab-detail" id="baseline-detail">nomic-embed-text retrieval + gemma4:12b selection over top-12 candidates. 15,821ms/query on 20-task sample.</div>
-            </div>
-            <div class="ab-card grounded-card" id="ab-grounded" onclick="switchRuntime('grounded')">
-              <div class="ab-card-header">
-                <div class="ab-card-name">LLM extractor</div>
-                <div class="ab-score" id="grounded-score">90%</div>
-              </div>
-              <div class="ab-detail" id="grounded-detail">gemma4:12b extracts slots from instruction text, then feeds the same ranker. 4,101ms/query.</div>
-            </div>
-            <div class="ab-card compiled-card active-selection" id="ab-compiled" onclick="switchRuntime('compiled')">
-              <div class="ab-card-header">
-                <div class="ab-card-name">spacy+repair</div>
-                <div class="ab-score" id="compiled-score">92%</div>
-              </div>
-              <div class="ab-detail" id="compiled-detail">Trained spaCy NER plus four-stage rule repair. 92% ASIN match, 100% option coverage, zero LLM calls.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right panel -->
-      <div class="console-right">
-        <div class="right-section">
-          <div class="right-section-title">Session State</div>
-          <div class="info-row">
-            <span class="info-label">Customer Tier</span>
-            <span class="info-val" id="cust-tier">Silver</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Lifetime Value</span>
-            <span class="info-val" id="cust-ltv">$642</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Order Date</span>
-            <span class="info-val" id="ord-date">Dec 3, 2025</span>
-          </div>
-        </div>
-        <div class="right-section">
-          <div class="right-section-title">Evidence Used</div>
-          <div id="evidence-panel">
-            <!-- Populated by JS -->
-          </div>
-        </div>
-        <div class="right-section">
-          <div class="right-section-title">Active Skill</div>
-          <div style="font-size:12px; font-weight:600;" id="active-skill-name">spacy_repair_catalog_extractor_v3</div>
-          <div style="font-size:11px; color: var(--text-muted); margin-top:4px;" id="active-skill-route">Intent confidence ≥ 0.70 routes to spaCy NER + repair_slots(); below threshold routes to LLM fallback.</div>
-        </div>
-        <div class="right-section">
-          <div class="right-section-title">Trace Logs</div>
-          <div id="trace-panel" style="background: var(--bg-alt); border: 1px solid var(--border); padding: 8px; max-height: 120px; overflow-y: auto; font-family: var(--mono); font-size: 11px;">
-            <!-- Populated by JS -->
-          </div>
-        </div>
-      </div>
+    <div class="runtime-card reveal">
+      <div class="mode">System 1 · Online</div>
+      <h3>Verify, route, execute.</h3>
+      <p>
+        Live interactions run through deterministic software: typed interfaces, evidence contracts, policy gates, regression tests, telemetry, rollback, and latency budgets.
+      </p>
     </div>
   </div>
 </section>
 
-<!-- ARCHITECTURE -->
-<section class="arch-section" id="architecture">
-  <div class="section-label">Architecture</div>
-  <h2>The compiler paradigm shift.</h2>
+<section id="product">
+  <div class="section-label">What milli.run does</div>
+  <h2>Turn commercial intent into verified merchant action.</h2>
   <p class="section-intro">
-    Standard agent architectures put the LLM on the production hot path. We separate routing from compilation.
+    milli.run compiles repeated commerce workflows into fast, observable execution paths. LLMs remain valuable for fallback and offline learning. Covered production paths run like software.
   </p>
 
-  <div class="arch-grid">
-    <div>
-      <div class="arch-diagram">
-        <div class="arch-layer">
-          <div class="arch-layer-name">Shopify Admin App Console</div>
-          <div class="arch-layer-desc">Merchant ticket view and telemetry</div>
-        </div>
-        <div class="arch-connector">↓</div>
-        <div class="arch-layer">
-          <div class="arch-layer-name">Evidence Verifier</div>
-          <div class="arch-layer-desc">Factual assertions must map to database rows</div>
-        </div>
-        <div class="arch-connector">↓</div>
-        <div class="arch-layer">
-          <div class="arch-layer-name">FastText Router &amp; spaCy Extractor</div>
-          <div class="arch-layer-desc">Intent classification <1ms; slot extraction ~3ms</div>
-        </div>
-        <div class="arch-connector">↓</div>
-        <div class="arch-layer">
-          <div class="arch-layer-name">GroundedRepoSDK</div>
-          <div class="arch-layer-desc">Typed interface to database primitives</div>
-        </div>
-        <div class="arch-connector">↓</div>
-        <div class="arch-layer">
-          <div class="arch-layer-name">DuckDB + Graph Traversal</div>
-          <div class="arch-layer-desc">DuckDB search_products() filtered + ranked in ~30ms</div>
-        </div>
-        <div class="arch-connector">↓</div>
-        <div class="arch-layer">
-          <div class="arch-layer-name">Offline LLM Compiler</div>
-          <div class="arch-layer-desc">Analyses fallback traces to propose new skills and test cases</div>
-        </div>
-      </div>
+  <div class="three-col">
+    <div class="card reveal">
+      <div class="card-label">01</div>
+      <h3>Understand intent</h3>
+      <p>Classify customer or agent requests, extract structured slots, repair catalog-specific language, and identify when a workflow is covered or must escalate.</p>
     </div>
 
-    <div class="arch-claims">
-      <div class="claim-item">
-        <div class="claim-title">1. LLM as Compiler, Not Executor</div>
-        <div class="claim-body">
-          Covered intents use spaCy NER plus deterministic repair rules on the hot path. gemma4:12b remains useful for fallback, evaluation, and offline compilation, but routine slot extraction does not require an LLM call.
-        </div>
-      </div>
-      <div class="claim-item">
-        <div class="claim-title">2. Provenance and Trust Contracts</div>
-        <div class="claim-body">
-          The verifier stops responses that contain claims not matching specific database records. Every price, option, color code, size, stock status, or shipment date should validate against catalog or order constraints.
-        </div>
-      </div>
-      <div class="claim-item">
-        <div class="claim-title">3. Trace Moat Loop</div>
-        <div class="claim-body">
-          Every low-confidence fallback can become a regression case. The durable asset is the catalog-specific lexicon, repair logic, and seed-grouped evaluation harness rather than a prompt-only workflow.
-        </div>
-      </div>
+    <div class="card reveal">
+      <div class="card-label">02</div>
+      <h3>Verify evidence</h3>
+      <p>Bind claims to merchant data before action. Prices, variants, order states, policies, stock, and delivery promises must map to records or approved rules.</p>
     </div>
+
+    <div class="card reveal">
+      <div class="card-label">03</div>
+      <h3>Execute safely</h3>
+      <p>Call typed tools against catalog, order, return, support, and fulfillment systems with policy gates, telemetry, confidence thresholds, and human fallback.</p>
+    </div>
+  </div>
+
+  <div class="flow reveal">
+    <div class="flow-step"><strong>Agent or customer intent</strong><span>Natural-language request, support ticket, or agent action proposal</span></div>
+    <div class="flow-step"><strong>Intent router</strong><span>Determines coverage, workflow, confidence, and escalation path</span></div>
+    <div class="flow-step"><strong>Evidence verifier</strong><span>Checks assertions against catalog, order, policy, and customer state</span></div>
+    <div class="flow-step"><strong>Typed merchant tools</strong><span>Executes approved actions through controlled interfaces</span></div>
+    <div class="flow-step"><strong>Offline compiler loop</strong><span>Turns fallbacks and failures into tests, skills, and rollout candidates</span></div>
   </div>
 </section>
 
-<!-- BENCHMARK -->
-<section class="bench-section" id="benchmark">
-  <div class="section-label">Benchmarks</div>
-  <h2>Findings v3: compiled runtime vs LLM extraction vs vector RAG.</h2>
+<section class="section-alt" id="proof">
+  <div class="section-label">Proof point</div>
+  <h2>Compiled execution beats runtime reasoning on covered commerce workflows.</h2>
   <p class="section-intro">
-    Evaluation results from <code>eval/compare_extractors.py</code> on 500 WebShop test tasks using seed-grouped splitting to prevent paraphrase leakage. Every system feeds into the same <code>search_products()</code> ranker; the only variable is how slots are extracted before ranking. Speedups are computed from the visible average latencies: <code>4,101ms / 3ms = 1,367x</code>, <code>94ms / 3ms = 31.3x</code>, and <code>15,821ms / 3ms = 5,274x</code>.
+    On 500 seed-grouped WebShop test tasks, the compiled spaCy + repair path tied the oracle ceiling at 92% ASIN match while keeping LLMs off the hot path.
   </p>
 
-  <div class="benchmark-note">
-    <strong>Scope note:</strong> the compiled path ties the golden oracle ceiling at 92% ASIN exact match. The remaining 42 misses are ranker/catalog-ceiling misses where the correct ASIN is ambiguous or absent from the catalog top results; the compiled extractor misses none that the oracle hits.
-  </div>
-
-  <div class="bench-table-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+  <div class="bench-table-wrapper">
     <table class="bench-table">
       <thead>
         <tr>
           <th>System</th>
-          <th>How slots are extracted</th>
-          <th>LLM call?</th>
+          <th>Execution model</th>
+          <th>Hot-path LLM?</th>
           <th>ASIN match</th>
-          <th>Option coverage</th>
           <th>Avg latency</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="highlight">golden oracle</td>
-          <td>Pre-labeled ground-truth slots</td>
-          <td>No</td>
-          <td class="highlight">92%</td>
-          <td>100%</td>
-          <td>0ms</td>
-        </tr>
-        <tr>
           <td class="highlight">spacy+repair compiled</td>
-          <td>Trained spaCy NER + four-stage rule repair</td>
+          <td>Trained spaCy NER plus deterministic repair rules, then shared product ranker</td>
           <td>No</td>
           <td class="highlight">92%</td>
-          <td class="highlight">100%</td>
-          <td class="highlight">3ms reported · 3ms ratio basis</td>
+          <td class="highlight">3ms reported extraction</td>
         </tr>
         <tr>
           <td>llm extractor</td>
-          <td>Ollama <code>gemma4:12b</code> extracts slots, then same ranker</td>
+          <td>Ollama gemma4:12b extracts slots, then same product ranker</td>
           <td>Yes</td>
           <td>90%</td>
-          <td>~98%</td>
           <td>4,101ms</td>
         </tr>
         <tr>
-          <td>GLiNER zero-shot</td>
-          <td>Zero-shot span extraction baseline</td>
-          <td>No</td>
-          <td>69%</td>
-          <td>~75%</td>
-          <td>94ms</td>
-        </tr>
-        <tr>
-          <td>spacy baseline</td>
-          <td>Trained spaCy NER without repair layer</td>
-          <td>No</td>
-          <td>82%</td>
-          <td>~88%</td>
-          <td>4ms</td>
-        </tr>
-        <tr>
-          <td>rag vector sample</td>
-          <td><code>nomic-embed-text</code> retrieves top-12 candidates; <code>gemma4:12b</code> selects</td>
+          <td>vector RAG sample</td>
+          <td>nomic-embed-text retrieves top candidates; gemma4:12b selects</td>
           <td>Yes</td>
           <td>~95%*</td>
-          <td>~85%</td>
           <td>15,821ms*</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <div class="benchmark-note">
-    <strong>*RAG caveat:</strong> vector RAG was measured on a 20-task sample, not the full 500-task run, because the full run would take roughly two hours at ~16 seconds/task. Use it as a production-representative latency/capability reference, not as a full-population ASIN score.
-  </div>
-
-  <div class="bench-table-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top:32px;">
-    <table class="bench-table">
-      <thead>
-        <tr>
-          <th>Slot</th>
-          <th>spacy+repair</th>
-          <th>llm extractor</th>
-          <th>GLiNER</th>
-          <th>spacy baseline</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td class="highlight">Color</td><td class="highlight">100%</td><td>93%</td><td>86%</td><td>54%</td></tr>
-        <tr><td class="highlight">Size</td><td class="highlight">99%</td><td>100%</td><td>92%</td><td>83%</td></tr>
-        <tr><td class="highlight">Price</td><td class="highlight">100%</td><td>100%</td><td>100%</td><td>100%</td></tr>
-        <tr><td class="highlight">Attributes</td><td class="highlight">100%</td><td>98%</td><td>13%</td><td>83%</td></tr>
-        <tr><td class="highlight">Overall slot accuracy</td><td class="highlight">100%</td><td>98%</td><td>71%</td><td>80%</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="bench-table-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top:32px;">
-    <table class="bench-table">
-      <thead>
-        <tr>
-          <th>Comparison</th>
-          <th>Raw latency inputs</th>
-          <th>Specific speedup</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="highlight">compiled vs llm extractor</td>
-          <td>4,101ms vs 3ms reported compiled latency</td>
-          <td class="highlight">1,367x faster</td>
-        </tr>
-        <tr>
-          <td class="highlight">compiled vs GLiNER zero-shot</td>
-          <td>94ms vs 3ms reported compiled latency</td>
-          <td class="highlight">31.3x faster</td>
-        </tr>
-        <tr>
-          <td class="highlight">compiled vs vector RAG</td>
-          <td>15,821ms vs 3ms reported compiled latency</td>
-          <td class="highlight">5,274x faster</td>
-        </tr>
-        <tr>
-          <td class="highlight">llm extractor vs vector RAG</td>
-          <td>15,821ms vs 4,101ms</td>
-          <td class="highlight">3.86x faster</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="bench-table-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top:32px;">
-    <table class="bench-table">
-      <thead>
-        <tr>
-          <th>Category</th>
-          <th>ASIN match</th>
-          <th>Slot accuracy</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td class="highlight">Apparel</td><td>1032/1268</td><td>89%</td></tr>
-        <tr><td class="highlight">Footwear</td><td>212/236</td><td>89%</td></tr>
-        <tr><td class="highlight">Home</td><td>166/168</td><td>84%</td></tr>
-        <tr><td class="highlight">Beauty</td><td>11/16</td><td>75%</td></tr>
-        <tr><td class="highlight">Other</td><td>244/312</td><td>81%</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="benchmark-note">
-    <strong>Cost frame at 1M queries/day:</strong> compiled path has $0/day in hot-path LLM token cost at ~3ms extraction latency; LLM extractor is approximately $2,000/day at 4,101ms/query; vector RAG is approximately $8,000/day at 15,821ms/query. Total covered-path latency is ~35ms once <code>search_products()</code> is included.
+  <div class="note">
+    <strong>Benchmark scope:</strong> product-match and extractor metrics are from <code>eval/compare_extractors.py</code> on 500 WebShop test tasks with seed-grouped splitting. Vector RAG was measured on a 20-task sample because the full 500-task run would take roughly two hours at approximately 16 seconds per query.
   </div>
 </section>
 
-<!-- STRATEGY: SEQUOIA PMF -->
-<section class="prize-section compact" id="sequoia">
-  <div class="section-label">Strategy</div>
-  <h2>Addressing the PMF framework.</h2>
+<section id="why-us">
+  <div class="section-label">Why we are building this</div>
+  <h2>We have seen commercial intent break across ads, data, support, brands, and developer platforms.</h2>
   <p class="section-intro">
-    Evaluating the business metrics through Sequoia Capital's PMF questions.
+    milli.run comes from a team that has worked where consumer intent is captured, inferred, routed, monetized, and operationalized.
   </p>
 
-  <div class="sequoia-grid">
-    <div class="sequoia-card">
-      <div class="sequoia-q">Why is this big?</div>
-      <div class="sequoia-a">$8B Commerce TAM</div>
-      <div class="sequoia-detail">
-        Existing helpdesks prove the workflow system of record. Hot-path agents prove autonomous resolution is possible. milli.run targets the middle path: agent-level coverage for repeated workflows, served through deterministic infrastructure where coverage is proven.
-      </div>
+  <div class="two-col">
+    <div>
+      <ul class="plain-list">
+        <li><strong>Kripa Rajshekhar</strong> founded Metonymize, serving large consumer brands and consumer data intermediaries in ads and insight pipelines before its exit to Straive.</li>
+        <li><strong>Wlodek Zadrozny</strong> co-founded Metonymize with Kripa and led IBM Watson's first move into customer service.</li>
+        <li><strong>Deb Henretta</strong> brings the global brand operator's view from P&amp;G: trust, scale, channel complexity, and consumer experience.</li>
+        <li><strong>Abhijit Dasgupta</strong> brings the demand-generation view from Mars Wrigley: how commercial intent turns into revenue across brands, retailers, and channels.</li>
+        <li><strong>Dan Stowell</strong> brings the developer-platform lens from early work across Replit, Vercel, and Spotify.</li>
+      </ul>
     </div>
-    <div class="sequoia-card">
-      <div class="sequoia-q">Why now?</div>
-      <div class="sequoia-a">LLM Commoditization</div>
-      <div class="sequoia-detail">
-        Inference is becoming increasingly standardized infrastructure. The differentiated value is captured in domain-specific workflows, evidence contracts, integration depth, and runtime reliability.
-      </div>
-    </div>
-    <div class="sequoia-card">
-      <div class="sequoia-q">Why will it last?</div>
-      <div class="sequoia-a">Proprietary Test Moats</div>
-      <div class="sequoia-detail">
-        Every fallback trace can become a regression test case. The software library grows with usage when review, compilation, and deployment gates are enforced.
-      </div>
-    </div>
-    <div class="sequoia-card">
-      <div class="sequoia-q">Why us?</div>
-      <div class="sequoia-a">Benchmark-First Science</div>
-      <div class="sequoia-detail">
-        We reject subjective demo scripts. The goal is to prove performance through reproducible fixtures, published scorer logic, raw outputs, and versioned benchmark runs.
-      </div>
+
+    <div class="card reveal">
+      <div class="card-label">The operating lesson</div>
+      <h3>Reasoning is not enough.</h3>
+      <p>
+        Ads systems infer intent indirectly. Chatbots talk around operational systems. Autonomous agents can act without merchant-grade controls. The next phase of commerce needs a runtime that gives merchants a trusted endpoint for intent: evidence-bound, policy-constrained, observable, and fast enough for production.
+      </p>
     </div>
   </div>
-
-
 </section>
 
-<!-- PILOT INSTALLATION -->
-<section class="pilot-section compact" id="pilot">
-  <div class="section-label">Implementation</div>
-  <h2>Pilot Installation Process</h2>
+<section class="section-alt" id="deploy">
+  <div class="section-label">Deployment path</div>
+  <h2>Start with support workflows. Expand into agentic commerce execution.</h2>
   <p class="section-intro">
-    A low-risk, phase-by-phase onboarding roadmap to transition customer service operations to a compiled, deterministic runtime while maintaining safety gates and agent fallbacks.
+    Support is the natural wedge because it already contains repeated commercial intent: where is my order, can I return this, which variant fits, can I exchange it, is this eligible, what can you recommend.
   </p>
 
-  <div class="pilot-phases">
-    <div class="pilot-phase-card">
-      <div class="phase-number">Phase 1</div>
-      <div class="phase-title">Ingest &amp; Train</div>
-      <div class="phase-desc">
-        We sync historical tickets, macros, policies, product catalog data, and order-state examples, establishing baseline coverage and training custom intent classifiers offline.
-      </div>
+  <div class="three-col">
+    <div class="card reveal">
+      <div class="card-label">Phase 1</div>
+      <h3>Ingest</h3>
+      <p>Sync tickets, macros, policies, product catalog, order states, returns, and fulfillment data. Establish baseline coverage and evidence requirements.</p>
     </div>
-    <div class="pilot-phase-card">
-      <div class="phase-number">Phase 2</div>
-      <div class="phase-title">Compile &amp; Verify</div>
-      <div class="phase-desc">
-        Core workflows are compiled into Elixir skills and integrated with your live APIs, running in shadow mode to audit accuracy against real agents.
-      </div>
-    </div>
-    <div class="pilot-phase-card">
-      <div class="phase-number">Phase 3</div>
-      <div class="phase-title">Route &amp; Scale</div>
-      <div class="phase-desc">
-        Routine tickets are routed gradually with automated verifier checks. Low-confidence interactions route to standard helpdesk queues.
-      </div>
-    </div>
-  </div>
 
-  <div class="timeline-grid">
-    <div class="timeline-col">
-      <div class="timeline-w">W1–W2</div>
-      <div class="timeline-title">Catalog Sync</div>
-      <div class="timeline-desc">Sync product catalog, order-state fixtures, policies, and active macros. Deploy shadow monitoring to baseline customer intents.</div>
+    <div class="card reveal">
+      <div class="card-label">Phase 2</div>
+      <h3>Compile</h3>
+      <p>Train routers and extractors, compile covered workflows, generate regression tests, and run in shadow mode against real support sessions.</p>
     </div>
-    <div class="timeline-col">
-      <div class="timeline-w">W3–W4</div>
-      <div class="timeline-title">Extraction Training</div>
-      <div class="timeline-desc">Train FastText intent classifiers and spaCy extractors on historical tickets; establish confidence thresholds.</div>
-    </div>
-    <div class="timeline-col">
-      <div class="timeline-w">W5–W6</div>
-      <div class="timeline-title">Skill Compiling</div>
-      <div class="timeline-desc">Compile core skills (WISMO tracking, return windows) into Elixir; connect live carrier and Shopify APIs.</div>
-    </div>
-    <div class="timeline-col">
-      <div class="timeline-w">W7–W8</div>
-      <div class="timeline-title">Shadow A/B Run</div>
-      <div class="timeline-desc">Run milli.run in shadow mode. Verify product/variant match targets, evidence pass rates, escalation behavior, and latency against live agent sessions.</div>
-    </div>
-    <div class="timeline-col">
-      <div class="timeline-w">W9–W10</div>
-      <div class="timeline-title">Controlled Launch</div>
-      <div class="timeline-desc">Route 5% of routine incoming tickets to milli.run. Enable automated verifier audits and escalation to the existing helpdesk queue.</div>
-    </div>
-    <div class="timeline-col">
-      <div class="timeline-w">W11–W12</div>
-      <div class="timeline-title">Production Scale</div>
-      <div class="timeline-desc">Scale to 50% traffic. Stream shadow fallbacks to compiler to automatically expand intent skill library.</div>
+
+    <div class="card reveal">
+      <div class="card-label">Phase 3</div>
+      <h3>Route</h3>
+      <p>Route covered traffic through deterministic execution paths. Escalate low-confidence interactions and feed fallbacks back into the compiler loop.</p>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-section" id="contact">
-  <h2>Autonomic support compiled to code. Not prompts.</h2>
+  <div class="section-label">Architecture thesis</div>
+  <h2>LLMs learn offline. Deterministic merchant software executes online.</h2>
   <p class="section-intro">
-    The v3 benchmark shows the compiled path tying oracle accuracy at 92% ASIN match while extracting slots in milliseconds. LLMs remain valuable for fallback and offline compilation, not routine covered-path execution.
+    milli.run turns agentic commerce from runtime reasoning into compiled execution: fast enough for customer support, reliable enough for merchant operations, and controlled enough for brands and retailers to trust.
   </p>
-  <div class="hero-cta-row" style="justify-content:center;">
-    <a href="#demo" class="btn-primary">Open Simulator</a>
-    <a href="#architecture" class="btn-secondary">Spec Sheet</a>
-  </div>
-
-  <div style="margin-top:64px; max-width:680px; text-align:center; margin-left:auto; margin-right:auto;">
-    <div style="font-size:18px; font-style:italic; line-height:1.5; color:var(--text-muted);">
-      "The LLM is most valuable as a compiler, simulator, evaluator, and fallback — not as a production executor."
-    </div>
-    <div style="font-size:11px; font-weight:700; margin-top:16px; letter-spacing:0.1em; text-transform:uppercase; color: var(--text);">
-      — milli.run Architecture Thesis
-    </div>
+  <div class="hero-cta-row">
+    <a href="mailto:kripa@metonymize.com?subject=milli.run%20merchant%20runtime" class="btn-primary">Talk to us</a>
+    <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-agentic-commerce-opportunity-how-ai-agents-are-ushering-in-a-new-era-for-consumers-and-merchants" class="btn-secondary" target="_blank" rel="noopener">McKinsey market estimate</a>
   </div>
 </section>
 
 <footer>
-  <div>milli.run · Confidential Pitch · 2026</div>
-  <div>Internal benchmark · publish harness before external use</div>
+  <div>milli.run · Merchant runtime for agentic commerce</div>
+  <div>Compiled execution · verified commercial intent</div>
 </footer>
 
 <script>
-// ---- Ticket and Runtime Data ----
-const tickets = [
-  {
-    customer: "Task A",
-    initials: "A",
-    sub: "WebShop apparel variant · exact color code",
-    tier: "Test split",
-    ltv: "n=500",
-    orderDate: "Seed-grouped",
-    prompt: "Find a women's jacket in catalog color code 12-navy, size medium, under $150, with machine-washable fabric.",
-    runtimes: {
-      baseline: {
-        score: "~95",
-        latency: "15.821s",
-        cost: "~$0.008",
-        message: "Vector RAG retrieves the right product family, then asks gemma4:12b to choose among the top-12 candidates. This often works, but variant-level color codes can be normalized during generation.",
-        detail: "Vector RAG: ~95% ASIN match on 20-task sample, ~85% option coverage, 15,821ms/query.",
-        evidence: ["embedding:nomic-embed-text", "top_k=12", "llm:gemma4:12b"],
-        trace: [
-          "1. Embed full instruction with nomic-embed-text",
-          "2. Cosine-rank against 1,000 product cards",
-          "3. Send top-12 candidates to gemma4:12b",
-          "4. LLM applies color, size, price, and attribute constraints",
-          "5. Return selected ASIN; no structured slot filters"
-        ],
-        skill: "Vector RAG baseline (20-task sample)"
-      },
-      grounded: {
-        score: "90",
-        latency: "4.101s",
-        cost: "~$0.002",
-        message: "The LLM extractor finds the main product constraints, then feeds the same search_products() ranker. It reaches 90% ASIN match, but loses extra tasks when it normalizes vendor color codes.",
-        detail: "LLM extractor: 90% ASIN match, ~98% option coverage, 4,101ms/query.",
-        evidence: ["llm:gemma4:12b", "ranker:search_products()"],
-        trace: [
-          "1. Send instruction text to gemma4:12b",
-          "2. Extract slots as JSON",
-          "3. Typical failure: '12-navy' normalized to 'navy blue'",
-          "4. Feed extracted slots into search_products()",
-          "5. Rank and return selected ASIN"
-        ],
-        skill: "LLM slot extractor baseline"
-      },
-      compiled: {
-        score: "92",
-        latency: "3ms extraction / ~35ms total",
-        cost: "$0",
-        message: "The compiled path preserves the exact catalog token 12-navy, repairs missing slots from the catalog lexicon, and feeds structured filters into search_products(). It ties the 92% oracle ceiling on n=500.",
-        detail: "spacy+repair: 92% ASIN match, 100% option coverage, 3ms reported latency, zero LLM calls; 1,367x faster than the 4,101ms LLM extractor.",
-        evidence: ["spaCy NER", "repair_slots()", "color lexicon", "search_products()"],
-        trace: [
-          "1. Intent classifier confidence ≥ 0.70",
-          "2. spaCy NER extracts candidate fields",
-          "3. repair_slots() preserves exact catalog color code",
-          "4. Longest-match color and attribute lexicons repair omissions",
-          "5. search_products() applies structured filters and ranking",
-          "6. Return top candidate deterministically"
-        ],
-        skill: "spacy+repair compiled extractor"
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
-    }
-  },
-  {
-    customer: "Task B",
-    initials: "B",
-    sub: "WebShop footwear query · width + price constraints",
-    tier: "Test split",
-    ltv: "n=500",
-    orderDate: "Seed-grouped",
-    prompt: "Find trail running shoes under $120 in wide fit with breathable material.",
-    runtimes: {
-      baseline: {
-        score: "~95",
-        latency: "15.821s",
-        cost: "~$0.008",
-        message: "Vector RAG can retrieve semantically similar shoes, but each query pays embedding plus full LLM selection latency. There is no fast path for simple covered product intents.",
-        detail: "Vector RAG pays both embedding cost and full generation cost: 15,821ms/query on the 20-task sample.",
-        evidence: ["embedding", "top_k=12", "llm-selection"],
-        trace: [
-          "1. Embed instruction",
-          "2. Retrieve 12 footwear candidates",
-          "3. Ask LLM to apply width, price, and material constraints",
-          "4. LLM selects product from candidate cards",
-          "5. Return selected ASIN"
-        ],
-        skill: "Vector RAG baseline (20-task sample)"
-      },
-      grounded: {
-        score: "90",
-        latency: "4.101s",
-        cost: "~$0.002",
-        message: "The LLM extractor performs well on size and price, but still spends 4,101ms/query to produce structured slots that the compiled path extracts in milliseconds.",
-        detail: "LLM extractor: 100% size, 100% price, 98% attributes, 93% color, 90% ASIN match.",
-        evidence: ["slot_json", "search_products()"],
-        trace: [
-          "1. LLM extracts size/width/price/material slots",
-          "2. JSON slots feed the shared ranker",
-          "3. Ranker applies catalog filters",
-          "4. Return ASIN"
-        ],
-        skill: "LLM slot extractor baseline"
-      },
-      compiled: {
-        score: "92",
-        latency: "3ms extraction / ~35ms total",
-        cost: "$0",
-        message: "The compiled path uses domain size rules, price parsing, and attribute longest-match repair before ranking. On the 500-task run it matches oracle accuracy with zero hot-path LLM cost.",
-        detail: "spacy+repair: 100% overall slot accuracy, 92% ASIN match, 1,367x faster than the LLM extractor using 4,101ms / 3ms.",
-        evidence: ["domain size parser", "price regex", "attribute union"],
-        trace: [
-          "1. Parse price_max=120",
-          "2. Parse width=wide and category=footwear",
-          "3. Repair breathable/material attribute from catalog phrase set",
-          "4. Rank against DuckDB product fixtures",
-          "5. Return deterministic top candidate"
-        ],
-        skill: "spacy+repair compiled extractor"
-      }
-    }
-  },
-  {
-    customer: "Task C",
-    initials: "C",
-    sub: "WebShop home query · multi-phrase attributes",
-    tier: "Test split",
-    ltv: "n=500",
-    orderDate: "Seed-grouped",
-    prompt: "Find a machine-washable home item with moisture-wicking polyester spandex attributes.",
-    runtimes: {
-      baseline: {
-        score: "~95",
-        latency: "15.821s",
-        cost: "~$0.008",
-        message: "Dense retrieval surfaces plausible product families, but variant and attribute selection is delegated to the LLM over candidate cards. The RAG sample is accurate but slow.",
-        detail: "Vector RAG: ~95% ASIN match on 20 tasks, but only ~85% option coverage and 15,821ms/query.",
-        evidence: ["candidate_cards", "top_k=12"],
-        trace: [
-          "1. Embed full instruction",
-          "2. Retrieve semantically similar home products",
-          "3. LLM reads candidate cards",
-          "4. LLM applies multi-phrase attribute constraints",
-          "5. Return selected ASIN"
-        ],
-        skill: "Vector RAG baseline (20-task sample)"
-      },
-      grounded: {
-        score: "90",
-        latency: "4.101s",
-        cost: "~$0.002",
-        message: "The LLM extractor handles most attributes, but still misses some exact catalog phrasing at scale. It reaches 98% attribute slot accuracy versus 100% for the compiled repair path.",
-        detail: "LLM extractor: 98% attributes, 90% ASIN match, 4,101ms/query.",
-        evidence: ["llm_slots", "ranker_input"],
-        trace: [
-          "1. LLM reads instruction",
-          "2. Extracts candidate attributes",
-          "3. Feeds slots to search_products()",
-          "4. Ranker returns ASIN"
-        ],
-        skill: "LLM slot extractor baseline"
-      },
-      compiled: {
-        score: "92",
-        latency: "3ms extraction / ~35ms total",
-        cost: "$0",
-        message: "The compiled repair layer uses a 261-phrase catalog attribute union with longest-match scanning. This recovers multi-phrase attributes that zero-shot span extraction misses.",
-        detail: "spacy+repair: 100% attribute accuracy vs 13% for GLiNER and 98% for the LLM extractor.",
-        evidence: ["attribute_union:261", "compiled_regex", "DuckDB ranker"],
-        trace: [
-          "1. spaCy extracts initial spans",
-          "2. repair_slots() runs compiled attribute regex",
-          "3. Longest-match scan preserves full catalog phrases",
-          "4. Structured filters feed search_products()",
-          "5. Return top candidate deterministically"
-        ],
-        skill: "spacy+repair compiled extractor"
-      }
-    }
-  }
-];
-
-let activeTicket = 0;
-let activeRuntime = 'compiled';
-
-function switchTicket(idx) {
-  activeTicket = idx;
-  
-  // Highlight active ticket in list
-  document.querySelectorAll('.ticket-item').forEach((el, i) => {
-    el.classList.toggle('selected', i === idx);
-  });
-  
-  // Highlight active ticket button
-  document.querySelectorAll('.tab-switch-btn').forEach((el, i) => {
-    el.classList.toggle('active', i === idx);
-  });
-
-  const t = tickets[idx];
-
-  // Update customer info
-  document.getElementById('customer-name').textContent = t.customer;
-  document.getElementById('customer-sub').textContent = t.sub;
-  
-  // Update Right Panel Context
-  document.getElementById('cust-tier').textContent = t.tier;
-  document.getElementById('cust-ltv').textContent = t.ltv;
-  document.getElementById('ord-date').textContent = t.orderDate;
-
-  // Clear and rewrite chat bubbles
-  const chatArea = document.getElementById('chat-area');
-  chatArea.innerHTML = '';
-  
-  // Customer message
-  const cMsg = document.createElement('div');
-  cMsg.className = 'chat-msg customer';
-  let firstMsg = t.prompt;
-  
-  cMsg.innerHTML = `
-    <div class="chat-sender">${t.customer}</div>
-    <div class="chat-bubble">${firstMsg}</div>
-  `;
-  chatArea.appendChild(cMsg);
-
-  // Agent message
-  const aMsg = document.createElement('div');
-  aMsg.className = 'chat-msg agent';
-  aMsg.innerHTML = `
-    <div class="chat-sender">Agent</div>
-    <div class="chat-bubble">Loading...</div>
-  `;
-  chatArea.appendChild(aMsg);
-
-  // Update scores and detail text
-  document.getElementById('baseline-score').textContent = t.runtimes.baseline.score + "%";
-  document.getElementById('baseline-detail').textContent = t.runtimes.baseline.detail;
-  
-  document.getElementById('grounded-score').textContent = t.runtimes.grounded.score + "%";
-  document.getElementById('grounded-detail').textContent = t.runtimes.grounded.detail;
-  
-  document.getElementById('compiled-score').textContent = t.runtimes.compiled.score + "%";
-  document.getElementById('compiled-detail').textContent = t.runtimes.compiled.detail;
-
-  switchRuntime(activeRuntime);
-}
-
-function switchRuntime(runtime) {
-  activeRuntime = runtime;
-
-  // Toggle selection highlight
-  document.querySelectorAll('.ab-card').forEach(el => {
-    el.classList.remove('active-selection');
-  });
-  document.getElementById(`ab-${runtime}`).classList.add('active-selection');
-
-  const t = tickets[activeTicket];
-  const rData = t.runtimes[runtime];
-
-  // Update agent message content
-  const agentBubble = document.querySelector('.chat-msg.agent .chat-bubble');
-  const agentSender = document.querySelector('.chat-msg.agent .chat-sender');
-  if (agentBubble) {
-    agentBubble.innerHTML = rData.message.replace(/\n/g, '<br>');
-  }
-  if (agentSender) {
-    if (runtime === 'baseline') agentSender.textContent = 'Vector RAG baseline';
-    if (runtime === 'grounded') agentSender.textContent = 'LLM extractor';
-    if (runtime === 'compiled') agentSender.textContent = 'spacy+repair compiled path';
-  }
-
-  // Update evidence drawer
-  const evidencePanel = document.getElementById('evidence-panel');
-  evidencePanel.innerHTML = '';
-  if (rData.evidence.length === 0) {
-    evidencePanel.innerHTML = '<span style="color:var(--text-muted); font-size:11px;">No structured evidence in this constrained baseline</span>';
-  } else {
-    rData.evidence.forEach(ev => {
-      const pill = document.createElement('span');
-      pill.className = 'evidence-pill';
-      pill.textContent = ev;
-      evidencePanel.appendChild(pill);
     });
-  }
+  }, { threshold: 0.08 });
 
-  // Update active skill metadata
-  document.getElementById('active-skill-name').textContent = rData.skill;
-  document.getElementById('active-skill-route').textContent = rData.detail;
-
-  // Update trace logs
-  const tracePanel = document.getElementById('trace-panel');
-  tracePanel.innerHTML = '';
-  rData.trace.forEach(step => {
-    const logLine = document.createElement('div');
-    logLine.style.marginBottom = '4px';
-    logLine.style.lineHeight = '1.3';
-    logLine.textContent = step;
-    tracePanel.appendChild(logLine);
-  });
-
-  // Telemetry updates
-  document.getElementById('sidebar-stat-accuracy').textContent = runtime === 'baseline' ? '~95% ASIN match*' : (runtime === 'grounded' ? '90% ASIN match' : '92% ASIN match');
-  document.getElementById('sidebar-stat-latency').textContent = `Avg ${rData.latency} latency`;
-  document.getElementById('sidebar-stat-cost').textContent = `LLM cost: ${rData.cost}/query`;
-}
-
-// Initial load
-switchTicket(0);
-
-// ---- Counters ----
-function animateCounter(el, target, duration) {
-  let start = 0;
-  const step = target / (duration / 16);
-  const timer = setInterval(() => {
-    start = Math.min(start + step, target);
-    el.textContent = Math.round(start);
-    if (start >= target) clearInterval(timer);
-  }, 16);
-}
-
-// ---- Scroll Reveals ----
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.05 });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Hero metrics are static in v3 so decimal latencies and exact speedup factors are not rounded by animation.
-
-
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
