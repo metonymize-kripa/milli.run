@@ -1,5 +1,7 @@
-<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <rect width="64" height="64" rx="10" fill="#B6FF00"/>
-  <text x="8" y="45" font-family="Inter, Arial, Helvetica, sans-serif" font-size="40" font-weight="800" letter-spacing="-3" fill="#0B0B0B">m</text>
-  <circle cx="51" cy="44" r="4.5" fill="#0B0B0B"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="milli icon">
+  <rect width="1024" height="1024" fill="white"/>
+  <path d="M278 660V424c0-106 80-184 190-184 64 0 116 23 152 67 36-44 88-67 152-67 110 0 190 78 190 184v236H784V432c0-47-31-84-80-84-47 0-80 37-80 84v228H446V432c0-47-33-84-80-84-49 0-80 37-80 84v228H278Z" fill="#1C1C1A"/>
+  <circle cx="338" cy="790" r="54" fill="#1C1C1A"/>
+  <circle cx="512" cy="790" r="54" fill="#1C1C1A"/>
+  <circle cx="686" cy="790" r="54" fill="#B6FF00"/>
 </svg>
