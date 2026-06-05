@@ -158,6 +158,86 @@ footer{
 }
 .reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
+
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.nav-actions,.cta-actions{display:flex;align-items:center;gap:12px}
+.btn.session-trigger{background:var(--lime);color:var(--text);border-color:var(--text)}
+.btn.session-trigger:hover{filter:brightness(.98)}
+.session-modal{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:28px}
+.session-modal.open{display:flex}
+.session-backdrop{position:absolute;inset:0;background:rgba(28,28,26,.72);backdrop-filter:blur(4px)}
+.session-window{
+  position:relative;z-index:1;width:min(1120px,100%);max-height:min(88vh,920px);overflow:hidden;
+  background:var(--bg);border:1px solid var(--text);box-shadow:0 24px 80px rgba(28,28,26,.28);
+  display:grid;grid-template-rows:auto auto 1fr auto
+}
+.session-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;padding:28px 32px 22px;border-bottom:1px solid var(--border);background:var(--alt)}
+.session-head h2{font-size:clamp(28px,3.4vw,44px);margin:0;max-width:none}
+.session-close{width:40px;height:40px;border:1px solid var(--border);background:var(--bg);font-size:28px;line-height:1;display:flex;align-items:center;justify-content:center}
+.session-close:hover{border-color:var(--text)}
+.session-toggle-wrap{padding:16px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:24px;background:var(--bg)}
+.session-mode-toggle{position:relative;display:grid;grid-template-columns:1fr 1fr;width:min(470px,100%);border:1px solid var(--text);background:var(--alt);padding:3px}
+.session-mode-toggle:before{content:"";position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);background:var(--text);transition:transform .22s ease}
+.session-mode-toggle[data-mode="milli"]:before{transform:translateX(100%)}
+.mode-option{position:relative;z-index:1;padding:10px 14px;font:700 11px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.mode-option.active{color:var(--bg)}
+.session-status{font:700 11px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.session-status strong{color:var(--text)}
+.session-body{overflow:auto;padding:28px 32px;background:linear-gradient(180deg,var(--bg),var(--alt))}
+.session-grid{display:grid;grid-template-columns:minmax(240px,.9fr) minmax(0,1.6fr);gap:22px;align-items:start}
+.customer-panel,.runtime-panel{background:var(--bg);border:1px solid var(--border)}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.panel-head strong{color:var(--text)}
+.turn-list{padding:14px;display:grid;gap:10px}
+.turn-chip{border:1px solid var(--border);background:var(--bg);padding:12px;text-align:left;width:100%;display:block}
+.turn-chip.active{border-color:var(--text);background:var(--lime)}
+.turn-chip span{display:block;font:700 10px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.turn-chip.active span{color:var(--text)}
+.turn-chip p{font-size:12px;color:var(--text);line-height:1.45;margin:0}
+.runtime-stage{padding:18px;display:grid;gap:14px}
+.user-utterance{border:1px solid var(--border);background:var(--alt);padding:14px 16px;font-size:14px;color:var(--text)}
+.user-utterance strong{display:block;font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.state-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.state-card{border:1px solid var(--border);background:var(--bg);padding:12px}
+.state-card b{display:block;font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.state-card span{display:block;font:700 13px var(--mono);color:var(--text);line-height:1.4}
+.slot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.slot-box{border:1px solid var(--border);padding:12px;background:var(--bg)}
+.slot-box b{display:block;font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.slot-tags{display:flex;flex-wrap:wrap;gap:6px}
+.slot-tag{display:inline-flex;border:1px solid var(--border);padding:4px 7px;font:700 10px var(--mono);background:var(--alt);color:var(--text)}
+.slot-tag.missing{background:var(--bg);color:var(--muted);border-style:dashed}
+.candidate-list{display:grid;gap:6px}
+.candidate-row{display:grid;grid-template-columns:58px 96px minmax(0,1fr);gap:10px;align-items:center;border:1px solid var(--border);background:var(--bg);padding:8px 10px;font-size:12px;color:var(--muted)}
+.candidate-row.top{border-color:var(--text)}
+.candidate-row.correct{background:#F3FFD9}
+.candidate-score{font:700 11px var(--mono);color:var(--text)}
+.candidate-asin{font:700 10px var(--mono);color:var(--muted)}
+.candidate-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.ask-card{border:1px solid var(--text);background:var(--text);color:var(--bg);padding:14px;display:grid;gap:10px}
+.ask-card b{font:700 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--lime)}
+.choice-row{display:flex;flex-wrap:wrap;gap:8px}
+.choice-pill{display:inline-flex;align-items:center;border:1px solid rgba(253,253,253,.35);padding:7px 9px;font:700 11px var(--mono);background:rgba(253,253,253,.08);color:var(--bg)}
+.choice-pill.selected{background:var(--lime);color:var(--text);border-color:var(--lime)}
+.flow-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:2px}
+.flow-node{border-top:2px solid var(--border);padding-top:8px;font:700 10px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.flow-node.active{border-color:var(--lime);color:var(--text)}
+.llm-response{border:1px solid var(--border);background:var(--bg);padding:16px;display:grid;gap:12px}
+.llm-bubble{padding:16px;border:1px solid var(--border);background:var(--alt);color:var(--text);font-size:14px;line-height:1.6}
+.llm-bubble strong{display:block;margin-bottom:6px;color:var(--text)}
+.llm-cost-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.llm-cost{border:1px solid var(--border);padding:10px;background:var(--bg)}
+.llm-cost b{display:block;font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.llm-cost span{font:700 13px var(--mono);color:var(--text)}
+.session-controls{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 32px;border-top:1px solid var(--border);background:var(--bg)}
+.session-stepper{font:700 11px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.session-control-buttons{display:flex;gap:10px}
+.session-control-buttons .btn{padding:9px 14px}
+@media(max-width:1024px){
+  .session-grid{grid-template-columns:1fr}
+  .state-row,.llm-cost-grid{grid-template-columns:1fr 1fr}
+}
+
 @media(max-width:1024px){
   section{padding:92px 40px}
   .metric-grid{grid-template-columns:repeat(2,1fr)}
@@ -180,6 +260,21 @@ footer{
   .final-cta{display:block}
   .final-cta .btn{margin-top:20px;width:100%}
   footer{padding:28px 20px;display:block}
+
+  .nav-actions{order:2;margin-left:auto;gap:8px}
+  .nav-actions .btn{padding:8px 12px;font-size:12px}
+  .cta-actions{margin-top:20px;display:grid;grid-template-columns:1fr;gap:10px}
+  .cta-actions .btn{width:100%}
+  .session-modal{padding:10px}
+  .session-window{max-height:94vh}
+  .session-head,.session-toggle-wrap,.session-body,.session-controls{padding-left:16px;padding-right:16px}
+  .session-toggle-wrap{display:grid;gap:10px}
+  .session-mode-toggle{width:100%}
+  .state-row,.slot-grid,.llm-cost-grid,.flow-strip{grid-template-columns:1fr}
+  .candidate-row{grid-template-columns:52px 88px minmax(0,1fr)}
+  .session-controls{display:grid}
+  .session-control-buttons{display:grid;grid-template-columns:1fr 1fr}
+
 }
 </style>
 </head>
@@ -193,7 +288,10 @@ footer{
     <li><a href="#proof">Proof</a></li>
     <li><a href="#deploy">Deployment</a></li>
   </ul>
-  <a class="btn" href="#deploy">Talk to us →</a>
+  <div class="nav-actions">
+    <button class="btn session-trigger" type="button" data-session-open>See session</button>
+    <a class="btn" href="#deploy">Talk to us →</a>
+  </div>
 </nav>
 
 <section class="hero" id="hero">
@@ -248,7 +346,7 @@ footer{
   </div>
 
   <div class="guarantees reveal">
-    <div class="guarantee"><strong>Latency</strong><span><10ms total covered-path product-intent resolution.</span></div>
+    <div class="guarantee"><strong>Latency</strong><span>&lt;10ms total covered-path product-intent resolution.</span></div>
     <div class="guarantee"><strong>Cost</strong><span>Zero hot-path LLM token cost for compiled workflows.</span></div>
     <div class="guarantee"><strong>Regression</strong><span>New skills ship with historical and synthetic fixtures.</span></div>
     <div class="guarantee"><strong>Fallback</strong><span>Novel or low-confidence paths logged for automated self-improvement.</span></div>
@@ -363,9 +461,52 @@ footer{
       <div class="label" style="margin-bottom:10px;">Architecture thesis</div>
       <h3>Turn agentic commerce into verified merchant action.</h3>
     </div>
-    <a class="btn" href="mailto:kripa@metolabs.com?subject=milli.run%20merchant%20runtime">Talk to us</a>
+    <div class="cta-actions">
+      <button class="btn session-trigger" type="button" data-session-open>See session</button>
+      <a class="btn" href="mailto:kripa@metolabs.com?subject=milli.run%20merchant%20runtime">Talk to us</a>
+    </div>
   </div>
 </section>
+
+
+<div class="session-modal" id="sessionModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="sessionTitle">
+  <button class="session-backdrop" type="button" data-session-close aria-label="Close milli.run session"></button>
+  <div class="session-window">
+    <div class="session-head">
+      <div>
+        <div class="label" style="margin-bottom:10px;">Interactive execution trace</div>
+        <h2 id="sessionTitle">milli.run session</h2>
+      </div>
+      <button class="session-close" type="button" data-session-close aria-label="Close">×</button>
+    </div>
+    <div class="session-toggle-wrap">
+      <div class="session-mode-toggle" id="sessionModeToggle" data-mode="milli" role="tablist" aria-label="Session mode">
+        <button class="mode-option" type="button" data-mode="llm" role="tab" aria-selected="false">SOTA LLM-in-loop</button>
+        <button class="mode-option active" type="button" data-mode="milli" role="tab" aria-selected="true">milli</button>
+      </div>
+      <div class="session-status" id="sessionStatus">Mode: <strong>milli</strong></div>
+    </div>
+    <div class="session-body">
+      <div class="session-grid">
+        <div class="customer-panel">
+          <div class="panel-head"><span>Customer input</span><strong>natural language</strong></div>
+          <div class="turn-list" id="sessionTurns"></div>
+        </div>
+        <div class="runtime-panel">
+          <div class="panel-head"><span id="runtimePanelLabel">milli output</span><strong id="runtimePanelState">actions · choices · commit</strong></div>
+          <div class="runtime-stage" id="sessionStage"></div>
+        </div>
+      </div>
+    </div>
+    <div class="session-controls">
+      <div class="session-stepper" id="sessionStepper">Turn 1 / 4</div>
+      <div class="session-control-buttons">
+        <button class="btn secondary" type="button" id="sessionPrev">Previous</button>
+        <button class="btn" type="button" id="sessionNext">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div>milli.run · Merchant runtime for agentic commerce</div>
@@ -382,6 +523,233 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const sessionData = {
+  milli: [
+    {
+      meta: 'FULL PATH · ~1ms',
+      user: 'I need something for yoga, high waist, tummy control',
+      intent: 'ambiguous · 0.43',
+      slots: ['attributes=high waist', 'attributes=tummy control'],
+      missing: ['product_type', 'color', 'size', 'price_upper'],
+      candidates: [
+        ['0.400','B09Q37JQZ6','Women\'s Sexy Swimsuit One Piece High Neck Halter',''],
+        ['0.400','B09QCP4579','LWLW High Waist Yoga Shorts','correct'],
+        ['0.400','B085S5P7WB','Women High Waist Tummy Control Fitness Yoga Pants',''],
+        ['0.400','B09NSC5VDG','CofeeMO Womens Lingerie Sleep Lounge Nursing','']
+      ],
+      gap: '0.000',
+      action: 'ASK_FIELD(product_type)',
+      choices: ['fashion'],
+      selected: ''
+    },
+    {
+      meta: 'FAST PATH · 0.3ms',
+      user: 'leggings',
+      intent: 'product intent · injected',
+      slots: ['product_type=leggings', 'attributes=high waist', 'attributes=tummy control'],
+      missing: ['color', 'size', 'price_upper'],
+      candidates: [
+        ['0.600','B085S5P7WB','Women High Waist Tummy Control Fitness Yoga Pants','top'],
+        ['0.400','B09MSZ4VS8','Goldweather Women Winter Leggings Printed Warm Fleece',''],
+        ['0.400','B09QCP4579','LWLW High Waist Yoga Shorts','correct'],
+        ['0.400','B09QCVCYVY','Burband Womens High Waist Bike Shorts','']
+      ],
+      gap: '0.333',
+      action: 'ASK_FIELD(color)',
+      choices: ['black','blue','dark blue','dark gray','gray','green','wine'],
+      selected: 'leggings'
+    },
+    {
+      meta: 'FAST PATH · 0.3ms',
+      user: 'wine',
+      intent: 'product intent · injected',
+      slots: ['product_type=leggings', 'color=wine', 'attributes=high waist', 'attributes=tummy control'],
+      missing: ['size', 'price_upper'],
+      candidates: [
+        ['0.800','B09QCP4579','LWLW High Waist Yoga Shorts','top correct'],
+        ['0.600','B085S5P7WB','Women High Waist Tummy Control Fitness Yoga Pants',''],
+        ['0.400','B07MGB73NJ','Viracy Women\'s Short Sleeve V-Neck Casual Flowy Tunic',''],
+        ['0.400','B09MSZ4VS8','Goldweather Women Winter Leggings','']
+      ],
+      gap: '0.250',
+      action: 'ASK_FIELD(size)',
+      choices: ['3x-large','4x-large','large','medium','small','x-large'],
+      selected: 'wine'
+    },
+    {
+      meta: 'FAST PATH · 0.2ms',
+      user: '3x-large',
+      intent: 'commit allowed · max turns',
+      slots: ['product_type=leggings', 'color=wine', 'size=3x-large', 'attributes=high waist', 'attributes=tummy control'],
+      missing: [],
+      candidates: [
+        ['0.800','B09QCP4579','LWLW High Waist Yoga Shorts','top correct'],
+        ['0.700','B085S5P7WB','Women High Waist Tummy Control Yoga Pants',''],
+        ['0.600','B09MSZ4VS8','Goldweather Women Winter Leggings',''],
+        ['0.500','B09QCVCYVY','Burband Womens High Waist Bike Shorts','']
+      ],
+      gap: '0.125',
+      action: 'COMMIT_PRODUCT(B09QCP4579) · $13.99',
+      choices: ['add_to_cart','send_product_card','log_trace'],
+      selected: '3x-large'
+    }
+  ],
+  llm: [
+    {
+      meta: 'MODEL CALL · 4,101ms',
+      user: 'I need something for yoga, high waist, tummy control',
+      response: 'I can help with that. Are you looking for leggings, shorts, pants, or something else for yoga?',
+      stats: ['LLM tokens on hot path','free-text answer','ambiguous product family'],
+      risk: 'Conversational clarification; no typed merchant action yet.'
+    },
+    {
+      meta: 'MODEL CALL · 4,101ms',
+      user: 'leggings',
+      response: 'Got it — leggings. Do you have a preferred color? I see options like black, blue, gray, green, and wine.',
+      stats: ['LLM tokens on hot path','catalog options translated to prose','state stored in prompt'],
+      risk: 'State and constraints remain language-shaped rather than execution-shaped.'
+    },
+    {
+      meta: 'MODEL CALL · 4,101ms',
+      user: 'wine',
+      response: 'Wine works. What size should I search for? Available sizes appear to include small through 4x-large.',
+      stats: ['LLM tokens on hot path','variant disambiguation in language','tool choice still pending'],
+      risk: 'The model still has to convert the conversation back into a tool/action schema.'
+    },
+    {
+      meta: 'MODEL CALL · 4,101ms',
+      user: '3x-large',
+      response: 'The closest match is LWLW High Waist Yoga Shorts in wine, 3x-large, priced at $13.99. Would you like me to add it to cart?',
+      stats: ['LLM tokens on hot path','natural-language confirmation','action after generation'],
+      risk: 'The final action is downstream of text generation rather than the primary interface.'
+    }
+  ]
+};
+
+const modal = document.getElementById('sessionModal');
+const stage = document.getElementById('sessionStage');
+const turns = document.getElementById('sessionTurns');
+const stepper = document.getElementById('sessionStepper');
+const modeToggle = document.getElementById('sessionModeToggle');
+const statusEl = document.getElementById('sessionStatus');
+const labelEl = document.getElementById('runtimePanelLabel');
+const stateEl = document.getElementById('runtimePanelState');
+let sessionMode = 'milli';
+let sessionTurn = 0;
+
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+}
+
+function renderTurns(){
+  turns.innerHTML = sessionData[sessionMode].map((item,index)=>`
+    <button class="turn-chip ${index === sessionTurn ? 'active' : ''}" type="button" data-turn="${index}">
+      <span>Turn ${index + 1} · ${escapeHtml(item.meta)}</span>
+      <p>${escapeHtml(item.user)}</p>
+    </button>
+  `).join('');
+  turns.querySelectorAll('[data-turn]').forEach(button => {
+    button.addEventListener('click', () => {
+      sessionTurn = Number(button.dataset.turn);
+      renderSession();
+    });
+  });
+}
+
+function renderMilliTurn(item){
+  const missing = item.missing.length ? item.missing : ['none'];
+  const candidates = item.candidates.map(row => `
+    <div class="candidate-row ${row[3].includes('top') ? 'top' : ''} ${row[3].includes('correct') ? 'correct' : ''}">
+      <span class="candidate-score">${escapeHtml(row[0])}</span>
+      <span class="candidate-asin">${escapeHtml(row[1])}</span>
+      <span class="candidate-title">${escapeHtml(row[2])}</span>
+    </div>
+  `).join('');
+  const choices = item.choices.map(choice => `<span class="choice-pill ${choice === item.selected ? 'selected' : ''}">${escapeHtml(choice)}</span>`).join('');
+  const flow = ['INTENT','SLOTS','RANK','ACTION'].map((node,index)=>`<div class="flow-node ${index <= Math.min(sessionTurn + 1, 3) ? 'active' : ''}">${node}</div>`).join('');
+  return `
+    <div class="user-utterance"><strong>USER</strong>${escapeHtml(item.user)}</div>
+    <div class="state-row">
+      <div class="state-card"><b>Path</b><span>${escapeHtml(item.meta)}</span></div>
+      <div class="state-card"><b>Intent</b><span>${escapeHtml(item.intent)}</span></div>
+      <div class="state-card"><b>Gap</b><span>${escapeHtml(item.gap)}</span></div>
+    </div>
+    <div class="slot-grid">
+      <div class="slot-box"><b>Slots</b><div class="slot-tags">${item.slots.map(slot => `<span class="slot-tag">${escapeHtml(slot)}</span>`).join('')}</div></div>
+      <div class="slot-box"><b>Missing</b><div class="slot-tags">${missing.map(slot => `<span class="slot-tag missing">${escapeHtml(slot)}</span>`).join('')}</div></div>
+    </div>
+    <div class="slot-box"><b>Candidates</b><div class="candidate-list">${candidates}</div></div>
+    <div class="ask-card"><b>${escapeHtml(item.action)}</b><div class="choice-row">${choices}</div></div>
+    <div class="flow-strip">${flow}</div>
+  `;
+}
+
+function renderLlmTurn(item){
+  return `
+    <div class="user-utterance"><strong>USER</strong>${escapeHtml(item.user)}</div>
+    <div class="llm-response">
+      <div class="state-row">
+        <div class="state-card"><b>Path</b><span>${escapeHtml(item.meta)}</span></div>
+        <div class="state-card"><b>Interface</b><span>natural language out</span></div>
+        <div class="state-card"><b>Control</b><span>post-generation action</span></div>
+      </div>
+      <div class="llm-bubble"><strong>Assistant text</strong>${escapeHtml(item.response)}</div>
+      <div class="llm-cost-grid">${item.stats.map(stat => `<div class="llm-cost"><b>Property</b><span>${escapeHtml(stat)}</span></div>`).join('')}</div>
+      <div class="note" style="margin-top:0"><strong>Runtime difference:</strong> ${escapeHtml(item.risk)}</div>
+    </div>
+  `;
+}
+
+function renderSession(){
+  modeToggle.dataset.mode = sessionMode;
+  modeToggle.querySelectorAll('.mode-option').forEach(button => {
+    const active = button.dataset.mode === sessionMode;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+  statusEl.innerHTML = `Mode: <strong>${sessionMode === 'milli' ? 'milli' : 'SOTA LLM-in-loop'}</strong>`;
+  labelEl.textContent = sessionMode === 'milli' ? 'milli output' : 'LLM output';
+  stateEl.textContent = sessionMode === 'milli' ? 'actions · choices · commit' : 'text · tokens · prompt state';
+  renderTurns();
+  const item = sessionData[sessionMode][sessionTurn];
+  stage.innerHTML = sessionMode === 'milli' ? renderMilliTurn(item) : renderLlmTurn(item);
+  stepper.textContent = `Turn ${sessionTurn + 1} / ${sessionData[sessionMode].length}`;
+}
+
+function openSession(){
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  renderSession();
+}
+function closeSession(){
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('[data-session-open]').forEach(button => button.addEventListener('click', openSession));
+document.querySelectorAll('[data-session-close]').forEach(button => button.addEventListener('click', closeSession));
+modeToggle.querySelectorAll('[data-mode]').forEach(button => {
+  button.addEventListener('click', () => {
+    sessionMode = button.dataset.mode;
+    sessionTurn = 0;
+    renderSession();
+  });
+});
+document.getElementById('sessionPrev').addEventListener('click', () => {
+  sessionTurn = Math.max(0, sessionTurn - 1);
+  renderSession();
+});
+document.getElementById('sessionNext').addEventListener('click', () => {
+  sessionTurn = Math.min(sessionData[sessionMode].length - 1, sessionTurn + 1);
+  renderSession();
+});
+document.addEventListener('keydown', event => {
+  if(event.key === 'Escape' && modal.classList.contains('open')) closeSession();
+});
+renderSession();
 </script>
 </body>
 </html>
